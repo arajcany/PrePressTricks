@@ -16,7 +16,8 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "cakephp/cakephp": "*"
+    "cakephp/cakephp": "*",
+    "mrlunar/php-dbg-dumper": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "*"

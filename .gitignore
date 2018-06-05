@@ -3,7 +3,8 @@
 
 #Composer
 composer.lock
-index.php
+
+#Project
 /vendor/
 /tmp/
 
