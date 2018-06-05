@@ -1,0 +1,29 @@
+{
+  "name": "arajcany/pre-press-tricks",
+  "description": "Box of Tricks for common PrePress related tasks.",
+  "license": "MIT",
+  "type": "package",
+  "keywords": [
+    "PrePress",
+    "Tools",
+    "Tricks"
+  ],
+  "authors": [
+    {
+      "name": "Andrew Rajcany",
+      "email": "a.rajcany@mac.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "cakephp/cakephp": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "arajcany\\PrePressTricks\\": "src"
+    }
+  }
+}
