@@ -820,31 +820,32 @@ class StringToTicket
         $string = $this->inputString;
         $stringNormalised = $this->normaliseString($string);
 
-        $regex = '/_\d+x\d+_/s';
+        $regexPatterns = [
+            '/_\d+x\d+_/s',
+            '/_\d+mmx\d+mm_/s',
+            '/_\d+mmx\d+_/s',
+            '/_\d+x\d+mm_/s',
+        ];
 
-        if ($this->getCaseSensitive() === true) {
-            $regex .= '';
-        } else {
-            $regex .= 'i';
+        foreach ($regexPatterns as $regex) {
+            if ($this->getCaseSensitive() === true) {
+                $regex .= '';
+            } else {
+                $regex .= 'i';
+            }
+
+            preg_match($regex, $stringNormalised, $matches);
+
+            if (isset($matches[0])) {
+                preg_match_all('/\d+/si', $matches[0], $numbers);
+
+                if (isset($numbers[0][1]) && isset($numbers[0][1])) {
+                    return $numbers[0];
+                }
+            }
         }
 
-        preg_match($regex, $stringNormalised, $matches);
-
-        if (!$matches) {
-            return false;
-        }
-
-        $matches = $matches[0];
-        $matches = str_replace("_", "", $matches);
-        $matches = str_replace("X", "_", $matches);
-        $matches = str_replace("x", "_", $matches);
-        $matches = explode("_", $matches);
-
-        if (isset($matches[0]) && isset($matches[1])) {
-            return $matches;
-        } else {
-            return false;
-        }
+        return false;
     }
 
 

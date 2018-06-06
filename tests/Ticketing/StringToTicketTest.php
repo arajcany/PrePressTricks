@@ -265,14 +265,16 @@ class StringToTicketTest extends TestCase
     {
         $this->str2ticket = (new StringToTicket(""))->setCaseSensitive(false);
         $strings = [
+            '210x297mm',
             '210x297_1x2',
-            '210x297',
-            '420X297',
+            '210mmx297',
+            '420mmX297mm',
             '_x30_320x450',
             '',
         ];
 
         $expectedResults = [
+            [210, 297],
             [210, 297],
             [210, 297],
             [420, 297],
