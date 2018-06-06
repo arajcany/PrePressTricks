@@ -430,7 +430,7 @@ class StringToTicket
         $strNormalised = $str;
 
         if ($this->getExtensionCheck() === true) {
-            $strNormalised = pathinfo($str, PATHINFO_FILENAME);
+            $strNormalised = pathinfo($str, PATHINFO_DIRNAME) . '\\' . pathinfo($str, PATHINFO_FILENAME);
         }
 
         if ($this->getFilepathCheck() === true) {
@@ -814,43 +814,31 @@ class StringToTicket
         $string = $this->inputString;
         $stringNormalised = $this->normaliseString($string);
 
-        //width
-        $regexDelimiter = '#';
-        $startTag = '_';
-        $endTag = 'x';
-        $regex = $regexDelimiter
-            . preg_quote($startTag, $regexDelimiter) . '(.*?)' . preg_quote($endTag, $regexDelimiter)
-            . $regexDelimiter
-            . 's';
+        $regex = '/_\d+x\d+_/s';
+
         if ($this->getCaseSensitive() === true) {
             $regex .= '';
         } else {
             $regex .= 'i';
         }
-        preg_match($regex, $stringNormalised, $matchesWidth);
 
-        //height
-        $regexDelimiter = '#';
-        $startTag = 'x';
-        $endTag = '_';
-        $regex = $regexDelimiter
-            . preg_quote($startTag, $regexDelimiter) . '(.*?)' . preg_quote($endTag, $regexDelimiter)
-            . $regexDelimiter
-            . 's';
-        if ($this->getCaseSensitive() === true) {
-            $regex .= '';
-        } else {
-            $regex .= 'i';
-        }
-        preg_match($regex, $stringNormalised, $matchesHeight);
+        preg_match($regex, $stringNormalised, $matches);
 
-        if (isset($matchesWidth[1]) && isset($matchesHeight[1])) {
-            $found = [$matchesWidth[1], $matchesHeight[1]];
-        } else {
-            $found = false;
+        if (!$matches) {
+            return false;
         }
 
-        return $found;
+        $matches = $matches[0];
+        $matches = str_replace("_", "", $matches);
+        $matches = str_replace("X", "_", $matches);
+        $matches = str_replace("x", "_", $matches);
+        $matches = explode("_", $matches);
+
+        if (isset($matches[0]) && isset($matches[1])) {
+            return $matches;
+        } else {
+            return false;
+        }
     }
 
 

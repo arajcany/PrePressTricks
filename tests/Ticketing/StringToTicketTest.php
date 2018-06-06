@@ -268,7 +268,7 @@ class StringToTicketTest extends TestCase
             '210x297_1x2',
             '210x297',
             '420X297',
-            '320x450',
+            '_x30_320x450',
             '',
         ];
 
@@ -276,7 +276,7 @@ class StringToTicketTest extends TestCase
             [210, 297],
             [210, 297],
             [420, 297],
-            ['320', '450'],
+            [320, 450],
             false,
         ];
 
