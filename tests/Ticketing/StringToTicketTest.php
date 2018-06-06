@@ -93,12 +93,12 @@ class StringToTicketTest extends TestCase
     {
         $this->str2ticket = (new StringToTicket(""))->setCaseSensitive(false);
         $strings = [
-            'silk',
-            'smooth',
-            'gloss',
-            'satin',
+            'Silk',
+            'SMOOTH',
+            'gloSS',
+            'sAtin',
             'plain',
-            'recycled',
+            'Recycled',
         ];
 
         $expectedResults = [

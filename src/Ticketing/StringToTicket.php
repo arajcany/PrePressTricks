@@ -510,8 +510,14 @@ class StringToTicket
         $found = [];
         foreach ($patterns as $stockPattern) {
             $currentPattern = "_" . $stockPattern . "_";
-            if (strstr($stringNormalised, $currentPattern)) {
-                $found[] = $stockPattern;
+            if ($this->getCaseSensitive() === true) {
+                if (strstr($stringNormalised, $currentPattern)) {
+                    $found[] = $stockPattern;
+                }
+            } else {
+                if (stristr($stringNormalised, $currentPattern)) {
+                    $found[] = $stockPattern;
+                }
             }
         }
 
