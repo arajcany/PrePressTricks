@@ -124,21 +124,19 @@ class StringToTicketTest extends TestCase
     {
         $this->str2ticket = (new StringToTicket(""))->setCaseSensitive(false);
         $strings = [
-            'oid1',
-            'orderid2',
-            'order-id3',
-            'oidXX123',
-            'orderid123-xx',
-            'order-idy2018m06d05-XYZ',
+            'o1',
+            'ord2',
+            'order3',
+            'orderid4',
+            'order-id5',
         ];
 
         $expectedResults = [
             '1',
             '2',
             '3',
-            'XX123',
-            '123-xx',
-            'y2018m06d05-XYZ',
+            '4',
+            '5',
         ];
 
         foreach ($strings as $key => $string) {
@@ -155,21 +153,19 @@ class StringToTicketTest extends TestCase
     {
         $this->str2ticket = (new StringToTicket(""))->setCaseSensitive(false);
         $strings = [
-            'jid1',
-            'jobid2',
-            'job-id3',
-            'jidXX123',
-            'jobid123-xx',
-            'job-idy2018m06d05-XYZ',
+            'j1',
+            'jb2',
+            'job3',
+            'jobid4',
+            'job-id5',
         ];
 
         $expectedResults = [
             '1',
             '2',
             '3',
-            'XX123',
-            '123-xx',
-            'y2018m06d05-XYZ',
+            '4',
+            '5',
         ];
 
         foreach ($strings as $key => $string) {
@@ -189,12 +185,18 @@ class StringToTicketTest extends TestCase
             'gk1',
             'groupkey2',
             'group-key3',
+            'gk66axg do not include this',
+            'groupkey77-a0x_g do not include from _g onwards',
+            'group-key00-0C-29-F6-2B-CF',
         ];
 
         $expectedResults = [
             '1',
             '2',
             '3',
+            '66axg',
+            '77-a0x',
+            '00-0C-29-F6-2B-CF',
         ];
 
         foreach ($strings as $key => $string) {
@@ -265,21 +267,79 @@ class StringToTicketTest extends TestCase
     {
         $this->str2ticket = (new StringToTicket(""))->setCaseSensitive(false);
         $strings = [
-            '210x297mm',
-            '210x297_1x2',
-            '210mmx297',
-            '420mmX297mm',
-            '_x30_320x450',
-            '',
+            '000x000',
+            '000 x 000',
+            ' 000x000',
+            '000x000 ',
+            ' 000x000 ',
+            ' 000 x 000 ',
+            ' 000 x000 ',
+            ' 000x 000 ',
+
+            '000mmx000mm',
+            '000mm x 000mm',
+            ' 000mmx000mm',
+            '000mmx000mm ',
+            ' 000mmx000mm ',
+            ' 000mm x 000mm ',
+            ' 000mm x000mm ',
+            ' 000mmx 000mm ',
+
+            '000x000mm',
+            '000 x 000mm',
+            ' 000x000mm',
+            '000x000mm ',
+            ' 000x000mm ',
+            ' 000 x 000mm ',
+            ' 000 x000mm ',
+            ' 000x 000mm ',
+
+            '000mmx000',
+            '000mm x 000',
+            ' 000mmx000',
+            '000mmx000 ',
+            ' 000mmx000 ',
+            ' 000mm x 000 ',
+            ' 000mm x000 ',
+            ' 000mmx 000 ',
         ];
 
         $expectedResults = [
-            [210, 297],
-            [210, 297],
-            [210, 297],
-            [420, 297],
-            [320, 450],
-            false,
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
+            ['000', '000'],
         ];
 
         foreach ($strings as $key => $string) {

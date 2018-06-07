@@ -351,12 +351,7 @@ class StringToTicket
                 '/',
             ],
             'quantity' => [
-                'quantity',
-                'qty',
-                'q',
-                'copies',
-                'cps',
-                'x',
+                '#(quantity|qty|q|copies|cps|x)(\d+)#s',
             ],
             'plex' => [
                 'single-sided' => ['ss', 'single', 'single-sided'],
@@ -372,29 +367,23 @@ class StringToTicket
                 'recycled',
             ],
             'order-id' => [
-                'oid',
-                'orderid',
-                'order-id',
+                '#(o|ord|order|orderid|order-id)(\d+)#s',
             ],
             'job-id' => [
-                'jid',
-                'jobid',
-                'job-id',
+                '#(j|jb|job|jobid|job-id)(\d+)#s',
             ],
             'group-key' => [
-                'gk',
-                'groupkey',
-                'group-key',
+                '#(gk|groupkey|group-key)([0-9a-zA-Z-]+|\d+)#s',
             ],
             'width' => [
-                'w',
-                'wd',
-                'width',
+                '#(w|wd|width)(\d+)#s',
             ],
             'height' => [
-                'h',
-                'ht',
-                'height',
+                '#(h|ht|height)(\d+)#s',
+            ],
+            'width-and-height' => [
+                '#\d+[ ]*[mm]*[ ]*[x][ ]*\d+[ ]*[mm]*#s',
+                '#\d+[ ]*[in]*[ ]*[x][ ]*\d+[ ]*[in]*#s',
             ],
             'colours' => [
                 'red',
@@ -419,6 +408,7 @@ class StringToTicket
         $this->setGroupKeyPattern($defaultPattern['group-key']);
         $this->setWidthPattern($defaultPattern['width']);
         $this->setHeightPattern($defaultPattern['height']);
+        $this->setWidthAndHeightPattern($defaultPattern['width-and-height']);
         $this->setExtensionCheck(true);
         $this->setFilepathCheck(true);
         $this->setCaseSensitive(true);
@@ -455,45 +445,25 @@ class StringToTicket
      */
     public function extractQuantity()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
-        $patterns = $this->quantityPattern;
+        $regexPatterns = $this->getQuantityPattern();
 
-        $found = [];
-        foreach ($patterns as $pattern) {
-            $currentPattern = "_" . $pattern;
-            $stringParts = explode($currentPattern, $stringNormalised);
-            if (count($stringParts) >= 2) {
-                $stringParts = explode("_", $stringParts[1]);
-                $qty = $stringParts[0];
-                if ($this->getCaseSensitive() === true) {
-                    $qtyStrReplaced = str_replace($currentPattern, '', $qty);
-                } else {
-                    $qtyStrReplaced = str_ireplace($currentPattern, '', $qty);
-                }
-                $qtyPregReplaced = preg_replace("/[^0-9]/", '', $qty);
-                if ($qtyStrReplaced == $qtyPregReplaced) {
-                    if ($qty === '') {
-                        $found[] = false;
-                    } elseif ($qty === false) {
-                        $found[] = false;
-                    } elseif ($qty === null) {
-                        $found[] = false;
-                    } else {
-                        $found[] = $qty;
-                    }
-                }
+        foreach ($regexPatterns as $regexPattern) {
+            if ($this->getCaseSensitive() === true) {
+                $regexPattern .= '';
+            } else {
+                $regexPattern .= 'i';
+            }
+
+            preg_match($regexPattern, $stringNormalised, $matches);
+            //return the Group2 match
+            if (isset($matches[2])) {
+                return $matches[2];
             }
         }
 
-        $found = array_unique($found);
-        if (count($found) == 0) {
-            return false;
-        } elseif (count($found) == 1) {
-            return $found[0];
-        } elseif (count($found) > 1) {
-            return $found[0];
-        }
+        return false;
     }
 
     /**
@@ -503,7 +473,7 @@ class StringToTicket
      */
     public function extractStock()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
         $patterns = $this->stockPattern;
 
@@ -538,7 +508,7 @@ class StringToTicket
      */
     public function extractPlex()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
         $patterns = $this->plexPattern;
 
@@ -575,45 +545,25 @@ class StringToTicket
      */
     public function extractOrderId()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
-        $patterns = $this->orderIdPattern;
+        $regexPatterns = $this->getOrderIdPattern();
 
-        $found = [];
-        foreach ($patterns as $pattern) {
-            $currentPattern = "_" . $pattern;
-            $stringParts = explode($currentPattern, $stringNormalised);
-            if (count($stringParts) >= 2) {
-                $stringParts = explode("_", $stringParts[1]);
-                $id = $stringParts[0];
-                if ($this->getCaseSensitive() === true) {
-                    $idStrReplaced = str_replace($currentPattern, '', $id);
-                } else {
-                    $idStrReplaced = str_ireplace($currentPattern, '', $id);
-                }
-                $idPregReplaced = preg_replace("/[^0-9a-zA-Z\-]/", '', $id);
-                if ($idStrReplaced == $idPregReplaced) {
-                    if ($id === '') {
-                        $found[] = false;
-                    } elseif ($id === false) {
-                        $found[] = false;
-                    } elseif ($id === null) {
-                        $found[] = false;
-                    } else {
-                        $found[] = $id;
-                    }
-                }
+        foreach ($regexPatterns as $regexPattern) {
+            if ($this->getCaseSensitive() === true) {
+                $regexPattern .= '';
+            } else {
+                $regexPattern .= 'i';
+            }
+
+            preg_match($regexPattern, $stringNormalised, $matches);
+            //return the Group2 match
+            if (isset($matches[2])) {
+                return $matches[2];
             }
         }
 
-        $found = array_unique($found);
-        if (count($found) == 0) {
-            return false;
-        } elseif (count($found) == 1) {
-            return $found[0];
-        } elseif (count($found) > 1) {
-            return $found[0];
-        }
+        return false;
     }
 
     /**
@@ -623,45 +573,25 @@ class StringToTicket
      */
     public function extractJobId()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
-        $patterns = $this->jobIdPattern;
+        $regexPatterns = $this->getJobIdPattern();
 
-        $found = [];
-        foreach ($patterns as $pattern) {
-            $currentPattern = "_" . $pattern;
-            $stringParts = explode($currentPattern, $stringNormalised);
-            if (count($stringParts) >= 2) {
-                $stringParts = explode("_", $stringParts[1]);
-                $id = $stringParts[0];
-                if ($this->getCaseSensitive() === true) {
-                    $idStrReplaced = str_replace($currentPattern, '', $id);
-                } else {
-                    $idStrReplaced = str_ireplace($currentPattern, '', $id);
-                }
-                $idPregReplaced = preg_replace("/[^0-9a-zA-Z\-]/", '', $id);
-                if ($idStrReplaced == $idPregReplaced) {
-                    if ($id === '') {
-                        $found[] = false;
-                    } elseif ($id === false) {
-                        $found[] = false;
-                    } elseif ($id === null) {
-                        $found[] = false;
-                    } else {
-                        $found[] = $id;
-                    }
-                }
+        foreach ($regexPatterns as $regexPattern) {
+            if ($this->getCaseSensitive() === true) {
+                $regexPattern .= '';
+            } else {
+                $regexPattern .= 'i';
+            }
+
+            preg_match($regexPattern, $stringNormalised, $matches);
+            //return the Group2 match
+            if (isset($matches[2])) {
+                return $matches[2];
             }
         }
 
-        $found = array_unique($found);
-        if (count($found) == 0) {
-            return false;
-        } elseif (count($found) == 1) {
-            return $found[0];
-        } elseif (count($found) > 1) {
-            return $found[0];
-        }
+        return false;
     }
 
     /**
@@ -671,45 +601,25 @@ class StringToTicket
      */
     public function extractGroupKey()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
-        $patterns = $this->groupKeyPattern;
+        $regexPatterns = $this->getGroupKeyPattern();
 
-        $found = [];
-        foreach ($patterns as $pattern) {
-            $currentPattern = "_" . $pattern;
-            $stringParts = explode($currentPattern, $stringNormalised);
-            if (count($stringParts) >= 2) {
-                $stringParts = explode("_", $stringParts[1]);
-                $id = $stringParts[0];
-                if ($this->getCaseSensitive() === true) {
-                    $idStrReplaced = str_replace($currentPattern, '', $id);
-                } else {
-                    $idStrReplaced = str_ireplace($currentPattern, '', $id);
-                }
-                $idPregReplaced = preg_replace("/[^0-9a-zA-Z\-]/", '', $id);
-                if ($idStrReplaced == $idPregReplaced) {
-                    if ($id === '') {
-                        $found[] = false;
-                    } elseif ($id === false) {
-                        $found[] = false;
-                    } elseif ($id === null) {
-                        $found[] = false;
-                    } else {
-                        $found[] = $id;
-                    }
-                }
+        foreach ($regexPatterns as $regexPattern) {
+            if ($this->getCaseSensitive() === true) {
+                $regexPattern .= '';
+            } else {
+                $regexPattern .= 'i';
+            }
+
+            preg_match($regexPattern, $stringNormalised, $matches);
+            //return the Group2 match
+            if (isset($matches[2])) {
+                return $matches[2];
             }
         }
 
-        $found = array_unique($found);
-        if (count($found) == 0) {
-            return false;
-        } elseif (count($found) == 1) {
-            return $found[0];
-        } elseif (count($found) > 1) {
-            return $found[0];
-        }
+        return false;
     }
 
     /**
@@ -719,45 +629,28 @@ class StringToTicket
      */
     public function extractWidth()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
-        $patterns = $this->widthPattern;
+        $regexPatterns = $this->getWidthPattern();
 
-        $found = [];
-        foreach ($patterns as $pattern) {
-            $currentPattern = "_" . $pattern;
-            $stringParts = explode($currentPattern, $stringNormalised);
-            if (count($stringParts) >= 2) {
-                $stringParts = explode("_", $stringParts[1]);
-                $id = $stringParts[0];
-                if ($this->getCaseSensitive() === true) {
-                    $idStrReplaced = str_replace($currentPattern, '', $id);
-                } else {
-                    $idStrReplaced = str_ireplace($currentPattern, '', $id);
-                }
-                $idPregReplaced = preg_replace("/[^0-9]/", '', $id);
-                if ($idStrReplaced == $idPregReplaced) {
-                    if ($id === '') {
-                        $found[] = false;
-                    } elseif ($id === false) {
-                        $found[] = false;
-                    } elseif ($id === null) {
-                        $found[] = false;
-                    } else {
-                        $found[] = $id;
-                    }
+        foreach ($regexPatterns as $regexPattern) {
+            if ($this->getCaseSensitive() === true) {
+                $regexPattern .= '';
+            } else {
+                $regexPattern .= 'i';
+            }
+
+            preg_match($regexPattern, $stringNormalised, $matches);
+
+            if (isset($matches[0])) {
+                preg_match_all('/\d+/si', $matches[0], $numbers);
+                if (isset($numbers[0][0])) {
+                    return $numbers[0][0];
                 }
             }
         }
 
-        $found = array_unique($found);
-        if (count($found) == 0) {
-            return false;
-        } elseif (count($found) == 1) {
-            return $found[0];
-        } elseif (count($found) > 1) {
-            return $found[0];
-        }
+        return false;
     }
 
     /**
@@ -767,45 +660,29 @@ class StringToTicket
      */
     public function extractHeight()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
-        $patterns = $this->heightPattern;
+        $regexPatterns = $this->getHeightPattern();
 
-        $found = [];
-        foreach ($patterns as $pattern) {
-            $currentPattern = "_" . $pattern;
-            $stringParts = explode($currentPattern, $stringNormalised);
-            if (count($stringParts) >= 2) {
-                $stringParts = explode("_", $stringParts[1]);
-                $id = $stringParts[0];
-                if ($this->getCaseSensitive() === true) {
-                    $idStrReplaced = str_replace($currentPattern, '', $id);
-                } else {
-                    $idStrReplaced = str_ireplace($currentPattern, '', $id);
-                }
-                $idPregReplaced = preg_replace("/[^0-9]/", '', $id);
-                if ($idStrReplaced == $idPregReplaced) {
-                    if ($id === '') {
-                        $found[] = false;
-                    } elseif ($id === false) {
-                        $found[] = false;
-                    } elseif ($id === null) {
-                        $found[] = false;
-                    } else {
-                        $found[] = $id;
-                    }
+        foreach ($regexPatterns as $regexPattern) {
+            if ($this->getCaseSensitive() === true) {
+                $regexPattern .= '';
+            } else {
+                $regexPattern .= 'i';
+            }
+
+            preg_match($regexPattern, $stringNormalised, $matches);
+
+            if (isset($matches[0])) {
+                preg_match_all('/\d+/si', $matches[0], $numbers);
+
+                if (isset($numbers[0][0])) {
+                    return $numbers[0][0];
                 }
             }
         }
 
-        $found = array_unique($found);
-        if (count($found) == 0) {
-            return false;
-        } elseif (count($found) == 1) {
-            return $found[0];
-        } elseif (count($found) > 1) {
-            return $found[0];
-        }
+        return false;
     }
 
     /**
@@ -817,24 +694,18 @@ class StringToTicket
      */
     public function extractWidthAndHeight()
     {
-        $string = $this->inputString;
+        $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
+        $regexPatterns = $this->getWidthAndHeightPattern();
 
-        $regexPatterns = [
-            '/_\d+x\d+_/s',
-            '/_\d+mmx\d+mm_/s',
-            '/_\d+mmx\d+_/s',
-            '/_\d+x\d+mm_/s',
-        ];
-
-        foreach ($regexPatterns as $regex) {
+        foreach ($regexPatterns as $regexPattern) {
             if ($this->getCaseSensitive() === true) {
-                $regex .= '';
+                $regexPattern .= '';
             } else {
-                $regex .= 'i';
+                $regexPattern .= 'i';
             }
 
-            preg_match($regex, $stringNormalised, $matches);
+            preg_match($regexPattern, $stringNormalised, $matches);
 
             if (isset($matches[0])) {
                 preg_match_all('/\d+/si', $matches[0], $numbers);
