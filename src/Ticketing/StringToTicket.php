@@ -100,6 +100,7 @@ class StringToTicket
 
     /**
      * @param mixed $outputFailValue
+     * @return $this
      */
     public function setOutputFailValue($outputFailValue)
     {
@@ -526,6 +527,8 @@ class StringToTicket
         } elseif (count($found) > 1) {
             return $found[0];
         }
+
+        return false;
     }
 
     /**
@@ -563,6 +566,8 @@ class StringToTicket
         } elseif (count($found) > 1) {
             return $found[0];
         }
+
+        return false;
     }
 
     /**
