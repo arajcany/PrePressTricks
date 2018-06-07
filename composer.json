@@ -15,12 +15,11 @@
     }
   ],
   "require": {
-    "php": ">=7.0.0",
-    "cakephp/cakephp": "*",
-    "mrlunar/php-dbg-dumper": "dev-master"
+    "php": ">=7.0.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "*"
+    "phpunit/phpunit": "*",
+    "mrlunar/php-dbg-dumper": "dev-master"
   },
   "autoload": {
     "psr-4": {
