@@ -8,12 +8,13 @@ namespace arajcany\PrePressTricks\Ticketing;
  */
 class StringToTicket
 {
-    //input string parameters
+    //setup parameters
     private $inputString;
     private $stringDelimiters;
     private $extensionCheck;
     private $filepathCheck;
     private $caseSensitive;
+    private $outputFailValue;
 
     //patterns for searching strings
     private $quantityPattern;
@@ -88,6 +89,24 @@ class StringToTicket
         $this->caseSensitive = $caseSensitive;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOutputFailValue()
+    {
+        return $this->outputFailValue;
+    }
+
+    /**
+     * @param mixed $outputFailValue
+     */
+    public function setOutputFailValue($outputFailValue)
+    {
+        $this->outputFailValue = $outputFailValue;
+        return $this;
+    }
+
 
     /**
      * @return mixed
@@ -344,12 +363,16 @@ class StringToTicket
 
     private function setDefaults()
     {
-        $defaultPattern = [
+        $default = [
             'delimiters' => [
                 '_',
                 '\\',
                 '/',
             ],
+            'fail-value' => false
+        ];
+
+        $defaultPattern = [
             'quantity' => [
                 '#(quantity|qty|q|copies|cps|x)(\d+)#s',
             ],
@@ -399,7 +422,14 @@ class StringToTicket
             ],
         ];
 
-        $this->setStringDelimiters($defaultPattern['delimiters']);
+        //setup
+        $this->setStringDelimiters($default['delimiters']);
+        $this->setOutputFailValue($default['fail-value']);
+        $this->setExtensionCheck(true);
+        $this->setFilepathCheck(true);
+        $this->setCaseSensitive(true);
+
+        //patterns
         $this->setQuantityPattern($defaultPattern['quantity']);
         $this->setPlexPattern($defaultPattern['plex']);
         $this->setStockPattern($defaultPattern['stock']);
@@ -409,9 +439,6 @@ class StringToTicket
         $this->setWidthPattern($defaultPattern['width']);
         $this->setHeightPattern($defaultPattern['height']);
         $this->setWidthAndHeightPattern($defaultPattern['width-and-height']);
-        $this->setExtensionCheck(true);
-        $this->setFilepathCheck(true);
-        $this->setCaseSensitive(true);
 
     }
 
@@ -463,7 +490,7 @@ class StringToTicket
             }
         }
 
-        return false;
+        return $this->getOutputFailValue();
     }
 
     /**
@@ -493,7 +520,7 @@ class StringToTicket
 
         $found = array_unique($found);
         if (count($found) == 0) {
-            return false;
+            return $this->getOutputFailValue();
         } elseif (count($found) == 1) {
             return $found[0];
         } elseif (count($found) > 1) {
@@ -530,7 +557,7 @@ class StringToTicket
 
         $found = array_unique($found);
         if (count($found) == 0) {
-            return false;
+            return $this->getOutputFailValue();
         } elseif (count($found) == 1) {
             return $found[0];
         } elseif (count($found) > 1) {
@@ -563,7 +590,7 @@ class StringToTicket
             }
         }
 
-        return false;
+        return $this->getOutputFailValue();
     }
 
     /**
@@ -591,7 +618,7 @@ class StringToTicket
             }
         }
 
-        return false;
+        return $this->getOutputFailValue();
     }
 
     /**
@@ -619,7 +646,7 @@ class StringToTicket
             }
         }
 
-        return false;
+        return $this->getOutputFailValue();
     }
 
     /**
@@ -650,7 +677,7 @@ class StringToTicket
             }
         }
 
-        return false;
+        return $this->getOutputFailValue();
     }
 
     /**
@@ -682,7 +709,7 @@ class StringToTicket
             }
         }
 
-        return false;
+        return $this->getOutputFailValue();
     }
 
     /**
@@ -716,7 +743,7 @@ class StringToTicket
             }
         }
 
-        return false;
+        return $this->getOutputFailValue();
     }
 
 
