@@ -743,7 +743,7 @@ class StringToTicket
             }
         }
 
-        return $this->getOutputFailValue();
+        return [$this->getOutputFailValue(), $this->getOutputFailValue()];
     }
 
 
