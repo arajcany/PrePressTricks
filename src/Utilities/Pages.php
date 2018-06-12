@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arajcany
- * Date: 20/09/2016
- * Time: 8:36 PM
- */
 
 namespace arajcany\PrePressTricks\Utilities;
 

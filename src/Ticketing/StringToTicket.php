@@ -475,8 +475,21 @@ class StringToTicket
     {
         $string = $this->getInputString();
         $stringNormalised = $this->normaliseString($string);
-        $regexPatterns = $this->getQuantityPattern();
 
+        //removed possibility of 000x000 fooling the qty of x000
+        $regexPatterns = $this->getWidthAndHeightPattern();
+        foreach ($regexPatterns as $regexPattern) {
+            if ($this->getCaseSensitive() === true) {
+                $regexPattern .= '';
+            } else {
+                $regexPattern .= 'i';
+            }
+
+            $stringNormalised = preg_replace($regexPattern, '', $stringNormalised);
+        }
+
+        //extract the qty
+        $regexPatterns = $this->getQuantityPattern();
         foreach ($regexPatterns as $regexPattern) {
             if ($this->getCaseSensitive() === true) {
                 $regexPattern .= '';

@@ -37,6 +37,7 @@ class StringToTicketTest extends TestCase
             'copies4',
             'cps5',
             'x6',
+            '7x8_x9',
         ];
 
         $expectedResults = [
@@ -46,6 +47,7 @@ class StringToTicketTest extends TestCase
             '4',
             '5',
             '6',
+            '9',
         ];
 
         foreach ($strings as $key => $string) {
