@@ -3,7 +3,7 @@
 namespace arajcany\Test\Ticketing;
 
 use PHPUnit\Framework\TestCase;
-use arajcany\PrePressTricks\Ticketing\StringToTicket;
+use arajcany\PrePressTricks\Ticketing\String\StringToTicket;
 
 /**
  * Class StringToTicketTest

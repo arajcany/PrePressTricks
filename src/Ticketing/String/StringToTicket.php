@@ -1,6 +1,6 @@
 <?php
 
-namespace arajcany\PrePressTricks\Ticketing;
+namespace arajcany\PrePressTricks\Ticketing\String;
 
 /**
  * Class StringToTicket
