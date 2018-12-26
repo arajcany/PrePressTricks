@@ -15,7 +15,10 @@
     }
   ],
   "require": {
-    "php": ">=7.0.0"
+    "php": ">=7.0.0",
+    "cakephp/filesystem": "*",
+    "cakephp/utility": "*",
+    "cakephp/i18n": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
