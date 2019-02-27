@@ -5,7 +5,7 @@ Box of Tricks for common PrePress related tasks.
 ## Table of Contents
 - [Purpose](#purpose)
 - [Installation](#installation)
-- [Basic Usage](#basic-usage)
+- [Basic Usage](#basic-usage---xpif-ticket-maker)
 
 
 
@@ -71,6 +71,31 @@ $ticket
 $string = $ticket->render("C:\\tmp\\Example_01.xpf");
 ```
 
+`$string` contains the following XML
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE xpif SYSTEM "xpif-v02082a.dtd">
+<xpif version="1.0" cpss-version="2.082a" xml:lang="en">
+  <xpif-operation-attributes>
+    <job-name syntax="name" xml:space="preserve">For_the_Term_of_His_Natural_Life.pdf</job-name>
+    <requesting-user-name syntax="name" xml:space="preserve">John Smith</requesting-user-name>
+  </xpif-operation-attributes>
+  <job-template-attributes>
+    <copies syntax="integer">2</copies>
+    <finishings syntax="1setOf">
+      <value syntax="enum">28</value>
+      <value syntax="enum">93</value>
+      <value syntax="enum">92</value>
+    </finishings>
+    <sheet-collate syntax="keyword">collated</sheet-collate>
+    <sides syntax="keyword">two-sided-long-edge</sides>
+    <media syntax="keyword">A4-White-80gsm</media>
+  </job-template-attributes>
+</xpif>
+
+```
+
 
 ### Example 2 - Base Ticket Supported Properties
 The XPIF Specification supports almost 650 properties inside the ticket.
@@ -101,7 +126,7 @@ $ticket->setDocumentFormat("application/pdf");
 //name of the stock as defined in the RIP or printer
 $ticket->setMedia('Plain-White-A4-80gsm');
 
-//print the job as 'color' | 'monochrome-grayscale'
+//print the job as 'color' │ 'monochrome-grayscale'
 $ticket->setColorEffectsType('color');
 
 //id for accounting / reconciliation purposes
@@ -128,7 +153,7 @@ $ticket->setOrientationRequested(3);
 //job collation
 $ticket->setSheetCollate("Collated");
 
-//sides to print on 'one-sided' | 'two-sided' | 'two-sided-shortedge'
+//sides to print on 'one-sided' │ 'two-sided' │ 'two-sided-shortedge'
 $ticket->setSides("one-sided");
 
 //commonly used in forcing a page to print on the RHS for double sided printing (i.e. chapter starts)
@@ -410,3 +435,111 @@ $ticket->setMediaCollection($mediaCollection);
   </job-template-attributes>
 </xpif>
 ```
+
+Media Collections are awesome because you can clone/modify/reuse them:
+
+```php
+<?php
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifMediaCollection;
+
+$whiteMediaCollection = new XpifMediaCollection('2.082a');
+$whiteMediaCollection
+    ->setMediaType('plain')
+    ->setMediaColor('white')
+    ->setMediaPrePrinted(false)
+    ->setMediaSize([21000, 29700])
+    ->setMediaWeightMetric(80);
+
+$pinkMediaCollection = (clone $whiteMediaCollection)->setMediaColor('pink');
+$greenMediaCollection = (clone $whiteMediaCollection)->setMediaColor('green');
+$blueMediaCollection = (clone $whiteMediaCollection)->setMediaColor('blue');
+$yellowMediaCollection = (clone $whiteMediaCollection)->setMediaColor('yellow');
+
+$blueCoverMediaCollection = (clone $blueMediaCollection)->setMediaWeightMetric(200);
+$greenCoverMediaCollection = (clone $greenMediaCollection)->setMediaWeightMetric(200);
+```
+
+To see how to reuse Media Collections refer to Example X.
+
+
+
+### Example 6 - Collections  
+
+In addition to the Media Collection the following collections are also available:
+- Front Cover Collection
+- Back Cover Collection
+- Insert Sheet Collection
+  
+```php
+<?php
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifMediaCollection;
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifCoverFrontCollection;
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifCoverBackCollection;
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifInsertSheetCollection;
+
+
+//front cover collection
+$coverFrontCollection = new XpifCoverFrontCollection('2.082a');
+$coverFrontCollection
+    ->setMediaCollection($blueCoverMediaCollection) //we created $blueCoverMedia in Example 5
+    ->setCoverType('print-both');
+
+//back cover collection
+$coverBackCollection = new XpifCoverBackCollection('2.082a');
+$coverBackCollection
+    ->setMediaCollection($greenCoverMediaCollection) //we created $greenCoverMedia in Example 5
+    ->setCoverType('print-both');
+
+//insert sheet collection
+$pinkInsertSheetCollection = new XpifInsertSheetCollection('2.082a');
+$pinkInsertSheetCollection
+    ->setInsertAfterPageNumber('0')
+    ->setInsertCount(1)
+    ->setMediaCollection($pinkMediaCollection); //we created $pinkMediaCollection in Example 5
+```
+
+
+
+### Example 7 - Using Collections In Your XPIF Tickets
+
+In case you got lost in Example 6 about Collections, here is a visual on how Collections can be nested inside the XPIF Ticket:
+  
+```
+xpif
+├── Media Collection
+│
+├── Cover Front Collection
+│   └── Media Collection
+│
+├── Cover Back Collection
+│   └── Media Collection
+│
+├── Slip Sheets (many)
+│   ├── Insert Sheet Collection
+│   │   └── Media Collection
+│   ├── Insert Sheet Collection
+│   │   └── Media Collection
+│   │
+│   ├── <...>
+│   │
+│   └── Insert Sheet Collection
+│       └── Media Collection
+│
+└── Page Exceptions (many)
+    ├── Page Overrides Collection
+    │   └── Media Collection
+    ├── Page Overrides Collection
+    │   └── Media Collection
+    │
+    ├── <...>
+    │
+    └── Page Overrides Collection
+        └── Media Collection
+```
+
+From the representation above, you can probably see why I said Collections are awesome:
+- They allow you to write less code.
+- You can create a base Collection.
+- You can clone and modify that Collection.
+- You can then reuse the collection in different parts of the ticket.
+
