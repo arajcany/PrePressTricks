@@ -326,7 +326,7 @@ $ticket->setProperty('xpif.job-template-attributes.force-front-side.value.4', '3
 
 
 //concrete method - see Example X
-$ticket->setInsertSheet($collection);
+$ticket->setInsertSheetCollection($collection);
 
 //concrete method - see Example X
 $ticket->setPageRanges($collection);
@@ -341,6 +341,8 @@ Depending on the RIP you use, you can either use Media or Media Collection:
 **Media** Use this when your RIP has a defined media catalogue and you know the name of that media in the catalogue.
 ```php
 <?php
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifTicket;
+
 $ticket = new XpifTicket('2.082a');
 $ticket->setJobName("For_the_Term_of_His_Natural_Life.pdf");
 $ticket->setMedia('Plain-White-A4-80gsm');
@@ -362,6 +364,7 @@ $ticket->setMedia('Plain-White-A4-80gsm');
 **Media Collection** Use this when your RIP does not have a defined media catalogue and you need to set the properties of the stock.
 ```php
 <?php
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifTicket;
 use arajcany\PrePressTricks\Ticketing\XPIF\XpifMediaCollection;
 
 $mediaCollection = new XpifMediaCollection('2.082a');
@@ -370,7 +373,7 @@ $mediaCollection
     ->setMediaType('plain')
     ->setMediaInfo('This is our standard white paper')
     ->setMediaColor('white')
-    ->setMediaPrePrinted(false)
+    ->setMediaPrePrinted('blank')
     ->setMediaHoleCount(0)
     ->setMediaOrderCount(1)
     ->setMediaSize([21000, 29700])
@@ -459,7 +462,7 @@ $blueCoverMediaCollection = (clone $blueMediaCollection)->setMediaWeightMetric(2
 $greenCoverMediaCollection = (clone $greenMediaCollection)->setMediaWeightMetric(200);
 ```
 
-To see how to reuse Media Collections refer to Example X.
+To see how to reuse Media Collections refer to [Example 6](#example-6---collections).
 
 
 
@@ -472,30 +475,31 @@ In addition to the Media Collection the following collections are also available
   
 ```php
 <?php
-use arajcany\PrePressTricks\Ticketing\XPIF\XpifMediaCollection;
 use arajcany\PrePressTricks\Ticketing\XPIF\XpifCoverFrontCollection;
 use arajcany\PrePressTricks\Ticketing\XPIF\XpifCoverBackCollection;
 use arajcany\PrePressTricks\Ticketing\XPIF\XpifInsertSheetCollection;
 
-
 //front cover collection
 $coverFrontCollection = new XpifCoverFrontCollection('2.082a');
 $coverFrontCollection
+    ->setCoverType('print-both')
     ->setMediaCollection($blueCoverMediaCollection) //we created $blueCoverMedia in Example 5
-    ->setCoverType('print-both');
+    ->setMedia('the-name-of-the-stock'); //not necessary if you use setMediaCollection() 
 
 //back cover collection
 $coverBackCollection = new XpifCoverBackCollection('2.082a');
 $coverBackCollection
+    ->setCoverType('print-both')
     ->setMediaCollection($greenCoverMediaCollection) //we created $greenCoverMedia in Example 5
-    ->setCoverType('print-both');
+    ->setMedia('the-name-of-the-stock'); //not necessary if you use setMediaCollection() 
 
 //insert sheet collection
 $pinkInsertSheetCollection = new XpifInsertSheetCollection('2.082a');
 $pinkInsertSheetCollection
     ->setInsertAfterPageNumber('0')
     ->setInsertCount(1)
-    ->setMediaCollection($pinkMediaCollection); //we created $pinkMediaCollection in Example 5
+    ->setMediaCollection($pinkMediaCollection) //we created $pinkMediaCollection in Example 5
+    ->setMedia('the-name-of-the-stock'); //not necessary if you use setMediaCollection() 
 ```
 
 
@@ -539,7 +543,18 @@ xpif
 
 From the representation above, you can probably see why I said Collections are awesome:
 - They allow you to write less code.
-- You can create a base Collection.
-- You can clone and modify that Collection.
-- You can then reuse the collection in different parts of the ticket.
+- You don't need to know the full xPath of the property you are trying to set - done automatically by the Collection.
+- Create a base Collection then clone/modify/reuse that Collection in different parts of the ticket.
 
+```php
+<?php
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifTicket;
+
+$ticket = new XpifTicket('2.082a');
+$ticket->setJobName("For_the_Term_of_His_Natural_Life.pdf");
+$ticket->setMediaCollection($whiteMediaCollection);//we created $whiteMediaCollection in Example 5
+$ticket->setCoverFrontCollection($coverFrontCollection);//we created $coverFrontCollection in Example 6
+$ticket->setCoverBackCollection($coverBackCollection);//we created $coverBackCollection in Example 6
+$ticket->setInsertSheetCollection($pinkInsertSheetCollection);//we created $pinkInsertSheetCollection in Example 6
+
+```

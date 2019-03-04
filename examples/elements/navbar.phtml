@@ -6,13 +6,26 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Utilities</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="<?= $basePath ?>?f=Utilities&p=Boxes">Boxes</a>
                     <a class="dropdown-item" href="<?= $basePath ?>?f=Utilities&p=Pages">Pages</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Ticketing</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="<?= $basePath ?>?f=Ticketing&p=StringToTicket">StringToTicket</a>
+                    <a class="dropdown-item" href="<?= $basePath ?>?f=Ticketing&p=01_XpifTicketMakerSimple">01_XpifTicketMakerSimple</a>
+                    <a class="dropdown-item" href="<?= $basePath ?>?f=Ticketing&p=02_XpifTicketMakerComplex">02_XpifTicketMakerComplex</a>
+                    <a class="dropdown-item" href="<?= $basePath ?>?f=Ticketing&p=03_XpifTicketMakerInsertSheet">03_XpifTicketMakerInsertSheet</a>
                 </div>
             </li>
         </ul>
