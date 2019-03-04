@@ -57,6 +57,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-/src/Ticketing/XpifDtdMapping/*.dtd
-/src/Ticketing/XpifDtdMapping/*.php
+
+/src/Ticketing/XPIF/XpifDtdMapping/*.dtd
+/src/Ticketing/XPIF/XpifDtdMapping/*.php
 /build/
+/src/Labels/
+/examples/Ticketing/
+/docs/
+/tests/Ticketing/XPIF/SampleTickets
+
