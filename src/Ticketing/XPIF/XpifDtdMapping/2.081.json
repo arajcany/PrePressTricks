@@ -1,0 +1,6600 @@
+{
+    "elements": {
+        "xpif": {
+            "children": [
+                "xpif-operation-attributes",
+                "job-template-attributes"
+            ],
+            "content": null,
+            "attributes": {
+                "version": {
+                    "opts": "CDATA",
+                    "defaults": "#REQUIRED"
+                },
+                "cpss-version": {
+                    "opts": "CDATA",
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "xpif-operation-attributes": {
+            "children": [
+                "job-name",
+                "document-name",
+                "document-format",
+                "document-uri",
+                "compression",
+                "job-k-octets",
+                "job-impressions",
+                "requesting-user-name",
+                "job-media-sheets",
+                "job-password",
+                "job-password-encryption",
+                "lcds-tape-characteristics",
+                "printer-uri",
+                "document-color",
+                "creator-name-attributes",
+                "creator-name-pdl",
+                "creator-version-attributes",
+                "creator-version-pdl",
+                "job-pages",
+                "file-name",
+                "job-id-from-client",
+                "job-originating-user-name",
+                "job-originating-user-domain",
+                "job-originating-user-encryption",
+                "job-originating-user-password",
+                "job-originating-user-password-encryption",
+                "host-address-col"
+            ],
+            "content": null
+        },
+        "job-template-attributes": {
+            "children": [
+                "job-priority",
+                "job-hold-until",
+                "job-sheets",
+                "multiple-document-handling",
+                "copies",
+                "finishings",
+                "page-ranges",
+                "sides",
+                "number-up",
+                "orientation-requested",
+                "media",
+                "printer-resolution",
+                "print-quality",
+                "output-bin",
+                "cover-back",
+                "cover-front",
+                "imposition-template",
+                "insert-sheet",
+                "job-account-id",
+                "job-accounting-sheets",
+                "job-error-sheet",
+                "job-message-to-operator",
+                "job-recipient-name",
+                "job-save-disposition",
+                "job-sheets-col",
+                "job-sheet-message",
+                "media-col",
+                "page-delivery",
+                "page-order-received",
+                "separator-sheets",
+                "sheet-collate",
+                "x-image-auto-center",
+                "x-image-shift",
+                "x-side1-image-shift",
+                "x-side2-image-shift",
+                "y-image-auto-center",
+                "y-image-shift",
+                "y-side1-image-shift",
+                "y-side2-image-shift",
+                "page-overrides",
+                "pages-per-subset",
+                "black-overprint",
+                "adjust-cyan-red",
+                "adjust-magenta-green",
+                "adjust-yellow-blue",
+                "adjust-contrast",
+                "adjust-lightness",
+                "adjust-saturation",
+                "color-destination-profile-back",
+                "color-destination-profile-front",
+                "color-effects-type",
+                "color-emulation",
+                "force-front-side",
+                "print-from-saved-attributes",
+                "trapping",
+                "rendering-intent-graphics",
+                "rendering-intent-images",
+                "rendering-intent-text",
+                "color-effects-type",
+                "source-cmy-graphics",
+                "undefined-source-cmy-graphics",
+                "source-cmy-images",
+                "undefined-source-cmy-images",
+                "source-cmy-text",
+                "undefined-source-cmy-text",
+                "source-cmyk-graphics",
+                "undefined-source-cmyk-graphics",
+                "source-cmyk-images",
+                "undefined-source-cmyk-images",
+                "source-cmyk-text",
+                "undefined-source-cmyk-text",
+                "source-gray-graphics",
+                "undefined-source-gray-graphics",
+                "source-gray-images",
+                "undefined-source-gray-images",
+                "source-gray-text",
+                "undefined-source-gray-text",
+                "source-rgb-graphics",
+                "undefined-source-rgb-graphics",
+                "source-rgb-images",
+                "undefined-source-rgb-images",
+                "source-rgb-text",
+                "undefined-source-rgb-text",
+                "trc",
+                "bleed-edge-printing",
+                "finishings-col",
+                "anti-aliasing",
+                "opi-image-insertion",
+                "opi-image-pre-scan",
+                "resource-pre-scan",
+                "lead-edge-conditioning",
+                "print-document-uri",
+                "resource-cleanup",
+                "font-name-requested",
+                "font-size-requested",
+                "job-accounting-user-id",
+                "proof-print",
+                "color-depth-yyy",
+                "job-hold-until-time",
+                "feed-orientation",
+                "media-input-tray-check",
+                "presentation-direction-number-up",
+                "x-image-position",
+                "y-image-position",
+                "page-rotation",
+                "highlight-colorant",
+                "highlight-map-color",
+                "highlight-map",
+                "highlight-colorant-mismatch",
+                "job-phone-number",
+                "halftone-text",
+                "halftone-graphics",
+                "halftone-images",
+                "trap-width-slow",
+                "trap-width-fast",
+                "pdl-init-file",
+                "forms-col",
+                "resample-method",
+                "sample-set",
+                "sample-sheet",
+                "toner-saver",
+                "job-retention-period",
+                "job-history-period",
+                "adjust-bw-darkness-mode",
+                "adjust-bw-darkness-value",
+                "job-accounting-data",
+                "job-offset",
+                "form-save",
+                "imposition-gutter-creep-x",
+                "imposition-gutter-creep-y",
+                "imposition-creep-policy",
+                "imposition-gutter-dimension-x",
+                "imposition-gutter-dimension-y",
+                "imposition-mark-front",
+                "imposition-number-up-x",
+                "imposition-number-up-y",
+                "imposition-rotate-policy",
+                "imposition-rotate-policy-order",
+                "imposition-scale",
+                "imposition-size-policy",
+                "imposition-source-orientation",
+                "imposition-source-page-dimension-col",
+                "pcl-paper-source-col",
+                "highlight-map-color-custom-col",
+                "job-copies",
+                "job-cover-back",
+                "job-cover-front",
+                "output-device",
+                "print-content-optimize",
+                "pantone-path-activation",
+                "edge-enhancement-disable",
+                "interleaved-sheets-col",
+                "pad-printing",
+                "aie-color-balance",
+                "aie-contrast",
+                "aie-exposure",
+                "aie-noise-reduction",
+                "aie-red-eye",
+                "aie-saturation",
+                "aie-shadow-detail",
+                "aie-sharpness",
+                "aie-type",
+                "optimized-object-data-caching",
+                "parallel-rip",
+                "spot-color-mapping",
+                "color-separated-file-behavior",
+                "job-print-with-saved-jobs",
+                "media-mismatch-property-policy",
+                "media-mismatch-size-policy",
+                "color-adjustment-set",
+                "print-settings",
+                "undefined-spot-color-graphics",
+                "undefined-spot-color-images",
+                "undefined-spot-color-text",
+                "embedded-profiles",
+                "rgb-monochrome-grayline-mapping",
+                "adjust-custom-color-col",
+                "natural-language-adjustment-col",
+                "client-default-attributes-col",
+                "print-quality-level",
+                "print-optimization-mixed-color-bw",
+                "line-thickening",
+                "output-gloss",
+                "fax-out-col",
+                "output-gloss-col",
+                "job-account-info",
+                "job-account-general-id",
+                "job-account-group-id",
+                "job-account-id-source",
+                "spot-color-trc-control",
+                "subset-delimiter-source",
+                "imposition-col",
+                "line-thickening-threshold",
+                "job-accounting-user-passcode",
+                "job-accounting-user-passcode-encryption",
+                "job-billing-id",
+                "job-billing-passcode",
+                "job-billing-passcode-encryption",
+                "edge-enhancement-col",
+                "black-enhancement-col",
+                "document-reading-orientation",
+                "hold-for-authentication",
+                "pre-cut-tabs-image-shift",
+                "grain-compensation",
+                "image-enhancement",
+                "wrap-cover-col",
+                "vivid-color-enhancement",
+                "skip-blank-page",
+                "line-weight-adjustment",
+                "colorant-set-col"
+            ],
+            "content": null
+        },
+        "lower-bound": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "upper-bound": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "value": {
+            "children": [],
+            "content": "ANY",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text",
+                        "name",
+                        "keyword",
+                        "enum",
+                        "uri",
+                        "uriScheme",
+                        "mimeMediaType",
+                        "octetString",
+                        "boolean",
+                        "integer",
+                        "rangeOfInteger",
+                        "dateTime",
+                        "resolution",
+                        "1setOf",
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "document-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "document-format": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "mimeMediaType"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "document-uri": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "compression": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-k-octets": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-impressions": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-media-sheets": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "requesting-user-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-password": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-password-encryption": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "original-requesting-user-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "lcds-tape-characteristics": {
+            "children": [
+                "lcds-tape-record-type",
+                "lcds-tape-block-length",
+                "lcds-tape-block-offset",
+                "lcds-tape-record-length",
+                "lcds-tape-max-record-length"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "lcds-tape-record-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "lcds-tape-block-length": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "lcds-tape-block-offset": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "lcds-tape-record-length": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "lcds-tape-max-record-length": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "printer-uri": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "document-color": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "file-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-id-from-client": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "host-address-col": {
+            "children": [
+                "host-address-type",
+                "host-address"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "host-address-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "host-address": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-priority": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-hold-until": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-sheets": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "multiple-document-handling": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "copies": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "finishings": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "page-ranges": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sides": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "number-up": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "orientation-requested": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "printer-resolution": {
+            "children": [
+                "cross-feed",
+                "feed-direction",
+                "units"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "resolution"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "cross-feed": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "feed-direction": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "units": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "print-quality": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-bin": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "cover-back": {
+            "children": [
+                "media",
+                "media-col",
+                "cover-type"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "cover-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "cover-front": {
+            "children": [
+                "media",
+                "media-col",
+                "cover-type"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-template": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "insert-sheet": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "insert-after-page-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "insert-count": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-account-id": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-accounting-sheets": {
+            "children": [
+                "media",
+                "media-col",
+                "job-accounting-sheets-type",
+                "job-accounting-output-bin"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-accounting-sheets-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-accounting-output-bin": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-error-sheet": {
+            "children": [
+                "media",
+                "media-col",
+                "job-error-sheet-when",
+                "job-error-sheet-type"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-error-sheet-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-error-sheet-when": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-message-to-operator": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-recipient-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-save-disposition": {
+            "children": [
+                "save-disposition",
+                "save-info"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-disposition": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-info": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-location": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-document-format": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "mimeMediaType"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-sheets-col": {
+            "children": [
+                "media",
+                "media-col",
+                "job-sheets",
+                "job-sheet-count"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-sheet-message": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-sheet-count": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-col": {
+            "children": [
+                "media-key",
+                "media-type",
+                "media-info",
+                "media-color",
+                "media-pre-printed",
+                "media-hole-count",
+                "media-order-count",
+                "media-size",
+                "media-weight-metric",
+                "media-back-coating",
+                "media-front-coating",
+                "media-recycled",
+                "media-description",
+                "media-tooth",
+                "media-grain",
+                "media-material",
+                "media-thickness",
+                "media-size-name",
+                "input-tray",
+                "tray-feed",
+                "feed-orientation",
+                "media-mismatch-property-policy",
+                "media-mismatch-size-policy"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-key": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-info": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-color": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-pre-printed": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-hole-count": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-order-count": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-size": {
+            "children": [
+                "x-dimension",
+                "y-dimension"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "x-dimension": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "y-dimension": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-weight-metric": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-back-coating": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-front-coating": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-recycled": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-description": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-tooth": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-grain": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-material": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-thickness": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-size-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "page-delivery": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "page-order-received": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "separator-sheets": {
+            "children": [
+                "media",
+                "media-col",
+                "separator-sheets-type"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "separator-sheets-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "sheet-collate": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "x-image-auto-center": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "boolean"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "x-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "x-side1-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "x-side2-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "y-image-auto-center": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "boolean"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "y-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "y-side1-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "y-side2-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "input-documents": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-documents": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "document-copies": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "page-overrides": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pages": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pages-per-subset": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "black-overprint": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-cyan-red": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-magenta-green": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-yellow-blue": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-contrast": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-lightness": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-saturation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-destination-profile-back": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "color-destination-profile-front": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "color-emulation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "trapping": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "rendering-intent-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "rendering-intent-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "rendering-intent-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-effects-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "source-cmy-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "undefined-source-cmy-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "source-cmy-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "undefined-source-cmy-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "source-cmy-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "undefined-source-cmy-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "source-cmyk-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-source-cmyk-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "source-cmyk-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-source-cmyk-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "source-cmyk-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-source-cmyk-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "source-gray-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "undefined-source-gray-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "source-gray-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "undefined-source-gray-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "source-gray-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "undefined-source-gray-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "source-rgb-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-source-rgb-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "source-rgb-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-source-rgb-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "source-rgb-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-source-rgb-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "trc": {
+            "children": [
+                "trc-type",
+                "trc-name",
+                "trc-cyan-data",
+                "trc-magenta-data",
+                "trc-yellow-data",
+                "trc-black-data"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "trc-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "trc-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "trc-cyan-data": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "trc-magenta-data": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "trc-yellow-data": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "trc-black-data": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "bleed-edge-printing": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "finishings-col": {
+            "children": [
+                "booklet-making",
+                "finishing-template",
+                "stitching",
+                "finishings-media-sheets-min-max",
+                "perfect-binding"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-binding": {
+            "children": [
+                "perfect-bind-reference-edge",
+                "perfect-bind-trim-control",
+                "perfect-bind-finished-size-col",
+                "perfect-bind-top-square-adjust",
+                "perfect-bind-bottom-square-adjust",
+                "perfect-bind-face-edge-square-adjust",
+                "perfect-bind-cover-x-align",
+                "perfect-bind-cover-y-align",
+                "perfect-bind-trim-vertical-adjust"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-reference-edge": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-trim-control": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-finished-size-col": {
+            "children": [
+                "perfect-bind-trim-width",
+                "perfect-bind-trim-height"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-trim-width": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-trim-height": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-top-square-adjust": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-bottom-square-adjust": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-face-edge-square-adjust": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-cover-x-align": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-cover-y-align": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "perfect-bind-trim-vertical-adjust": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "finishing-template": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "stitching": {
+            "children": [
+                "stitching-reference-edge",
+                "stitching-offset",
+                "stitching-locations"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "finishings-media-sheets-min-max": {
+            "children": [
+                "lower-bound",
+                "upper-bound"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "rangeOfInteger"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "booklet-making": {
+            "children": [
+                "booklet-fold-type",
+                "booklet-square-fold-type",
+                "booklet-staple-type",
+                "booklet-trim-type",
+                "booklet-trim-width"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "booklet-fold-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "booklet-square-fold-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "booklet-staple-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "booklet-trim-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "booklet-trim-width": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "stitching-reference-edge": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "stitching-offset": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "stitching-locations": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "anti-aliasing": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "opi-image-insertion": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "opi-image-pre-scan": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "resource-pre-scan": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "lead-edge-conditioning": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "print-from-saved-attributes": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "print-document-uri": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "force-front-side": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "resource-cleanup": {
+            "children": [
+                "#PCDATA",
+                "value"
+            ],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "font-name-requested": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "font-size-requested": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-accounting-user-id": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "proof-print": {
+            "children": [
+                "job-name",
+                "proof-print-copies",
+                "media",
+                "media-col"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "proof-print-copies": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-depth-yyy": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-hold-until-time": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "dateTime"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "feed-orientation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-input-tray-check": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "presentation-direction-number-up": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "x-image-position": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "y-image-position": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "page-rotation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "highlight-colorant": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "highlight-map-color": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "highlight-map": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "highlight-colorant-mismatch": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-phone-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "halftone-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "halftone-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "halftone-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "trap-width-slow": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "trap-width-fast": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pdl-init-file": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pdl-init-file-location": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pdl-init-file-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pdl-init-file-entry": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-retention-period": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-history-period": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-name-lcds": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "forms-col": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-location": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-cycle-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-cycle-start": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "forms-x-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "forms-y-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "resample-method": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sample-set": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sample-sheet": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-bw-darkness-mode": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "adjust-bw-darkness-value": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "toner-saver": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-save": {
+            "children": [
+                "form-save-disposition",
+                "form-save-info"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-save-disposition": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-save-info": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-save-location": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-save-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "form-save-format": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "mimeMediaType"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-accounting-data": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-offset": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-gutter-creep-x": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-gutter-creep-y": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-creep-policy": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-gutter-dimension-x": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-gutter-dimension-y": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-mark-front": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-number-up-x": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-number-up-y": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-rotate-policy": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-rotate-policy-order": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-scale": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-size-policy": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-source-orientation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-source-page-dimension-col": {
+            "children": [
+                "x-source-page",
+                "y-source-page"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "x-source-page": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "y-source-page": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pcl-paper-source-col": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "paper-source-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "highlight-map-color-custom-col": {
+            "children": [
+                "color-device-cmyk-col",
+                "color-hsv-col",
+                "color-srgb-col"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-device-cmyk-col": {
+            "children": [
+                "color-device-cmyk-cyan",
+                "color-device-cmyk-magenta",
+                "color-device-cmyk-yellow",
+                "color-device-cmyk-black"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-device-cmyk-cyan": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-device-cmyk-magenta": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-device-cmyk-yellow": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-device-cmyk-black": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-hsv-col": {
+            "children": [
+                "color-hsv-hue",
+                "color-hsv-saturation",
+                "color-hsv-value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-hsv-hue": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-hsv-saturation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-hsv-value": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-srgb-col": {
+            "children": [
+                "color-srgb-red",
+                "color-srgb-green",
+                "color-srgb-blue"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-srgb-red": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-srgb-green": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-srgb-blue": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-copies": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-cover-back": {
+            "children": [
+                "media",
+                "media-col",
+                "cover-type"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-cover-front": {
+            "children": [
+                "media",
+                "media-col",
+                "cover-type"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-finishings": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-finishings-col": {
+            "children": [
+                "finishing-template",
+                "stitching"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-device": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "print-content-optimize": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pantone-path-activation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "edge-enhancement-disable": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "interleaved-sheets-col": {
+            "children": [
+                "interleaved-sheets-type",
+                "media",
+                "media-col"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "interleaved-sheets-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "pad-printing": {
+            "children": [
+                "pad-printing-type",
+                "number-of-sheets-per-pad",
+                "cover-back-pad",
+                "cover-front-pad"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "number-of-sheets-per-pad": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pad-printing-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "cover-back-pad": {
+            "children": [
+                "media",
+                "media-col"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "cover-front-pad": {
+            "children": [
+                "media",
+                "media-col"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-color-balance": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-contrast": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-exposure": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-noise-reduction": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-red-eye": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-saturation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-shadow-detail": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-sharpness": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "enum"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "aie-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "creator-name-attributes": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "creator-name-pdl": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "creator-version-attributes": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "creator-version-pdl": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-pages": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "optimized-object-data-caching": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "parallel-rip": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "spot-color-mapping": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-separated-file-behavior": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-print-with-saved-jobs": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "print-with-context": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-job-id": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-password": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "save-password-encryption": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "media-mismatch-property-policy": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "media-mismatch-size-policy": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "input-tray": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "tray-feed": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "color-adjustment-set": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "print-settings": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "undefined-spot-color-graphics": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-spot-color-images": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "undefined-spot-color-text": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "embedded-profiles": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "rgb-monochrome-grayline-mapping": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "adjust-custom-color-col": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "custom-object-type": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "custom-source-space": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "custom-spot-emulation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "natural-language-adjustment-col": {
+            "children": [
+                "natural-language-adjustment-version",
+                "natural-language-adjustment-string"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "natural-language-adjustment-version": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "natural-language-adjustment-string": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "client-default-attributes-col": {
+            "children": [],
+            "content": "ANY",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "print-quality-level": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "print-optimization-mixed-color-bw": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "line-thickening": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-gloss": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "document-reading-orientation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "fax-out-col": {
+            "children": [
+                "sender-col",
+                "confirmation-sheet",
+                "job-hold-until",
+                "job-hold-until-time",
+                "job-originating-user-password",
+                "job-originating-user-password-encryption",
+                "job-password",
+                "job-password-encryption",
+                "output-quality",
+                "recipients-col",
+                "send-header",
+                "send-speed"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "confirmation-sheet": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-quality": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "send-speed": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "recipients-col": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "recipient-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "destination-uri": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "recipient-organization": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "recipient-mailbox-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "recipient-email-address": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "recipient-voice-phone-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "recipient-destination-uri": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sender-col": {
+            "children": [
+                "charge-number",
+                "charge-number-encryption",
+                "sender-name",
+                "origin-uri",
+                "sender-organization",
+                "sender-mailbox-number",
+                "sender-email-address",
+                "sender-email-confirmation",
+                "sender-voice-phone-number"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "charge-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "charge-number-encryption": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "origin-uri": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "uri"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sender-email-address": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "sender-email-confirmation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sender-mailbox-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sender-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sender-organization": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "sender-voice-phone-number": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-originating-user-password": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-originating-user-password-encryption": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "send-header": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-gloss-col": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-gloss-scope": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-gloss-level": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-gloss-percent": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "output-gloss-region-col": {
+            "children": [
+                "origin-x",
+                "origin-y",
+                "range-x",
+                "range-y"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "origin-x": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "origin-y": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "range-x": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "range-y": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-account-info": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "job-originating-user-name": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-originating-user-domain": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-originating-user-encryption": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-col": {
+            "children": [
+                "imposition-key",
+                "imposition-comment"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "imposition-comment": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "text"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "imposition-key": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "subset-delimiter-source": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "line-thickening-threshold": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-accounting-user-passcode": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-accounting-user-passcode-encryption": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-billing-id": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-billing-passcode": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-billing-passcode-encryption": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "hold-for-authentication": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "black-enhancement-col": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "edge-enhancement-col": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "enhancement-level": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "object-type": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "pre-cut-tabs-image-shift": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "image-enhancement": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "grain-compensation": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "wrap-cover-col": {
+            "children": [
+                "wrap-cover-imaging",
+                "media",
+                "media-col"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "wrap-cover-imaging": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-account-general-id": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-account-group-id": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "job-account-id-source": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "spot-color-trc-control": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "vivid-color-enhancement": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword",
+                        "name"
+                    ],
+                    "defaults": "#REQUIRED"
+                },
+                "xml:lang": {
+                    "opts": "NMTOKEN",
+                    "defaults": "#IMPLIED"
+                },
+                "xml:space": {
+                    "opts": [
+                        "preserve"
+                    ],
+                    "defaults": "#IMPLIED"
+                }
+            }
+        },
+        "skip-blank-page": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "line-weight-adjustment": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "colorant-set-col": {
+            "children": [
+                "colorant-set"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "collection"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "colorant-set": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        }
+    }
+}
