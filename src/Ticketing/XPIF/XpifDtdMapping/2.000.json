@@ -193,23 +193,7 @@
             "content": "ANY",
             "attributes": {
                 "syntax": {
-                    "opts": [
-                        "text",
-                        "name",
-                        "keyword",
-                        "enum",
-                        "uri",
-                        "uriScheme",
-                        "mimeMediaType",
-                        "octetString",
-                        "boolean",
-                        "integer",
-                        "rangeOfInteger",
-                        "dateTime",
-                        "resolution",
-                        "1setOf",
-                        "collection"
-                    ],
+                    "opts": "%ipp-syntaxes;",
                     "defaults": "#REQUIRED"
                 },
                 "xml:space": {

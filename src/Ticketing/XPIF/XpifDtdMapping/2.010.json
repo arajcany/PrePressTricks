@@ -33,8 +33,7 @@
                 "requesting-user-name",
                 "job-media-sheets",
                 "job-password",
-                "job-password-encryption",
-                "lcds-tape-characteristics"
+                "job-password-encryption"
             ],
             "content": null
         },
@@ -79,6 +78,7 @@
                 "y-image-shift",
                 "y-side1-image-shift",
                 "y-side2-image-shift",
+                "document-overrides",
                 "page-overrides",
                 "pages-per-subset",
                 "black-overprint",
@@ -124,8 +124,19 @@
                 "source-rgb-text",
                 "undefined-source-rgb-text",
                 "trc",
+                "trc-type",
+                "trc-name",
+                "trc-cyan-data",
+                "trc-magenta-data",
+                "trc-yellow-data",
+                "trc-black-data",
                 "bleed-edge-printing",
                 "finishings-col",
+                "finishing-template",
+                "stitching",
+                "stitching-reference-edge",
+                "stitching-offset",
+                "stitching-locations",
                 "anti-aliasing",
                 "opi-image-insertion",
                 "opi-image-pre-scan",
@@ -141,7 +152,7 @@
                 "job-hold-until-time",
                 "feed-orientation",
                 "media-input-tray-check",
-                "presentation-direction-number-up",
+                "presentation-direction",
                 "x-image-position",
                 "y-image-position",
                 "page-rotation",
@@ -155,41 +166,7 @@
                 "halftone-images",
                 "trap-width-slow",
                 "trap-width-fast",
-                "pdl-init-file",
-                "forms-col",
-                "resample-method",
-                "sample-set",
-                "sample-sheet",
-                "adjust-bw-darkness-col",
-                "toner-saver",
-                "job-retention-period",
-                "job-history-period",
-                "adjust-bw-darkness-mode",
-                "adjust-bw-darkness-value",
-                "job-accounting-data",
-                "job-offset",
-                "form-save",
-                "imposition-gutter-creep-x",
-                "imposition-gutter-creep-y",
-                "imposition-creep-policy",
-                "imposition-gutter-dimension-x",
-                "imposition-gutter-dimension-y",
-                "imposition-mark-front",
-                "imposition-number-up-x",
-                "imposition-number-up-y",
-                "imposition-rotate-policy",
-                "imposition-rotate-policy-order",
-                "imposition-scale",
-                "imposition-size-policy",
-                "imposition-source-orientation",
-                "imposition-source-page-dimension-col",
-                "pcl-paper-source-col",
-                "highlight-map-color-custom-col",
-                "job-copies",
-                "job-cover-back",
-                "job-cover-front",
-                "output-device",
-                "print-content-optimize"
+                "pdl-init-file"
             ],
             "content": null
         },
@@ -222,23 +199,7 @@
             "content": "ANY",
             "attributes": {
                 "syntax": {
-                    "opts": [
-                        "text",
-                        "name",
-                        "keyword",
-                        "enum",
-                        "uri",
-                        "uriScheme",
-                        "mimeMediaType",
-                        "octetString",
-                        "boolean",
-                        "integer",
-                        "rangeOfInteger",
-                        "dateTime",
-                        "resolution",
-                        "1setOf",
-                        "collection"
-                    ],
+                    "opts": "%ipp-syntaxes;",
                     "defaults": "#REQUIRED"
                 },
                 "xml:space": {
@@ -443,84 +404,6 @@
                 "xml:space": {
                     "opts": [
                         "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "lcds-tape-characteristics": {
-            "children": [
-                "lcds-tape-record-type",
-                "lcds-tape-block-length",
-                "lcds-tape-block-offset",
-                "lcds-tape-record-length",
-                "lcds-tape-max-record-length"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "lcds-tape-record-type": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "lcds-tape-block-length": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "lcds-tape-block-offset": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "lcds-tape-record-length": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "lcds-tape-max-record-length": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
                     ],
                     "defaults": "#REQUIRED"
                 }
@@ -832,7 +715,6 @@
             "attributes": {
                 "syntax": {
                     "opts": [
-                        "keyword",
                         "name"
                     ],
                     "defaults": "#REQUIRED"
@@ -845,7 +727,7 @@
                     "opts": [
                         "preserve"
                     ],
-                    "defaults": "#IMPLIED"
+                    "defaults": "#REQUIRED"
                 }
             }
         },
@@ -1751,6 +1633,20 @@
                 "syntax": {
                     "opts": [
                         "integer"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "document-overrides": {
+            "children": [
+                "value"
+            ],
+            "content": null,
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "1setOf"
                     ],
                     "defaults": "#REQUIRED"
                 }
@@ -3054,7 +2950,7 @@
                 }
             }
         },
-        "presentation-direction-number-up": {
+        "presentation-direction": {
             "children": [],
             "content": "#PCDATA",
             "attributes": {
@@ -3324,7 +3220,9 @@
             "children": [
                 "value"
             ],
-            "content": null,
+            "content": null
+        },
+        "pdl-init-files": {
             "attributes": {
                 "syntax": {
                     "opts": [
@@ -3385,884 +3283,6 @@
                 "xml:space": {
                     "opts": [
                         "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-retention-period": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-history-period": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-name-lcds": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "name"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "forms-col": {
-            "children": [
-                "value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "1setOf"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-location": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "uri"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-name": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "name"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-cycle-type": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-cycle-start": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "forms-x-image-shift": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "forms-y-image-shift": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "resample-method": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "sample-set": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "sample-sheet": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "adjust-bw-darkness-col": {
-            "children": [
-                "adjust-bw-darkness-mode",
-                "adjust-bw-darkness-value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "adjust-bw-darkness-mode": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword",
-                        "name"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#IMPLIED"
-                }
-            }
-        },
-        "adjust-bw-darkness-value": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "toner-saver": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-save": {
-            "children": [
-                "form-save-disposition",
-                "form-save-info"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-save-disposition": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-save-info": {
-            "children": [
-                "value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "1setOf"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-save-location": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "uri"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-save-name": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "name"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "form-save-format": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "mimeMediaType"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-accounting-data": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "text"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                }
-            }
-        },
-        "job-offset": {
-            "children": [
-                "value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "1setOf"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-gutter-creep-x": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-gutter-creep-y": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-creep-policy": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-gutter-dimension-x": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-gutter-dimension-y": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-mark-front": {
-            "children": [
-                "value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "1setOf"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-number-up-x": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-number-up-y": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-rotate-policy": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-rotate-policy-order": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-scale": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-size-policy": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-source-orientation": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "imposition-source-page-dimension-col": {
-            "children": [
-                "x-source-page",
-                "y-source-page"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "x-source-page": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "y-source-page": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "pcl-paper-source-col": {
-            "children": [
-                "value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "1setOf"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "paper-source-number": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "enum"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "highlight-map-color-custom-col": {
-            "children": [
-                "color-device-cmyk-col",
-                "color-hsv-col",
-                "color-srgb-col"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-device-cmyk-col": {
-            "children": [
-                "color-device-cmyk-cyan",
-                "color-device-cmyk-magenta",
-                "color-device-cmyk-yellow",
-                "color-device-cmyk-black"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-device-cmyk-cyan": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-device-cmyk-magenta": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-device-cmyk-yellow": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-device-cmyk-black": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-hsv-col": {
-            "children": [
-                "color-hsv-hue",
-                "color-hsv-saturation",
-                "color-hsv-value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-hsv-hue": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-hsv-saturation": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-hsv-value": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-srgb-col": {
-            "children": [
-                "color-srgb-red",
-                "color-srgb-green",
-                "color-srgb-blue"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-srgb-red": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-srgb-green": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "color-srgb-blue": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-copies": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-cover-back": {
-            "children": [
-                "media",
-                "media-col",
-                "cover-type"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-cover-front": {
-            "children": [
-                "media",
-                "media-col",
-                "cover-type"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-finishings": {
-            "children": [
-                "value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "1setOf"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-finishings-col": {
-            "children": [
-                "finishing-template",
-                "stitching"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "output-device": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "name"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "print-content-optimize": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
                     ],
                     "defaults": "#REQUIRED"
                 }

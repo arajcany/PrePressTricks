@@ -155,12 +155,7 @@
                 "halftone-images",
                 "trap-width-slow",
                 "trap-width-fast",
-                "pdl-init-file",
-                "resample-method",
-                "sample-set",
-                "sample-sheet",
-                "adjust-bw-darkness-col",
-                "toner-saver"
+                "pdl-init-file"
             ],
             "content": null
         },
@@ -193,23 +188,7 @@
             "content": "ANY",
             "attributes": {
                 "syntax": {
-                    "opts": [
-                        "text",
-                        "name",
-                        "keyword",
-                        "enum",
-                        "uri",
-                        "uriScheme",
-                        "mimeMediaType",
-                        "octetString",
-                        "boolean",
-                        "integer",
-                        "rangeOfInteger",
-                        "dateTime",
-                        "resolution",
-                        "1setOf",
-                        "collection"
-                    ],
+                    "opts": "%ipp-syntaxes;",
                     "defaults": "#REQUIRED"
                 },
                 "xml:space": {
@@ -3292,104 +3271,6 @@
                 "xml:space": {
                     "opts": [
                         "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "resample-method": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "sample-set": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "sample-sheet": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "adjust-bw-darkness-col": {
-            "children": [
-                "adjust-bw-darkness-mode",
-                "adjust-bw-darkness-value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "collection"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "adjust-bw-darkness-mode": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword",
-                        "name"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#IMPLIED"
-                }
-            }
-        },
-        "adjust-bw-darkness-value": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "integer"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "toner-saver": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "keyword"
                     ],
                     "defaults": "#REQUIRED"
                 }

@@ -163,11 +163,7 @@
                 "adjust-bw-darkness-col",
                 "toner-saver",
                 "job-retention-period",
-                "job-history-period",
-                "adjust-bw-darkness-mode",
-                "adjust-bw-darkness-value",
-                "job-accounting-data",
-                "job-offset"
+                "job-history-period"
             ],
             "content": null
         },
@@ -200,23 +196,7 @@
             "content": "ANY",
             "attributes": {
                 "syntax": {
-                    "opts": [
-                        "text",
-                        "name",
-                        "keyword",
-                        "enum",
-                        "uri",
-                        "uriScheme",
-                        "mimeMediaType",
-                        "octetString",
-                        "boolean",
-                        "integer",
-                        "rangeOfInteger",
-                        "dateTime",
-                        "resolution",
-                        "1setOf",
-                        "collection"
-                    ],
+                    "opts": "%ipp-syntaxes;",
                     "defaults": "#REQUIRED"
                 },
                 "xml:space": {
@@ -3680,42 +3660,6 @@
                 "syntax": {
                     "opts": [
                         "mimeMediaType"
-                    ],
-                    "defaults": "#REQUIRED"
-                }
-            }
-        },
-        "job-accounting-data": {
-            "children": [],
-            "content": "#PCDATA",
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "text"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:space": {
-                    "opts": [
-                        "preserve"
-                    ],
-                    "defaults": "#REQUIRED"
-                },
-                "xml:lang": {
-                    "opts": "NMTOKEN",
-                    "defaults": "#IMPLIED"
-                }
-            }
-        },
-        "job-offset": {
-            "children": [
-                "value"
-            ],
-            "content": null,
-            "attributes": {
-                "syntax": {
-                    "opts": [
-                        "1setOf"
                     ],
                     "defaults": "#REQUIRED"
                 }

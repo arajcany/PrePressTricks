@@ -49,7 +49,8 @@
                 "job-originating-user-encryption",
                 "job-originating-user-password",
                 "job-originating-user-password-encryption",
-                "host-address-col"
+                "host-address-col",
+                "document-encryption-col"
             ],
             "content": null
         },
@@ -263,8 +264,7 @@
                 "wrap-cover-col",
                 "vivid-color-enhancement",
                 "skip-blank-page",
-                "line-weight-adjustment",
-                "colorant-set-col"
+                "line-weight-adjustment"
             ],
             "content": null
         },
@@ -297,23 +297,7 @@
             "content": "ANY",
             "attributes": {
                 "syntax": {
-                    "opts": [
-                        "text",
-                        "name",
-                        "keyword",
-                        "enum",
-                        "uri",
-                        "uriScheme",
-                        "mimeMediaType",
-                        "octetString",
-                        "boolean",
-                        "integer",
-                        "rangeOfInteger",
-                        "dateTime",
-                        "resolution",
-                        "1setOf",
-                        "collection"
-                    ],
+                    "opts": "%ipp-syntaxes;",
                     "defaults": "#REQUIRED"
                 },
                 "xml:space": {
@@ -6570,9 +6554,13 @@
                 }
             }
         },
-        "colorant-set-col": {
+        "document-encryption-col": {
             "children": [
-                "colorant-set"
+                "hash-algorithm",
+                "encryption-algorithm",
+                "encryption-password",
+                "encryption-salt",
+                "key-generation-iteration"
             ],
             "content": null,
             "attributes": {
@@ -6584,13 +6572,61 @@
                 }
             }
         },
-        "colorant-set": {
+        "hash-algorithm": {
             "children": [],
             "content": "#PCDATA",
             "attributes": {
                 "syntax": {
                     "opts": [
                         "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "encryption-algorithm": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "keyword"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "encryption-password": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "encryption-salt": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "octetString"
+                    ],
+                    "defaults": "#REQUIRED"
+                }
+            }
+        },
+        "key-generation-iteration": {
+            "children": [],
+            "content": "#PCDATA",
+            "attributes": {
+                "syntax": {
+                    "opts": [
+                        "integer"
                     ],
                     "defaults": "#REQUIRED"
                 }
