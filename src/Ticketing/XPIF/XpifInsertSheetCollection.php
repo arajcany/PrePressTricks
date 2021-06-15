@@ -104,6 +104,18 @@ class XpifInsertSheetCollection extends XpifBase
     }
 
     /**
+     * @param $insert_before_page_number
+     * @param array $attributes
+     * @return XpifInsertSheetCollection
+     */
+    public function setInsertBeforePageNumber($insert_before_page_number, $attributes = [])
+    {
+        $insert_after_page_number = $insert_before_page_number - 1;
+        $this->setProperty('insert-sheet.value.insert-after-page-number', $insert_after_page_number, $attributes);
+        return $this;
+    }
+
+    /**
      * @param $insert_count
      * @param array $attributes
      * @return XpifInsertSheetCollection

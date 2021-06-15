@@ -93,13 +93,13 @@ class XpifPageOverridesCollection extends XpifBase
     }
 
     /**
-     * @param array $page_ranges
+     * @param array|int $page_ranges
      * @param array $attributes
      * @return XpifPageOverridesCollection
      */
     public function setPages($page_ranges, $attributes = [])
     {
-        if (is_int($page_ranges)) {
+        if (is_int($page_ranges) || is_numeric($page_ranges)) {
             $page_ranges = [$page_ranges, $page_ranges];
         }
 

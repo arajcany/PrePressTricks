@@ -18,8 +18,8 @@ class XpifTicket extends XpifBase
      *
      * @param null $cpss_version
      * @param string $lang
-     * @internal param $dtd
      * @throws Exception
+     * @internal param $dtd
      */
     function __construct($cpss_version = null, $lang = "en")
     {
@@ -141,12 +141,16 @@ class XpifTicket extends XpifBase
     }
 
     /**
-     * @param array $page_ranges
+     * @param array|integer $page_ranges
      * @param array $attributes
      * @return XpifTicket
      */
     public function setPageRanges($page_ranges, $attributes = [])
     {
+        if (is_int($page_ranges) || is_numeric($page_ranges)) {
+            $page_ranges = [$page_ranges, $page_ranges];
+        }
+
         $page_ranges_data = [
             '@syntax' => '1setOf',
             'value' => [
