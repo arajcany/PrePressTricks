@@ -23,8 +23,7 @@ if (isset($output[0])) {
 $imCommands = new ImageMagickCommands();
 $imCommands->setImPath($imPath);
 
-
-$file = "M:\\GenericRepository_Test\\QuickPosition\\jobs\\15 - SDI Test Page\\meta\\SDI Iridesse Inks-8.tif";
+$file = __DIR__ . '/../../tests/Graphics/SampleFiles/SDI Iridesse Inks-8.tif';
 
 $report = $imCommands->getIdentifyReport($file, true, true);
 r($report);
