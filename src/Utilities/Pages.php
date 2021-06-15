@@ -94,7 +94,7 @@ class Pages
      * Will correct overlapping page ranges.
      * e.g. '12-13,1-4,6' => '1,2,3,4,6,12,13'
      *
-     * @param string $rangeInput
+     * @param string|array $rangeInput
      * @param array $options
      * @return mixed
      */
@@ -111,8 +111,15 @@ class Pages
 
         $rangeFinal = [];
 
-        $ranges = preg_replace('/[^0-9\-,.]/', '', $rangeInput);
-        $ranges = explode(",", $ranges);
+        if (is_string($rangeInput)) {
+            $ranges = preg_replace('/[^0-9\-,.]/', '', $rangeInput);
+            $ranges = explode(",", $ranges);
+        } elseif (is_array($rangeInput)) {
+            $ranges = $rangeInput;
+        } else {
+            return false;
+        }
+
         foreach ($ranges as $range) {
             $range = explode("-", $range);
 
@@ -157,8 +164,8 @@ class Pages
      * will display as a range.
      * e.g. '3,4,6,12,13,10-20,1,2,8' => '1-4,6-6,8-8,10-20'
      *
-     * @param type string $rangeInput
-     * @param type array $options
+     * @param string $rangeInput
+     * @param array $options
      * @return mixed
      */
     public function rangeCompact($rangeInput = null, $options = [])
@@ -270,7 +277,8 @@ class Pages
         $rangeInput = null,
         $lowerBound = null,
         $upperBound = null
-    ) {
+    )
+    {
         if ($this->is_blank($rangeInput)) {
             return false;
         }
