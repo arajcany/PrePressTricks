@@ -658,11 +658,27 @@ $ticket = (new XpifTicket('2.082a'))
   ;
 
 //we need to loop the book starts
-foreach(explode(',',$bookStarts)as $bookStart){
+foreach (explode(',', $bookStarts) as $bookStart) {
+    $bookStartInsert = (new XpifInsertSheetCollection('2.082a'))
+        ->setInsertBeforePageNumber($bookStart)
+        ->setInsertCount(1)
+        ->setMediaCollection($yellowDividerMediaCollection);
 
+    //push into the xpif ticket
+    $ticket = $ticket->setInsertSheetCollection($bookStartInsert);
 }
 
+//we need to loop the chapter starts
+foreach (explode(',', $chapterStarts) as $chapterStart) {
+    $chapterStartException = (new XpifPageOverridesCollection('2.082a'))
+        ->setPages([$chapterStart, $chapterStart + 1])
+        ->setMediaCollection($pinkMediaCollection);
 
+    //push into the xpif ticket
+    $ticket = $ticket->setPageOverridesCollection($chapterStartException);
+}
 
+$xpifXml = $ticket->render();
+print_r($xpifXml);
 
 ```

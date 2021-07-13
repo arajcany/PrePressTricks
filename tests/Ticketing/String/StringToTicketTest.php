@@ -1,6 +1,6 @@
 <?php
 
-namespace arajcany\Test\Ticketing;
+namespace Ticketing\String;
 
 use PHPUnit\Framework\TestCase;
 use arajcany\PrePressTricks\Ticketing\String\StringToTicket;

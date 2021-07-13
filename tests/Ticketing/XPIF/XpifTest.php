@@ -1,6 +1,6 @@
 <?php
 
-namespace arajcany\Test\Utility;
+namespace Ticketing\XPIF;
 
 use arajcany\PrePressTricks\Ticketing\XPIF\XpifCoverBackCollection;
 use arajcany\PrePressTricks\Ticketing\XPIF\XpifCoverFrontCollection;
@@ -11,6 +11,7 @@ use arajcany\PrePressTricks\Ticketing\XPIF\XpifTicket;
 use DOMDocument;
 use DOMXPath;
 use PHPUnit\Framework\TestCase;
+use arajcany\PrePressTricks\Ticketing\XPIF\XpifDtdMapping\XML_DTD_Parser;
 
 /**
  * Class TimeMakerTest
@@ -23,6 +24,7 @@ class XpifTest extends TestCase
     public $tstTmpDir;
     public $tstSampleTicketsDir;
     public $now;
+    private $dtdMappingDir;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
@@ -32,6 +34,50 @@ class XpifTest extends TestCase
         $this->tstHomeDir = str_replace("\\Ticketing\\XPIF", '', __DIR__) . DS;
         $this->tstTmpDir = __DIR__ . "\\..\\..\\..\\tmp\\";
         $this->tstSampleTicketsDir = __DIR__ . DS . "SampleTickets" . DS;
+        $this->dtdMappingDir = __DIR__ . "\\..\\..\\..\\src\\Ticketing\\XPIF\\XpifDtdMapping\\";
+
+    }
+
+    public function testDtd()
+    {
+        $ffcHome = getenv('FF_CORE_HOME');
+        $this->assertNotEquals(false, $ffcHome);
+
+        if (!$ffcHome) {
+            return;
+        }
+
+        $dtdGlob = $ffcHome . "Platform\\*.dtd";
+        $dtdFiles = glob($dtdGlob);
+
+        $versionMap = [];
+        $mapFilePath = null;
+        foreach ($dtdFiles as $dtdFile) {
+            $dtd_parser = new XML_DTD_Parser();
+            $dtd_parser->parse($dtdFile);
+            $dtd = $dtd_parser->dtd;
+
+            $mapFileName = pathinfo($dtdFile, PATHINFO_FILENAME);
+            $mapFileName = explode("v", $mapFileName);
+            $mapFileName = $mapFileName[1];
+            $mapFileName = ltrim($mapFileName, "0");
+            $mapFileName = substr_replace($mapFileName, '.', 1, 0);
+
+            $mapFilePath = $this->dtdMappingDir;
+
+            $mapJson = json_encode($dtd, JSON_PRETTY_PRINT);
+
+            file_put_contents($mapFilePath . $mapFileName . ".json", $mapJson);
+
+            $versionMap[$mapFileName] = pathinfo($dtdFile, PATHINFO_BASENAME);
+            $versionMap = array_flip($versionMap);
+            natsort($versionMap);
+            $versionMap = array_flip($versionMap);
+        }
+
+        if ($mapFilePath) {
+            file_put_contents($mapFilePath . "_version.json", json_encode($versionMap, JSON_PRETTY_PRINT));
+        }
     }
 
     public function testMediaCollection()
@@ -929,6 +975,123 @@ class XpifTest extends TestCase
                 $entries = $xpath->query($q);
                 $this->assertEquals($test['r'], $entries->item($k)->nodeValue);
             }
+        }
+
+    }
+
+    public function testForTheTermOfHisNaturalLifePdf()
+    {
+        $titleStart = '1';
+        $imprintStart = '2';
+        $prefaceStart = '3';
+        $prologueStart = '4';
+        $bookStarts = '13,79,173,331';
+        $chapterStarts = '14,21,28,31,35,41,49,56,62,67,75,78,80,83,86,95,98,101,108,113,118,123,129,140,147,151,158,164,168,174,185,194,201,208,212,217,221,225,233,243,245,249,253,260,265,269,273,276,279,282,290,300,305,311,315,325,332,341,351,357,361,365,371,375,379,383,389,392,397,402,410,415,418,423';
+        $epilogueStart = '428';
+
+        //Start by setting up a default white media collection.
+        $defaultWhiteMediaCollection = (new XpifMediaCollection('2.082a'))
+            ->setMediaType('plain')
+            ->setMediaColor('white')
+            ->setMediaPrePrinted(false)
+            ->setMediaSize([21000, 29700])
+            ->setMediaWeightMetric(80);
+
+        //Create the other needed media collections by cloning and modifying
+        $blueCoverMediaCollection = (clone $defaultWhiteMediaCollection)->setMediaColor('blue')->setMediaWeightMetric(200);
+        $yellowDividerMediaCollection = (clone $defaultWhiteMediaCollection)->setMediaColor('yellow')->setMediaWeightMetric(200);
+        $pinkMediaCollection = (clone $defaultWhiteMediaCollection)->setMediaColor('pink');
+
+        //Create the exception and insert pages that don't require looping
+        $frontCoverException = (new XpifCoverFrontCollection('2.082a'))
+            ->setCoverType('print-front')
+            ->setMediaCollection($blueCoverMediaCollection);
+
+        $backCoverException = (new XpifCoverBackCollection('2.082a'))
+            ->setCoverType('print-none')
+            ->setMediaCollection($blueCoverMediaCollection);
+
+        $imprintException = (new XpifPageOverridesCollection('2.082a'))
+            ->setPages($imprintStart)
+            ->setSides('one-sided');
+
+        $prefaceException = (new XpifPageOverridesCollection('2.082a'))
+            ->setPages($prefaceStart)
+            ->setMediaCollection($pinkMediaCollection);
+
+        $prologueInsert = (new XpifInsertSheetCollection('2.082a'))
+            ->setInsertBeforePageNumber($prologueStart)
+            ->setMediaCollection($yellowDividerMediaCollection);
+
+        $epilogueInsert = (new XpifInsertSheetCollection('2.082a'))
+            ->setInsertBeforePageNumber($epilogueStart)
+            ->setMediaCollection($yellowDividerMediaCollection);
+
+        //Create the ticket and set the properties created so far
+        $ticket = (new XpifTicket('2.082a'))
+            ->setJobName("For_the_Term_of_His_Natural_Life.pdf")
+            ->setMediaCollection($defaultWhiteMediaCollection)
+            ->setFinishings(['92']) //punch-4-hole
+            ->setCoverFrontCollection($frontCoverException)
+            ->setCoverBackCollection($backCoverException)
+            ->setPageOverridesCollection($imprintException)
+            ->setPageOverridesCollection($prefaceException)
+            ->setInsertSheetCollection($prologueInsert)
+            ->setInsertSheetCollection($epilogueInsert);
+
+        //we need to loop the book starts
+        foreach (explode(',', $bookStarts) as $bookStart) {
+            $bookStartInsert = (new XpifInsertSheetCollection('2.082a'))
+                ->setInsertBeforePageNumber($bookStart)
+                ->setMediaCollection($yellowDividerMediaCollection);
+
+            //push into the xpif ticket
+            $ticket = $ticket->setInsertSheetCollection($bookStartInsert);
+        }
+
+        //we need to loop the chapter starts
+        foreach (explode(',', $chapterStarts) as $chapterStart) {
+            $chapterStartException = (new XpifPageOverridesCollection('2.082a'))
+                ->setPages([$chapterStart, $chapterStart + 1])
+                ->setMediaCollection($pinkMediaCollection);
+
+            //push into the xpif ticket
+            $ticket = $ticket->setPageOverridesCollection($chapterStartException);
+        }
+
+        $doc = new DOMDocument();
+        $doc->loadXML($ticket->render());
+        $xpath = new DOMXPath($doc);
+
+        //media collection
+        $tests = [
+            [
+                'q' => '//media-col/media-type',
+                'r' => 'plain',
+            ],
+            [
+                'q' => '//media-col/media-color',
+                'r' => 'white',
+            ],
+            [
+                'q' => '//media-col/media-size/x-dimension',
+                'r' => '21000',
+            ],
+            [
+                'q' => '//media-col/media-size/y-dimension',
+                'r' => '29700',
+            ],
+            [
+                'q' => '//media-col/media-weight-metric',
+                'r' => 80,
+            ],
+        ];
+
+        foreach ($tests as $test) {
+            $q = str_replace('//', '//xpif/job-template-attributes/', $test['q']);
+            //print_r("\r\n" . $q);
+            $entries = $xpath->query($q);
+            $this->assertEquals($test['r'], $entries->item(0)->nodeValue);
         }
 
     }
