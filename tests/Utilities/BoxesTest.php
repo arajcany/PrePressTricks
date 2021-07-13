@@ -1,6 +1,6 @@
 <?php
 
-namespace arajcany\Test\Ticketing;
+namespace Utilities;
 
 use PHPUnit\Framework\TestCase;
 use arajcany\PrePressTricks\Utilities\Boxes;
