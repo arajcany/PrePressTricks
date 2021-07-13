@@ -62,7 +62,7 @@ Temporary Items
 /src/Ticketing/XPIF/XpifDtdMapping/*.php
 /build/
 /src/Labels/
-/examples/Ticketing/
 /docs/
-/tests/Ticketing/XPIF/SampleTickets
 
+.phpunit.result.cache
+tests/Graphics/SampleFiles/For_The_Term_of_His_Natural_Life.pdf

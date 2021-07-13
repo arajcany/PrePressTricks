@@ -23,13 +23,16 @@ if (isset($output[0])) {
 $imCommands = new ImageMagickCommands();
 $imCommands->setImPath($imPath);
 
-$file = __DIR__ . '/../../tests/Graphics/SampleFiles/SDI Iridesse Inks-8.tif';
+$file = __DIR__ . '/../../tests/Graphics/SampleFiles/000 SDI Base Test Pages-1(Gold).tif';
+$file = __DIR__ . '/../../tests/Graphics/SampleFiles/000 SDI Base Test Pages-2(Gold).tif';
+$file = __DIR__ . '/../../tests/Graphics/SampleFiles/000 SDI Base Test Pages-3(Gold).tif';
+$file = __DIR__ . '/../../tests/Graphics/SampleFiles/000 SDI Base Test Pages-4(Gold).tif';
 
-$report = $imCommands->getIdentifyReport($file, true, true);
+$report = $imCommands->getIdentifyReportViaCli($file, true, true);
 r($report);
 
 $reportFormatted = (new IdentifyParser())->parse($report)->toArray();
 r($reportFormatted);
 
-$reportHistogram = $imCommands->getHistogramJson($file, false, true);
+$reportHistogram = $imCommands->getHistogramJson($file, false, false);
 r($reportHistogram);

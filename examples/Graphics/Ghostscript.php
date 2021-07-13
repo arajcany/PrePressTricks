@@ -21,7 +21,8 @@ if (isset($output[0])) {
 $gs = new GhostscriptCommands();
 $gs->setGsPath($gsPath);
 
-$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/SDI Iridesse Inks.pdf';
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/001 SDI Iridesse Ink Swatches.pdf';
+$reportOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/001 SDI Iridesse Ink Swatches.ghostscript_report.json';
 $fileTmpOutput = __DIR__ . '/../../tmp/';
 $pdfReport = $gs->getPdfReport($pdfInput, true, true);
 r($pdfReport);
@@ -32,7 +33,7 @@ r($pdfReportSeps);
 $pageSizeGroupsReport = $gs->getPageSizeGroupsReport($pdfInput, true, true);
 r($pageSizeGroupsReport);
 
-$callasReport = $gs->getCallasReport($pdfInput, true, true);
+$callasReport = $gs->getCallasReport($pdfInput, true, $reportOutput);
 r($callasReport);
 
 
