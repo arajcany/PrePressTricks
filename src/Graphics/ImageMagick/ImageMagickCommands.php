@@ -6,7 +6,6 @@ namespace arajcany\PrePressTricks\Graphics\ImageMagick;
 
 use Imagick;
 use ImagickPixel;
-use function PHPUnit\Framework\returnValue;
 
 class ImageMagickCommands
 {
@@ -15,10 +14,24 @@ class ImageMagickCommands
     private $returnMessage = null;
 
     /**
-     * GhostscriptCommands constructor.
+     * ImageMagickCommands constructor.
+     * @param null $imPath
      */
-    public function __construct()
+    public function __construct($imPath = null)
     {
+        if ($imPath) {
+            $this->imPath = $imPath;
+        } else {
+            $command = "where magick";
+            $output = [];
+            $return_var = '';
+            exec($command, $output, $return_var);
+            if (isset($output[0])) {
+                if (is_file($output[0])) {
+                    $this->imPath = $output[0];
+                }
+            }
+        }
 
     }
 
@@ -81,6 +94,48 @@ class ImageMagickCommands
         }
 
         return strpos($pngData, "\x89PNG\r\n\x1a\n") === 0 ? true : false;
+    }
+
+    /**
+     * Get the version string
+     *
+     * @return false|mixed
+     */
+    public function getCliVersion()
+    {
+        $version = $this->cli("-version");
+        if (isset($version[0])) {
+            return $version[0];
+        }
+    }
+
+    /**
+     * Generic function to run a command
+     *
+     * @param $cliCommand
+     * @return false|mixed
+     */
+    private function cli($cliCommand)
+    {
+        $options = [
+            $this->imPath,
+            $cliCommand
+        ];
+
+        $cmd = __('"{0}" {1}', $options);
+        exec($cmd, $out, $ret);
+
+        if ($ret == 0) {
+            if (isset($out[0])) {
+                $version = $out;
+            } else {
+                $version = false;
+            }
+        } else {
+            $version = false;
+        }
+
+        return $version;
     }
 
 

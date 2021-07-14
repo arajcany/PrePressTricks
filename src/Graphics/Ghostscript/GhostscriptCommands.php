@@ -16,9 +16,23 @@ class GhostscriptCommands
 
     /**
      * GhostscriptCommands constructor.
+     * @param null $gsPath
      */
-    public function __construct()
+    public function __construct($gsPath = null)
     {
+        if ($gsPath) {
+            $this->gsPath = $gsPath;
+        } else {
+            $command = "where gswin64c";
+            $output = [];
+            $return_var = '';
+            exec($command, $output, $return_var);
+            if (isset($output[0])) {
+                if (is_file($output[0])) {
+                    $this->gsPath = $output[0];
+                }
+            }
+        }
 
     }
 

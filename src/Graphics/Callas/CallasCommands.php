@@ -16,10 +16,25 @@ class CallasCommands
     private $callasQuickCheckFilters = ['$' => []];
 
     /**
-     * GhostscriptCommands constructor.
+     * CallasCommands constructor.
+     * @param null $callasPath
      */
-    public function __construct()
+    public function __construct($callasPath = null)
     {
+        if ($callasPath) {
+            $this->callasPath = $callasPath;
+        } else {
+            $command = "where pdftoolbox";
+            $output = [];
+            $return_var = '';
+            exec($command, $output, $return_var);
+            if (isset($output[0])) {
+                if (is_file($output[0])) {
+                    $this->callasPath = $output[0];
+                }
+            }
+        }
+
         $this->resetCallasQuickCheckFilters();
     }
 
