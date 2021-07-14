@@ -21,7 +21,8 @@
     "cakephp/i18n": "*",
     "ext-json": "*",
     "ext-dom": "*",
-    "ext-imagick": "*"
+    "ext-imagick": "*",
+    "ext-soap": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
