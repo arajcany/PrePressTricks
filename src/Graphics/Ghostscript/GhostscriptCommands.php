@@ -22,6 +22,7 @@ class GhostscriptCommands
     {
         if ($gsPath) {
             $this->gsPath = $gsPath;
+            $this->setPdfInfoPath();
         } else {
             $command = "where gswin64c";
             $output = [];
@@ -30,6 +31,7 @@ class GhostscriptCommands
             if (isset($output[0])) {
                 if (is_file($output[0])) {
                     $this->gsPath = $output[0];
+                    $this->setPdfInfoPath();
                 }
             }
         }
@@ -75,8 +77,17 @@ class GhostscriptCommands
     public function setGsPath($gsPath)
     {
         $this->gsPath = $gsPath;
+        $this->setPdfInfoPath();
 
-        $gsBinPath = pathinfo($gsPath, PATHINFO_DIRNAME);
+        return $this;
+    }
+
+    /**
+     * @return GhostscriptCommands
+     */
+    public function setPdfInfoPath()
+    {
+        $gsBinPath = pathinfo($this->gsPath, PATHINFO_DIRNAME);
         $gsLibPath = str_replace("bin", "lib", $gsBinPath) . DIRECTORY_SEPARATOR;
         $this->pdfInfoFile = $gsLibPath . "pdf_info.ps";
 
