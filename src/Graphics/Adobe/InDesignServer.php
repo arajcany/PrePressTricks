@@ -65,13 +65,15 @@ class InDesignServer
     }
 
     /**
-     * @param mixed $host
+     * @param mixed $hostWithPortNumber
      * @return InDesignServer
      */
-    public function setHost($host)
+    public function setHost($hostWithPortNumber)
     {
-        $this->host = $host;
-        $this->wsdl = $host . "/Service?wsdl";
+        $hostWithPortNumber = rtrim($hostWithPortNumber, "\\/");
+
+        $this->host = $hostWithPortNumber;
+        $this->wsdl = $hostWithPortNumber . "/Service?wsdl";
         return $this;
     }
 
