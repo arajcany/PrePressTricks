@@ -1,4 +1,14 @@
-﻿var myDocument = app.documents.add();
+﻿var env = [
+    "INDESING_SERVER_VERSION = " + app.version,
+    "COMPUTERNAME = " + $.getenv("COMPUTERNAME"),
+    "USERDOMAIN = " + $.getenv("USERDOMAIN"),
+    "USERNAME = " + $.getenv("USERNAME"),
+    "OS = " + $.getenv("OS"),
+    "NUMBER_OF_PROCESSORS = " + $.getenv("NUMBER_OF_PROCESSORS"),
+    "PROCESSOR_ARCHITECTURE = " + $.getenv("PROCESSOR_ARCHITECTURE"),
+];
+
+var myDocument = app.documents.add();
 
 var defaultDocName = "SaveDocumentAsThisName";
 var docName = app.scriptArgs.isDefined("doc_name") ? app.scriptArgs.getValue("doc_name") : defaultDocName;
@@ -20,8 +30,11 @@ returnValue = [
     [1, 2, 3, ['nested arrays are fine']],
     {'foo': 'objects will not pass through', 'bar': 'neither will this'}
 ];
-//returnValue = "abc";
+returnValue = "abc";
 returnValue = ["a", "b", "c"];
+returnValue = env;
+
+//return something
 returnValue;
 
 function sleep(delay) {
