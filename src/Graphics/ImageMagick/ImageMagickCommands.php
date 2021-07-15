@@ -106,6 +106,8 @@ class ImageMagickCommands
         $version = $this->cli("-version");
         if (isset($version[0])) {
             return $version[0];
+        } else {
+            return false;
         }
     }
 
