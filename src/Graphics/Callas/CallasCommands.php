@@ -219,7 +219,7 @@ class CallasCommands
      * @param string $returnFormat
      * @return array|false|string
      */
-    private function trialCallas($trialRegistrationName, $trialCompanyName, $returnFormat = 'text')
+    public function trialCallas($trialRegistrationName, $trialCompanyName, $returnFormat = 'array')
     {
         $options = [
             $this->callasPath,
@@ -258,7 +258,7 @@ class CallasCommands
      * @param string $returnFormat
      * @return array|false|string|true
      */
-    private function registerCallas($activationPDF, $returnFormat = 'json')
+    public function registerCallas($activationPDF, $returnFormat = 'array')
     {
         if (!is_file($activationPDF)) {
             $resp = [
