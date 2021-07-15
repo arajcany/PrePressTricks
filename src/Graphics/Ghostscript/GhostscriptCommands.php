@@ -116,7 +116,7 @@ class GhostscriptCommands
      */
     public function getCliStatus()
     {
-        return $this->cli("--status");
+        return $this->cli("--help");
     }
 
     /**

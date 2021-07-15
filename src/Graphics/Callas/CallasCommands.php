@@ -170,7 +170,7 @@ class CallasCommands
      */
     public function getCliStatus()
     {
-        return $this->cli("--help");
+        return $this->cli("--status");
     }
 
     /**
