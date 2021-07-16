@@ -1,5 +1,5 @@
 ﻿var env = [
-    "INDESING_SERVER_VERSION = " + app.version,
+    "INDESIGN_SERVER_VERSION = " + app.version,
     "COMPUTERNAME = " + $.getenv("COMPUTERNAME"),
     "USERDOMAIN = " + $.getenv("USERDOMAIN"),
     "USERNAME = " + $.getenv("USERNAME"),
@@ -10,16 +10,18 @@
 
 var myDocument = app.documents.add();
 
+var defaultSavePath = "/c/tmp/";
+var savePath = app.scriptArgs.isDefined("save_path") ? app.scriptArgs.getValue("save_path") : defaultSavePath;
+
 var defaultDocName = "SaveDocumentAsThisName";
 var docName = app.scriptArgs.isDefined("doc_name") ? app.scriptArgs.getValue("doc_name") : defaultDocName;
 
-
-var defaultDelay = 5;
+var defaultDelay = 0;
 var delayInSec = app.scriptArgs.isDefined("delay") ? parseInt(app.scriptArgs.getValue("delay")) : defaultDelay;
 sleep(delayInSec * 1000);
 
 
-myDocument.save(File("/c/tmp/" + docName + ".indd"));
+myDocument.save(File( savePath + docName + ".indd"));
 myDocument.close();
 
 var returnValue;
