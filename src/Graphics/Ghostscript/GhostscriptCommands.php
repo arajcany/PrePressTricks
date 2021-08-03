@@ -172,7 +172,7 @@ class GhostscriptCommands
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".report.txt";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached TEXT report');
                 $this->setReturnValue(0);
@@ -231,7 +231,7 @@ class GhostscriptCommands
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".report.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached JSON report');
                 $this->setReturnValue(0);
@@ -286,7 +286,7 @@ class GhostscriptCommands
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".pagesizegroups.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached PageSizeGroups JSON report');
                 $this->setReturnValue(0);
@@ -345,7 +345,7 @@ class GhostscriptCommands
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".pageseparations.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached PageSeparations JSON report');
                 $this->setReturnValue(0);

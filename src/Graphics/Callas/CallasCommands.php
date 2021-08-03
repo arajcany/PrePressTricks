@@ -7,6 +7,7 @@ namespace arajcany\PrePressTricks\Graphics\Callas;
 use arajcany\PrePressTricks\Utilities\Boxes;
 use arajcany\PrePressTricks\Utilities\Pages;
 use Cake\Utility\Hash;
+use Cake\Utility\Xml;
 
 class CallasCommands
 {
@@ -305,6 +306,8 @@ class CallasCommands
     /**
      * Get a PDF report in the CLI Applications native format.
      *
+     * This is **really** basic report and only practical use is the page count.
+     *
      * @param $pdfPath //path to the PDF file
      * @param bool $useCached //if true, will try and use a local save copy
      * @param bool|string $saveReport //if true, will save with .report.txt as the extension. If a path, save it to that path - must be fully qualified path + filename + extension.
@@ -312,7 +315,51 @@ class CallasCommands
      */
     public function getPdfReport($pdfPath, $useCached = true, $saveReport = false)
     {
-        return $this->getQuickCheckReport($pdfPath, $useCached, $saveReport);
+        $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".report.txt";
+
+        if ($useCached) {
+            //try and find existing report files
+            if (is_file($defaultSavePath)) {
+                $this->setReturnMessage('Using cached TEXT report');
+                $this->setReturnValue(0);
+                return file_get_contents($defaultSavePath);
+            }
+
+            if ($saveReport !== true && $saveReport !== false && is_file($saveReport)) {
+                $this->setReturnMessage('Using cached TEXT report');
+                $this->setReturnValue(0);
+                return file_get_contents($saveReport);
+            }
+        }
+
+
+        $args = [
+            $this->callasPath,
+            $pdfPath,
+        ];
+        $command = __('"{0}" --quickpdfinfo "{1}" ', $args);
+        $output = [];
+        $return_var = '';
+        exec($command, $output, $return_var);
+        $report = implode("\r\n", $output);
+
+
+        if ($saveReport) {
+            if ($saveReport === true) {
+                file_put_contents($defaultSavePath, $report);
+            } else {
+                $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
+                @mkdir($savePath);
+                if (is_dir($savePath)) {
+                    file_put_contents($saveReport, $report);
+                }
+            }
+        }
+
+        $this->setReturnMessage('PDF Info report generated');
+        $this->setReturnValue($return_var);
+
+        return $report;
     }
 
 
@@ -329,7 +376,7 @@ class CallasCommands
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".report.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached JSON report');
                 $this->setReturnValue(0);
@@ -399,7 +446,7 @@ class CallasCommands
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".pagesizegroups.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached PageSizeGroups JSON report');
                 $this->setReturnValue(0);
@@ -445,7 +492,7 @@ class CallasCommands
     }
 
     /**
-     * Report on the page sizes in the PDF.
+     * Report on the page separations in the PDF.
      * Handy for when you need to RIP a PDF as images.
      *
      * @param $pdfPath
@@ -458,7 +505,7 @@ class CallasCommands
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".pageseparations.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached PageSeparations JSON report');
                 $this->setReturnValue(0);
@@ -481,7 +528,6 @@ class CallasCommands
 
         $report = $this->convertCallasJsonReportToSeparationsJsonReport($report);
 
-
         if ($saveReport) {
             $reportString = json_encode($report, JSON_PRETTY_PRINT);
             if ($saveReport === true) {
@@ -501,6 +547,171 @@ class CallasCommands
         return $report;
     }
 
+
+    public function getImagesReport($pdfPath, $useCached = true, $saveReport = false)
+    {
+        $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".images.json";
+
+        if ($useCached) {
+            //try and find existing report files
+            if (is_file($defaultSavePath)) {
+                $this->setReturnMessage('Using cached Images JSON report');
+                $this->setReturnValue(0);
+                return json_decode(file_get_contents($defaultSavePath), JSON_OBJECT_AS_ARRAY);
+            }
+
+            if ($saveReport !== true && $saveReport !== false && is_file($saveReport)) {
+                $this->setReturnMessage('Using cached Images JSON report');
+                $this->setReturnValue(0);
+                return json_decode(file_get_contents($saveReport), JSON_OBJECT_AS_ARRAY);
+            }
+        }
+
+
+        $report = $this->getImagesReportXml($pdfPath, $useCached);
+        if (empty($report)) {
+            return false;
+        }
+
+        $report = $this->convertCallasPreflightXmlReportToJsonImagesReport($report);
+
+        if ($saveReport) {
+            $reportString = json_encode($report, JSON_PRETTY_PRINT);
+            if ($saveReport === true) {
+                file_put_contents($defaultSavePath, $reportString);
+            } else {
+                $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
+                @mkdir($savePath);
+                if (is_dir($savePath)) {
+                    file_put_contents($saveReport, $reportString);
+                }
+            }
+        }
+
+        $this->setReturnMessage('Images report generated');
+        $this->setReturnValue(0);
+
+        return $report;
+    }
+
+    /**
+     * Report on the images in the PDF.
+     *
+     * Use it to get the DPI of images
+     *
+     * @param $pdfPath
+     * @param bool $useCached
+     * @param bool $saveReport
+     * @return array|false
+     */
+    public function getImagesReportXml($pdfPath, $useCached = true, $saveReport = false)
+    {
+        $preflightProfile = __DIR__ . "\\ImagesHigher.kfp";
+        $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".images_raw.xml";
+
+        if ($useCached) {
+            //try and find existing report files
+            if (is_file($defaultSavePath)) {
+                $this->setReturnMessage('Using cached XML report');
+                $this->setReturnValue(0);
+                return file_get_contents($defaultSavePath);
+            }
+
+            if ($saveReport !== true && $saveReport !== false && is_file($saveReport)) {
+                $this->setReturnMessage('Using cached XML report');
+                $this->setReturnValue(0);
+                return file_get_contents($saveReport);
+            }
+        }
+
+        //The Callas CLI saves the report to disk as opposed to returning the report in the console
+        $rnd1 = sha1(mt_rand());
+        $tmpOutputFile = __DIR__ . '/../../../tmp/' . $rnd1 . ".report.xml";
+
+        $args = [
+            $this->callasPath,
+            $preflightProfile,
+            $pdfPath,
+            $tmpOutputFile
+        ];
+        $command = __('"{0}" -r=xml,PATH="{3}" "{1}" "{2}" ', $args);
+        print_r($command);
+        $output = [];
+        $return_var = '';
+        exec($command, $output, $return_var);
+
+        //retrieve the report from the tmp output location - delete tmp files
+        $report = file_get_contents($tmpOutputFile);
+        //$report = json_decode($report, JSON_OBJECT_AS_ARRAY);
+        unlink($tmpOutputFile);
+
+        if ($saveReport) {
+            if ($saveReport === true) {
+                file_put_contents($defaultSavePath, $report);
+            } else {
+                $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
+                @mkdir($savePath);
+                if (is_dir($savePath)) {
+                    file_put_contents($saveReport, $report);
+                }
+            }
+        }
+
+        $this->setReturnMessage('Images XML report generated');
+        $this->setReturnValue($return_var);
+
+        return $report;
+
+
+        $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".images.json";
+
+        if ($useCached) {
+            //try and find existing report files
+            if (is_file($defaultSavePath)) {
+                $this->setReturnMessage('Using cached Images JSON report');
+                $this->setReturnValue(0);
+                return json_decode(file_get_contents($defaultSavePath), JSON_OBJECT_AS_ARRAY);
+            }
+
+            if ($saveReport !== true && $saveReport !== false && is_file($saveReport)) {
+                $this->setReturnMessage('Using cached Images JSON report');
+                $this->setReturnValue(0);
+                return json_decode(file_get_contents($saveReport), JSON_OBJECT_AS_ARRAY);
+            }
+        }
+
+        $this->removeCallasQuickCheckFilter('$.aggregated.pages');
+        $this->addCallasQuickCheckFilter('$.aggregated.pages.page.info.pagenum', true);
+        $this->addCallasQuickCheckFilter('$.aggregated.pages.page.resources.images', true);
+        //$this->addCallasQuickCheckFilter('$.aggregated.resources', true);
+        $report = $this->getQuickCheckReport($pdfPath, $useCached);
+        $this->resetCallasQuickCheckFilters();
+
+        if (empty($report)) {
+            return false;
+        }
+
+        //$report = $this->convertCallasJsonReportToSeparationsJsonReport($report);
+
+
+        if ($saveReport) {
+            $reportString = json_encode($report, JSON_PRETTY_PRINT);
+            if ($saveReport === true) {
+                file_put_contents($defaultSavePath, $reportString);
+            } else {
+                $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
+                @mkdir($savePath);
+                if (is_dir($savePath)) {
+                    file_put_contents($saveReport, $reportString);
+                }
+            }
+        }
+
+        $this->setReturnMessage('Images JSON report generated');
+        $this->setReturnValue(0);
+
+        return $report;
+    }
 
     /**
      * Formats a Callas PDF Toolbox quickcheck JSON report as Page Size Groups report.
@@ -598,6 +809,75 @@ class CallasCommands
         }
 
         return $sepReport;
+    }
+
+    /**
+     * Formats a preflight XML report as an easy to read JSON report.
+     * Return format is an array, be sure to json_encode() before saving this report to FSO.
+     *
+     * @param $reportStringOrPath
+     * @return array[]|false
+     */
+    private function convertCallasPreflightXmlReportToJsonImagesReport($reportStringOrPath)
+    {
+        if (is_string($reportStringOrPath) && is_file($reportStringOrPath)) {
+            $rawReport = file_get_contents($reportStringOrPath);
+        } elseif (is_string($reportStringOrPath)) {
+            $rawReport = $reportStringOrPath;
+        } elseif (is_array($reportStringOrPath)) {
+            $rawReport = $reportStringOrPath;
+        } else {
+            return false;
+        }
+
+        $reportHashed = Xml::toArray(Xml::build($rawReport));
+
+        //map the colour spaces
+        $colorspaces = Hash::extract($reportHashed, "report.document.resources.colorspaces.colorspace");
+        if (array_keys($colorspaces) !== range(0, count($colorspaces) - 1)) {
+            $colorspaces = [$colorspaces];
+        }
+        $colourspaceMap = [];
+        foreach ($colorspaces as $colorspace) {
+            $colourspaceMap[$colorspace['@id']] = $colorspace;
+        }
+
+        //map the images
+        $images = Hash::extract($reportHashed, "report.document.resources.images.image");
+        if (array_keys($images) !== range(0, count($images) - 1)) {
+            $images = [$images];
+        }
+        $imageMap = [];
+        foreach ($images as $image) {
+            $imageMap[$image['@id']] = $image;
+        }
+
+
+        $hits = Hash::extract($reportHashed, 'report.results.hits');
+        $hits = Hash::flatten(Hash::insert([], 'report.results.hits', $hits));
+
+        //look at all the hits and extract paths that relates to Image hits
+        $imagePaths = [];
+        foreach ($hits as $imagePath => $value) {
+            if (in_array($value, array_keys($imageMap))) {
+                $pathTrimmed = explode('.', $imagePath);
+                $pathTrimmed = array_splice($pathTrimmed, 0, -2);
+                $pathTrimmed = implode('.', $pathTrimmed);
+                $imagePaths[$value] = $pathTrimmed;
+            }
+        }
+
+        //extract those paths and compile the final JSON
+        $extractedImages = [];
+        foreach ($imagePaths as $imageId => $imagePath) {
+            $imageMeta = array_merge(['@image_id' => $imageId], $imageMap[$imageId], Hash::get($reportHashed, $imagePath));
+            $colorspace = $colourspaceMap[$imageMeta['@colorspace']];
+            $imageMeta['@colorspace'] = $colorspace;
+            $extractedImages[$imageId] = $imageMeta;
+        }
+
+        ksort($extractedImages);
+        return $extractedImages;
     }
 
 

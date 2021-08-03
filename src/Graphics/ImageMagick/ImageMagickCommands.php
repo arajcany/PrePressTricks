@@ -154,7 +154,7 @@ class ImageMagickCommands
         $defaultSavePath = pathinfo($imagePath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($imagePath, PATHINFO_FILENAME) . ".identify.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached IDENTIFY report');
                 $this->setReturnValue(0);
@@ -219,7 +219,7 @@ class ImageMagickCommands
         $defaultSavePath = pathinfo($imagePath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($imagePath, PATHINFO_FILENAME) . ".identify.txt";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached IDENTIFY report');
                 $this->setReturnValue(0);
@@ -284,7 +284,7 @@ class ImageMagickCommands
         $defaultSavePath = pathinfo($imagePath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($imagePath, PATHINFO_FILENAME) . ".histogram.json";
 
         if ($useCached) {
-            //try and find exiting report files
+            //try and find existing report files
             if (is_file($defaultSavePath)) {
                 $this->setReturnMessage('Using cached HISTOGRAM report');
                 $this->setReturnValue(0);
