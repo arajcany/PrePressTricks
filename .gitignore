@@ -65,4 +65,4 @@ Temporary Items
 /docs/
 
 .phpunit.result.cache
-tests/Graphics/SampleFiles/For_The_Term_of_His_Natural_Life.pdf
+/tests/Graphics/SampleFiles/
