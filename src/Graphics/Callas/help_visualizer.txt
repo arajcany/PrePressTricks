@@ -1,0 +1,153 @@
+
+Usage:
+  pdftoolbox --visualizer [--excludeprocessingsteps] [--usebleed] [--nosimulateoverprint] [--noblackpointcompensation] [--safetyoutside=safetyoutside] [--safetyinside=safetyinside] [--gamut_method=gamut_method] [--gamut_targetprofile=gamut_targetprofile] [--gamut_currentprofile=gamut_currentprofile] [--gamut=gamut] [--sep_colors] [--onlyproblems] [--smlobj=smlobj] [--inkcov=inkcov] [--bmpres=bmpres] [--imgres=imgres] [--part=part] [--resolution=resolution] [--colorspace=colorspace] [--jpegformat=jpegformat] [--compression=compression] [--imgformat=imgformat] [--licensetype=licensetype] [--timeout_licenseserver=timeout_licenseserver] [--lsmessage=lsmessage] [--licenseserver=licenseserver] [--satellite_type=satellite_type] [--timeout_satellite=timeout_satellite] [--timeout_dispatcher=timeout_dispatcher] [--noshadowfiles] [--nolocal] [--endpoint=endpoint] [--dist] [--timeout=timeout] [--customdict=customdict] [-l=l] [--cachefolder=cachefolder] [--noprogress] [-t] [--topdf_noremotecontent] [--topdf_psepilogue=topdf_psepilogue] [--topdf_psprologue=topdf_psprologue] [--openpassword=openpassword] [--password=password] [--topdf_parameter=topdf_parameter] [--topdf_psfontsonly=topdf_psfontsonly] [--topdf_psaddfonts=topdf_psaddfonts] [--topdf_ignore] [-p=p] [--topdf_pdfsetting=topdf_pdfsetting] [--topdf_useexcelpagelayout] [--topdf_screen] [--topdf_forceopenoffice] [--optimizepdf] [--nooptimization] [-o=o] [-f=f] [-w] [-s=s] <input file>
+
+Purpose:
+  Create a visualizer report
+
+Options:
+      --excludeprocessingsteps    Exclude all Processing Steps
+      --usebleed                  Width of BleedBox is used if existing
+      --nosimulateoverprint       Do not simulate overprint
+      --noblackpointcompensation  Do not use blackpoint compensation
+      --safetyoutside             Used as safety distance outside of TrimBox, default: 3mm
+      --safetyinside              Used as safety distance inside of the TrimBox, default: 3mm
+      --gamut_method              Method used for Delta E
+                                      DeltaE
+                                      CIE2000DeltaE (default)
+                                      DeltaC
+                                      CIE2000DeltaC
+      --gamut_targetprofile       Target color space
+                                     <DESC>: Use ICC profile with 'desc' tag <DESC>
+                                     <PATH>: Use ICC profile loaded from <PATH>
+                                     OUTPUTINTENT: Use outputintent of file
+      --gamut_currentprofile      Current color space
+                                     <DESC>: Use ICC profile with 'desc' tag <DESC>
+                                     <PATH>: Use ICC profile loaded from <PATH>
+                                     OUTPUTINTENT: Use outputintent of file
+      --gamut                     Threshold used for Delta E highlighting
+      --sep_colors                Render all individual separations in their respective color
+      --onlyproblems              Only emit pages that have problems
+      --smlobj                    Threshold for small object coverage highlighting, any of:
+                                     low: low resolution output
+                                     medium: medium resolution output
+                                     high: high resolution output
+      --inkcov                    Threshold for ink coverage highlighting
+      --bmpres                    Threshold for bitmap resolution highlighting
+      --imgres                    Threshold for image resolution highlighting
+      --part                      Visualizer report parts
+                                     any of:
+                                       all: all visualizer parts 
+                                       full: regular page view 
+                                       ink: all ink coverage views 
+                                       ink_temp: ink coverage above threshold
+                                       ink_topo: ink coverage topographic view
+                                       ink_sep:<COLORSPEC>[;<COLORSPEC>...]: Ink coverage per separation between thresholds
+                                          <COLORSPEC>:<COLORSELECTOR=LOWER_THRESHOLD:UPPER_THRESHOLD>
+                                          COLORSELECTOR: A name of a process or spot channel. Meta values are PROCESS and SPOT
+                                          which select all process colors or spot colors respectivley
+                                          LOWER_THRESHOLD: lower threshold for selected colorant(s)
+                                          UPPER_THRESHOLD: upper threshold for selected colorant(s)
+                                       ink_sep_below:<COLORSPEC>[;<COLORSPEC>...]: Ink coverage per separation below threshold
+                                          <COLORSPEC>:<COLORSELECTOR=THRESHOLD>
+                                          COLORSELECTOR: A name of a process or spot channel. Meta values are PROCESS and SPOT
+                                          which select all process colors or spot colors respectivley
+                                          THRESHOLD: threshold for selected colorant(s)
+                                       ink_sep_above:<COLORSPEC>[;<COLORSPEC>...]: Ink coverage per separation above threshold
+                                          <COLORSPEC>:<COLORSELECTOR=THRESHOLD>
+                                          COLORSELECTOR: A name of a process or spot channel. Meta values are PROCESS and SPOT
+                                          which select all process colors or spot colors respectivley
+                                          THRESHOLD: threshold for selected colorant(s)
+                                       process: all process color views 
+                                       process_CMYK: CMYK channels (without spots)
+                                       process_CMY: CMY
+                                       process_K: K channel only
+                                       spot: all spot color views 
+                                       spot_spots: spot color channels 
+                                       spot_spots_K: spot color + K channels
+                                       spot_CMYK: CMYK channels (without spots)
+                                       sep: all individual separations
+                                       sep_process: all individual process separations
+                                       sep_spot: all individual spot color separations
+                                       sep:<NAME>: separation with name <NAME>
+                                       imgres: all image resolution views
+                                       imgres_img: image resolution below threshold 
+                                       imgres_bmp: bitmap resolution below threshold 
+                                       smallobj: all small object views
+                                       smallobj_text: very small text objects below threshold
+                                       smallobj_lines: very small vector objects below threshold
+                                       safety_zone: display safety zone inside and outside of TrimBox
+                                       gamut: all gamut views
+                                       gamut_current: current color space view
+                                       gamut_target: target color space view
+                                       gamut_heatmap: heatmap view
+      --resolution                Resolution in ppi or width x height in pixel, e.g. 1024x800 (default: 72)
+      --colorspace                Color space for seperations: RGB, Gray (default: RGB)
+      --jpegformat                Baseline_Standard, Progressive_3_Scan (default: Baseline_Standard)
+      --compression               JPEG: JPEG_minimum, JPEG_low, JPEG_medium, JPEG_high, JPEG_maximum (default: JPEG_medium)
+                                  PDF:  JPEG_minimum, JPEG_low, JPEG_medium, JPEG_high, JPEG_maximum, PDF_Flate (default: JPEG_medium)
+                                  TIFF: TIFF_None, TIFF_LZW, TIFF_FLATE (default: TIFF_LZW)
+                                  PNG:  n.a.
+      --imgformat                 JPEG, PNG, TIFF, PDF (default: JPEG)
+      --licensetype               Use only specific license type on license server
+                                      ALL (default)
+                                      CREDITS
+                                      RUNCOUNT
+      --timeout_licenseserver     Time interval in seconds before search for available license is cancelled, if < 0: wait forever, default: 60)
+      --lsmessage                 Optional message forwarded to license server sessions (http://<licenseserver>/status/data.json)
+      --licenseserver             Use a callas license server instead of local license
+                                  Syntax: --licenseserver=<IP Adress>:<PORT>
+      --satellite_type            Distribute to satellite with specific type
+      --timeout_satellite         Time interval before processing of job is cancelled on satellite (default: infinite)
+      --timeout_dispatcher        Time interval before search for available satellite is cancelled (s.a. --nolocal, default: 10)
+      --noshadowfiles             do not create 0kB shadow files in --dist mode
+      --nolocal                   do not process locally, return error in case of timeout
+      --endpoint                  dispatcher url
+      --dist                      distribute execution to satellites
+      --timeout                   Time interval before local processing of job is cancelled
+      --customdict                Custom dictionary
+  -l  --language                  Reporting language (e.g. en (English, default), de or fr)
+      --cachefolder               Sets the cache folder path
+      --noprogress                Switches off progress information
+  -t  --timestamp                 show time stamp in output
+      --topdf_noremotecontent     Disables remote content
+      --topdf_psepilogue          Path to Epilogue for PostScript to PDF
+      --topdf_psprologue          Path to Prologue for PostScript to PDF
+      --openpassword              Open password
+      --password                  Secure password
+      --topdf_parameter           Custom parameters, valid values are:
+                                     ShowHiddenColumns (for MS Excel conversion only)
+                                     ShrinkToFit (for MS Excel conversion only)
+                                     PrintQualityAndComments (for MS Word conversion only)
+                                     UpdateChangedFields (for MS Word conversion only)
+                                     DoNotHideOffice (for MS Office only)
+                                     NoMemoryOptimization (for MS Office only)
+                                     CSV_IMPORT=FieldSeparator,TextDelimiter,ChararcterSet (for LibreOffice only)
+                                         FieldSeparator: Set field seperator as ASCII value, e.g. 44 for comma, 59 for semi-colon, 44/59 for both
+                                         TextDelimiter: Set TextDelimeter as ASCII value, e.g. 34 for double quotes and 39 for single quotes
+                                         ChararcterSet: Set character set. 0 = Unknown/System, 1 = Windows-1252, 9 = System Default, 11 = Ascii, 76 = UTF-8
+                                     NoBitmapMissingFonts (for MS Word conversion only)
+      --topdf_psfontsonly         Path to font folder for PS to PDF conversion (no usage of system fonts)
+      --topdf_psaddfonts          Path to additional font folder for PS to PDF conversion 
+      --topdf_ignore              Ignores the Office conversion
+  -p  --pagerange                 <firstpage>[-<lastpage>], default: all pages;
+                                  Only applied when analyzing not when converting PDF files.
+                                  When converting non-PDF documents the page range of the
+                                  original document can be specified.
+      --topdf_pdfsetting          Path to Distiller joboptions file for PostScript to PDF
+      --topdf_useexcelpagelayout  Use Excel page layout
+      --topdf_screen              Images from Office documents will have lower quality, 
+                                  result file will be smaller
+      --topdf_forceopenoffice     Processes MS Office documents with Open Office
+      --optimizepdf               The internal PDF structure is optimized
+                                  when saving the PDF.
+      --nooptimization            The internal PDF structure is not optimized
+                                  when saving the PDF.
+  -o  --outputfile                Destination for modified input file(s)
+  -f  --outputfolder              Puts modified input file(s) into folder
+  -w  --overwrite                 Overwrites existing files (default: index file name)
+  -s  --suffix                    Adds suffix to modified file(s)
+
+Arguments:
+  input file   File to be processed
+

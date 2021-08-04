@@ -104,7 +104,7 @@ class GhostscriptCommands
         $version = $this->cli("-version");
         if (isset($version[0])) {
             return $version[0];
-        }else{
+        } else {
             return false;
         }
     }
@@ -226,7 +226,7 @@ class GhostscriptCommands
      * @param bool|string $saveReport //if true, will save with .report.txt as the extension. If a path, save it to that path - must be fully qualified path + filename + extension.
      * @return array|false
      */
-    public function getCallasReport($pdfPath, $useCached = true, $saveReport = false)
+    public function getQuickCheckReport($pdfPath, $useCached = true, $saveReport = false)
     {
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".report.json";
 
@@ -301,7 +301,7 @@ class GhostscriptCommands
         }
 
 
-        $report = $this->getCallasReport($pdfPath, $useCached);
+        $report = $this->getQuickCheckReport($pdfPath, $useCached);
         if (empty($report)) {
             return false;
         }
@@ -1035,7 +1035,7 @@ class GhostscriptCommands
                     $compiledSeparationName,
                     $extension,
                 ];
-                $realOutputFile = __('{0}\{1}-{2}{3}.{4}', $realOutputOpts);
+                $realOutputFile = __('{0}\{1}_{2}{3}.{4}', $realOutputOpts);
 
                 if (is_file($gsOutputFile)) {
                     rename($gsOutputFile, $realOutputFile);
@@ -1053,15 +1053,29 @@ class GhostscriptCommands
     }
 
     /**
-     * Default options for gs PDF->Image
+     * Default options for PDF->Image
      *
      * @return array
      */
     private function getDefaultSaveOptions()
     {
         /**
-         * format
-         * Output format of either PNG or JPG
+         * Formats and Compression (compression a.k.a quality)
+         *
+         * Callas = 'compression' [JPEG_minimum = high quality] [JPEG_maximum = low quality]
+         * Ghostscript = 'quality' of 0-100 [0 = low quality] [100 = high quality]
+         *
+         * JPEG: JPEG_minimum, JPEG_low, JPEG_medium, JPEG_high, JPEG_maximum (default: JPEG_medium)
+         * PDF:  JPEG_minimum, JPEG_low, JPEG_medium, JPEG_high, JPEG_maximum, PDF_Flate (default: JPEG_medium)
+         * TIFF: TIFF_None, TIFF_LZW, TIFF_FLATE (default: TIFF_LZW)
+         * PNG: n/a
+         * ANY OF ABOVE: 0 -100 (will be translated to string)
+         *
+         * Formats and Colourspaces
+         * JPEG: RGB, Gray, CMYK (default: RGB)
+         * PDF:  RGB, Gray, CMYK (default: RGB)
+         * TIFF: RGB, Gray, CMYK, Multichannel (default: RGB)
+         * PNG:  RGB, RGBA, Gray (default: RGB)
          *
          * resolution (N or NxN)
          * Resolution in ppi or width x height in pixel, e.g. 72 or 300 or 1024x800 or 256x256
@@ -1093,9 +1107,16 @@ class GhostscriptCommands
         ];
     }
 
+    /**
+     * Compares the requested page range to actual pdf and only returns a valid range.
+     *
+     * @param string $pdfPath
+     * @param array $pageList
+     * @return array
+     */
     private function getValidatedPageList($pdfPath, $pageList)
     {
-        $report = $this->getCallasReport($pdfPath, true, false);
+        $report = $this->getQuickCheckReport($pdfPath, true, false);
         if (!isset($report['aggregated']['pages']['length'])) {
             return [];
         }
@@ -1106,6 +1127,44 @@ class GhostscriptCommands
         }
 
         return array_intersect($pageList, $pdfPages);
+    }
+
+    /**
+     * Extract the Key from the nested arrays.
+     *
+     * e.g. consider the following array.
+     * [
+     *  'foo' => [a,b,c,d,e],
+     *  'bar' => [f,g,h,i,j]
+     * ]
+     *  - 'e' would return 'foo'
+     *  - 'g' would return 'bar'
+     *  - 'xxx' would return $default
+     *
+     * @param array $masters
+     * @param string|bool|null $unknown
+     * @param string $default
+     * @return string
+     */
+    private function getMasterKeyFromUnknown(array $masters, string $unknown, $default = '')
+    {
+        if (is_array($unknown)) {
+            $unknown = implode("", $unknown);
+        }
+
+        foreach ($masters as $masterKey => $values) {
+            foreach ($values as $value) {
+                if (($unknown === true || $unknown === false) && $value === $unknown) {
+                    return $masterKey;
+                } elseif (($unknown === null) && $value === $unknown) {
+                    return $masterKey;
+                } elseif (strtolower($value) === strtolower($unknown)) {
+                    return $masterKey;
+                }
+            }
+        }
+
+        return $default;
     }
 
 }

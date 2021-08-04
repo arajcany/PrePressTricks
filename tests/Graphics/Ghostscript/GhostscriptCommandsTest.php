@@ -84,8 +84,8 @@ class GhostscriptCommandsTest extends TestCase
 
 
         //see if report written to same directory and other directory
-        $gs->getCallasReport($pdf, false, true);
-        $gs->getCallasReport($pdf, false, $jsonCallasReportOtherDir);
+        $gs->getQuickCheckReport($pdf, false, true);
+        $gs->getQuickCheckReport($pdf, false, $jsonCallasReportOtherDir);
         $this->assertFileExists($jsonCallasReportSameDir);
         $this->assertFileExists($jsonCallasReportOtherDir);
         unlink($jsonCallasReportSameDir);
