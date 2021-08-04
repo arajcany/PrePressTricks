@@ -121,6 +121,7 @@ class Pages
         }
 
         foreach ($ranges as $range) {
+            $range = str_replace(" ", "", $range);
             $range = explode("-", $range);
 
             if (isset($range[0])) {
@@ -273,11 +274,7 @@ class Pages
      * @param null $upperBound
      * @return array|bool|string
      */
-    public function rangeFlip(
-        $rangeInput = null,
-        $lowerBound = null,
-        $upperBound = null
-    )
+    public function rangeFlip($rangeInput = null, $lowerBound = null, $upperBound = null)
     {
         if ($this->is_blank($rangeInput)) {
             return false;
@@ -305,6 +302,34 @@ class Pages
         $difference = implode(',', $difference);
 
         return $difference;
+    }
+
+
+    public function getMinToMax($rangeInput = null, $options = [])
+    {
+        if ($this->is_blank($rangeInput)) {
+            return false;
+        }
+
+        $defaultOptions = [
+            'returnFormat' => 'string',
+        ];
+        $options = array_merge($defaultOptions, $options);
+
+        //expand the range first as this will clean
+        $numbers = $this->rangeExpand($rangeInput, ['returnFormat' => 'array']);
+
+        $min = min($numbers);
+        $max = max($numbers);
+
+        if ($options['returnFormat'] == 'array') {
+            return [$min, $max];
+        } elseif ($options['returnFormat'] == 'string') {
+            return $min . "-" . $max;
+        } else {
+            return false;
+        }
+
     }
 
     /**
