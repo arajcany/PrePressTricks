@@ -4,7 +4,6 @@
 namespace arajcany\PrePressTricks\Graphics\Callas;
 
 
-use arajcany\PrePressTricks\Utilities\Boxes;
 use arajcany\PrePressTricks\Utilities\Pages;
 use Cake\Utility\Hash;
 use Cake\Utility\Xml;
@@ -1013,6 +1012,7 @@ class CallasCommands
         $output = [];
         $ranges = (new Pages())->rangeCompact($options['pagelist'], ['returnFormat' => 'array', 'duplicateStringSingles' => true]);
         foreach ($ranges as $range) {
+            $range = $range['lower'] . "-" . $range['upper'];
             $pagelist = __('--pagerange={0}', $range);
 
             $args = [
@@ -1043,6 +1043,21 @@ class CallasCommands
                 $imagePath = trim(str_replace("Output", "", $line));
                 $imagePaths[] = $imagePath;
             }
+        }
+
+        //rename files like Ghostscript because its nicer.
+        foreach ($imagePaths as $k => $imagePath) {
+            $pdfFileName = pathinfo($pdfPath, PATHINFO_FILENAME);
+            $tmpImageDir = explode($pdfFileName, $imagePath)[0];
+            $tmpImageName = explode("_sep_", explode($pdfFileName, $imagePath)[1]);
+            $tmpPageNumber = intval(trim($tmpImageName[0], "_"));
+            $tmpColour = explode(".", $tmpImageName[1])[0];
+            $tmpExtension = explode(".", $tmpImageName[1])[1];
+            $renameTo = [$tmpImageDir, $pdfFileName, "_", $tmpPageNumber, "(", $tmpColour, ").", $tmpExtension];
+            $renameTo = implode("", $renameTo);
+
+            rename($imagePath, $renameTo);
+            $imagePaths[$k] = $renameTo;
         }
 
         return $imagePaths;
@@ -1135,7 +1150,7 @@ class CallasCommands
         $pageList = $this->getValidatedPageList($pdfPath, $pageList);
         $pageList = $Pages->rangeCompact($pageList);
         if (empty($pageList)) {
-            return [];
+            $options['pagelist'] = null;
         } else {
             $options['pagelist'] = $pageList;
         }
@@ -1260,20 +1275,32 @@ class CallasCommands
      * @param string $default
      * @return string
      */
-    private function getMasterKeyFromUnknown(array $masters, string $unknown, $default = '')
+    private function getMasterKeyFromUnknown(array $masters, $unknown, $default = '')
     {
         if (is_array($unknown)) {
             $unknown = implode("", $unknown);
         }
 
         foreach ($masters as $masterKey => $values) {
+
+            //check if the $unknown is actually a masterKey
+            if (is_string($unknown)) {
+                if (strtolower($masterKey) === strtolower($unknown)) {
+                    return $masterKey;
+                }
+            }
+
             foreach ($values as $value) {
-                if (($unknown === true || $unknown === false) && $value === $unknown) {
+                if ($unknown === true || $unknown === false || $unknown === null) {
+                    if ($unknown === $value) {
+                        return $masterKey;
+                    }
+                } elseif ($value === $unknown) {
                     return $masterKey;
-                } elseif (($unknown === null) && $value === $unknown) {
-                    return $masterKey;
-                } elseif (strtolower($value) === strtolower($unknown)) {
-                    return $masterKey;
+                } elseif (is_string($value) && is_string($unknown)) {
+                    if (strtolower($value) === strtolower($unknown)) {
+                        return $masterKey;
+                    }
                 }
             }
         }

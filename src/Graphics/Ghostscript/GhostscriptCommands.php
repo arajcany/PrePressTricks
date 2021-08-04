@@ -732,20 +732,7 @@ class GhostscriptCommands
      */
     public function savePdfAsImages($pdfPath, $options = [])
     {
-        $defaultOptions = $this->getDefaultSaveOptions();
-        $options = array_merge($defaultOptions, $options);
-
-        $options['resolution'] = strtolower($options['resolution']);
-        $options['resolution'] = str_replace(['*', "_", "-", "/", "+"], 'x', $options['resolution']);
-
-        $Pages = new Pages();
-        $pageList = $Pages->rangeExpand($options['pagelist'], ['returnFormat' => 'array']);
-        $pageList = $this->getValidatedPageList($pdfPath, $pageList);
-        if (empty($pageList)) {
-            return [];
-        } else {
-            $options['pagelist'] = $pageList;
-        }
+        $options = $this->fixSaveAsImageOptions($pdfPath, $options);
 
         $compiledReturns = [];
         if (strpos($options['resolution'], 'x') === false) {
@@ -770,7 +757,69 @@ class GhostscriptCommands
                 $imageHeightInches = ($imageHeight / 72);
                 $outputDpi = floor(min(($newResolution['width'] / $imageWidthInches), ($newResolution['height'] / $imageHeightInches)));
 
-                $intersectingPages = array_intersect($options['pagelist'], $pages);
+                $intersectingPages = (new Pages())->rangeExpand($options['pagelist'], ['returnFormat' => 'array']);
+                $intersectingPages = array_intersect($intersectingPages, $pages);
+                $intersectingPages = implode(',', $intersectingPages);
+
+                $newOptions = ['resolution' => $newResolutionString, 'pagelist' => $intersectingPages, 'outputdpi' => $outputDpi];
+                $newOptions = array_merge($options, $newOptions);
+                $compiledReturns = array_merge($compiledReturns, $this->convertPdfToImages($pdfPath, $newOptions));
+            }
+        }
+
+        $compiledReturns = array_unique($compiledReturns);
+        $compiledReturns = array_values($compiledReturns);
+        return $compiledReturns;
+    }
+
+
+    /**
+     * Wrapper function to convert a PDF to Separations.
+     *
+     * A wrapper function is used because gs is not the best at ripping multi page size documents.
+     * This wrapper splits such documents into chunks for conversion - based on same page size.
+     *
+     * NOTE: at this stage GS can only output TIFF separations, so format will always be overridden as TIFF
+     *
+     * For documentation on $options, see $this->getDefaultSaveOptions().
+     *
+     * @param $pdfPath
+     * @param array $options
+     * @return array
+     */
+    public function savePdfAsSeparations($pdfPath, $options = [])
+    {
+        $options = $this->fixSaveAsImageOptions($pdfPath, $options);
+
+        $options['format'] = 'tif';
+        $options['colorspace'] = 'tiffsep';
+
+        $compiledReturns = [];
+        if (strpos($options['resolution'], 'x') === false) {
+            //pass straight through as no need to fit a specific dimension
+            $compiledReturns = array_merge($compiledReturns, $this->convertPdfToImages($pdfPath, $options));
+            return $compiledReturns;
+        } else {
+            //reformat the resolution as there could be mixed Box sizes
+            $boxes = new Boxes();
+            $requestedPageBox = $options['pagebox'];
+            $pageSizeGroups = $this->getPageSizeGroupsReport($pdfPath);
+
+            foreach ($pageSizeGroups[$requestedPageBox]['pages_grouped_by_size'] as $pageSize => $pages) {
+                $imageWidth = explode("_", $pageSize)[0];
+                $imageHeight = explode("_", $pageSize)[1];
+                $requestedMaxWidth = explode("x", $options['resolution'])[0];
+                $requestedMaxHeight = explode("x", $options['resolution'])[1];
+                $newResolution = $boxes->fitIntoBox($imageWidth, $imageHeight, $requestedMaxWidth, $requestedMaxHeight, true);
+                $newResolutionString = $newResolution['width'] . "x" . $newResolution['height'];
+
+                $imageWidthInches = ($imageWidth / 72);
+                $imageHeightInches = ($imageHeight / 72);
+                $outputDpi = floor(min(($newResolution['width'] / $imageWidthInches), ($newResolution['height'] / $imageHeightInches)));
+
+                $intersectingPages = (new Pages())->rangeExpand($options['pagelist'], ['returnFormat' => 'array']);
+                $intersectingPages = array_intersect($intersectingPages, $pages);
+                $intersectingPages = implode(',', $intersectingPages);
 
                 $newOptions = ['resolution' => $newResolutionString, 'pagelist' => $intersectingPages, 'outputdpi' => $outputDpi];
                 $newOptions = array_merge($options, $newOptions);
@@ -795,24 +844,10 @@ class GhostscriptCommands
      */
     private function convertPdfToImages($pdfPath, $options = [])
     {
-
-        $boxTypes = [
-            'MediaBox', //MediaBox is first as it MUST be defined as per PDF specification
-            'TrimBox',
-            'BleedBox',
-            'CropBox',
-            'ArtBox'
-        ];
-
-        $colourArray = ['color', 'colour', 'col', 'c', 'rgb', 'cmyk',];
-        $grayArray = ['grey', 'gray', 'greyscale', 'grayscale', 'g',];
-        $monoArray = ['mono', 'monochrome', 'm',];
-
         //we use a tmp image name gs still numbers sequentially 1-n even if you ask for pages 4,7,8 etc.
         $outputFilenameTmp = '_' . substr(sha1(mt_rand()), 0, 16);
 
         $gsPath = $this->gsPath;
-        $switches = '-q -dQUIET -dNOSAFER -dBATCH -dNOPAUSE -dNOPROMPT';
         $switches = '-dNOSAFER -dBATCH -dNOPAUSE -dNOPROMPT';
 
         if (strpos($options['resolution'], 'x') !== false) {
@@ -821,138 +856,35 @@ class GhostscriptCommands
             $res = __('-r{0}', $options['resolution']);
         }
 
-        if ($options['pagebox'] == 'MediaBox') {
-            $pagebox = '';
-        } elseif (in_array($options['pagebox'], $boxTypes)) {
-            $pagebox = __('-dUse{0}', $options['pagebox']);
-        } else {
-            $pagebox = '';
-        }
+        $pagebox = __('-dUse{0}', $options['pagebox']);
 
-        if ($options['pagelist']) {
-            if (is_array($options['pagelist'])) {
-                $pagelist = __('-sPageList={0}', implode(",", $options['pagelist']));
-            } elseif (is_string($options['pagelist'])) {
-                $pagelist = __('-sPageList={0}', $options['pagelist']);
-            }
-        } else {
-            $pagelist = '';
-        }
+        $pagelist = __('-sPageList={0}', $options['pagelist']);
 
-        if (in_array(strtolower($options['format']), ['jpg', 'jpeg'])) {
+        if ($options['format'] == 'jpg') {
             $extension = "jpg";
-
-            /*
-             * gs devices for JPG
-             *
-             * jpeg      JPEG format, RGB output
-             * jpeggray  JPEG format, gray output
-             */
-            $jpegDevice = 'jpeg';
-            if (in_array(strtolower($options['colorspace']), $colourArray)) {
-                $jpegDevice = 'jpeg';
-            } elseif (in_array(strtolower($options['colorspace']), $grayArray)) {
-                $jpegDevice = 'jpeggray';
-            } elseif (in_array(strtolower($options['colorspace']), $monoArray)) {
-                $jpegDevice = 'jpeggray';
-            }
-
             $deviceOpts = [
-                $jpegDevice,
+                $options['colorspace'],
                 intval($options['quality']),
             ];
             $device = __('-sDEVICE={0} -dJPEGQ={1}', $deviceOpts);
-        } elseif (in_array(strtolower($options['format']), ['png'])) {
+        } elseif ($options['format'] == 'png') {
             $extension = "png";
-
-            /*
-             * gs devices for PNG
-             *
-             * pngmono      Monochrome
-             * pnggray      8-bit gray
-             * png16        4-bit color
-             * png256       8-bit color
-             * png16m       24-bit color
-             * pngalpha     32-bit RGBA color with transparency indicating pixel coverage
-             */
-            $pngDevice = 'png16m';
-            if (in_array(strtolower($options['colorspace']), $colourArray)) {
-                $pngDevice = 'png16m';
-            } elseif (in_array(strtolower($options['colorspace']), $grayArray)) {
-                $pngDevice = 'pnggray';
-            } elseif (in_array(strtolower($options['colorspace']), $monoArray)) {
-                $pngDevice = 'pngmono';
-            } elseif (in_array(strtolower($options['colorspace']), [16, '16'])) {
-                $pngDevice = 'png16';
-            } elseif (in_array(strtolower($options['colorspace']), [256, '256'])) {
-                $pngDevice = 'png256';
-            } elseif (in_array(strtolower($options['colorspace']), ['pngalpha', 'alpha', 'rgba'])) {
-                $pngDevice = 'pngalpha';
-            }
-
             $deviceOpts = [
-                $pngDevice,
+                $options['colorspace'],
             ];
             $device = __('-sDEVICE={0}', $deviceOpts);
-        } elseif (in_array(strtolower($options['format']), ['tiff', 'tif'])) {
+        } elseif ($options['format'] == 'tif') {
             $extension = "tif";
-
-            /*
-             * gs devices for TIFF
-             *
-             * tiffgray Produces 8-bit gray output.
-             * tiff12nc Produces 12-bit RGB output (4 bits per component).
-             * tiff24nc Produces 24-bit RGB output (8 bits per component).
-             * tiff48nc Produces 48-bit RGB output (16 bits per component).
-             * tiff32nc Produces 32-bit CMYK output (8 bits per component).
-             * tiff64nc Produces 64-bit CMYK output (16 bits per component).
-             * tiffsep The tiffsep device creates multiple output files
-             */
-            $tifDevice = 'tiff24nc';
-            if (in_array(strtolower($options['colorspace']), $colourArray)) {
-                $tifDevice = 'tiff24nc';
-            } elseif (in_array(strtolower($options['colorspace']), $grayArray)) {
-                $tifDevice = 'tiffgray';
-            } elseif (in_array(strtolower($options['colorspace']), $monoArray)) {
-                $tifDevice = 'tiffgray';
-            } elseif (in_array(strtolower($options['colorspace']), ['tiffgray', 'tiff12nc', 'tiff24nc', 'tiff48nc', 'tiff32nc', 'tiff64nc'])) {
-                $tifDevice = $options['colorspace'];
-            } elseif (in_array(strtolower($options['colorspace']), ['tiffsep', 'sep', 'separations', 'separation',])) {
-                $tifDevice = 'tiffsep';
-            }
-
             $deviceOpts = [
-                $tifDevice,
+                $options['colorspace'],
             ];
             $device = __('-sDEVICE={0}', $deviceOpts);
-        } else {
-            $extension = "jpg";
-            $deviceOpts = [
-                'jpeg',
-                $options['quality'],
-            ];
-            $device = __('-sDEVICE={0} -dJPEGQ={1}', $deviceOpts);
         }
 
-        if ($options['smoothing'] === true) {
-            $smoothing = '-dTextAlphaBits=4 -dGraphicsAlphaBits=4';
-        } elseif ($options['smoothing'] === false) {
-            $smoothing = '-dTextAlphaBits=1 -dGraphicsAlphaBits=1';
-        } elseif ($options['smoothing'] >= 1 && $options['smoothing'] <= 4) {
-            $vals = [$options['smoothing'], $options['smoothing']];
-            $smoothing = __('-dTextAlphaBits={0} -dGraphicsAlphaBits={1}', $vals);
-        } else {
-            $smoothing = '-dTextAlphaBits=4 -dGraphicsAlphaBits=4';
-        }
+        $vals = [$options['smoothing'], $options['smoothing']];
+        $smoothing = __('-dTextAlphaBits={0} -dGraphicsAlphaBits={1}', $vals);
 
-        if ($options['outputfolder']) {
-            $outputFolder = rtrim($options['outputfolder'], " \t\n\r\0\x0B\\/");
-            if (!is_dir($outputFolder)) {
-                mkdir($outputFolder, 0777, true);
-            }
-        } else {
-            $outputFolder = pathinfo($pdfPath, PATHINFO_DIRNAME);
-        }
+        $outputFolder = $options['outputfolder'];
 
         $outputOpts = [
             $outputFolder,
@@ -1009,10 +941,12 @@ class GhostscriptCommands
             preg_match_all($re, $line, $matches, PREG_SET_ORDER, 0);
             if (isset($matches[0][1])) {
                 $foundSeparationNames[] = '(' . $matches[0][1] . ')';
+                //$foundSeparationNames[] = '_sep_' . $matches[0][1] . '';
             }
         }
 
         $gsSequentialPageNumber = 1;
+        $imagePaths = [];
         foreach ($realPageNumbers as $k => $realPageNumber) {
 
             $compiledSeparationNames = ['', '(Cyan)', '(Magenta)', '(Yellow)', '(Black)'];
@@ -1031,6 +965,8 @@ class GhostscriptCommands
                 $realOutputOpts = [
                     $outputFolder,
                     pathinfo($pdfPath, PATHINFO_FILENAME),
+                    //str_pad($realPageNumber, 4, '0', STR_PAD_LEFT), //pad page number to 4 digits like Callas
+                    //str_replace(")", "", str_replace("(", "_sep_", $compiledSeparationName)), //separation naming like Callas
                     $realPageNumber,
                     $compiledSeparationName,
                     $extension,
@@ -1052,12 +988,13 @@ class GhostscriptCommands
         return $imagePaths;
     }
 
+
     /**
      * Default options for PDF->Image
      *
      * @return array
      */
-    private function getDefaultSaveOptions()
+    private function getDefaultSaveAsImageOptions()
     {
         /**
          * Formats and Compression (compression a.k.a quality)
@@ -1108,6 +1045,162 @@ class GhostscriptCommands
     }
 
     /**
+     * Take the standard $options and converts them to Ghostscript flavoured $options for ripping a PDF
+     *
+     * @param string $pdfPath
+     * @param array $options
+     * @return array
+     */
+    private function fixSaveAsImageOptions($pdfPath, $options)
+    {
+        $defaultOptions = $this->getDefaultSaveAsImageOptions();
+        $options = array_merge($defaultOptions, $options);
+
+        //fix resolution
+        $options['resolution'] = strtolower($options['resolution']);
+        $options['resolution'] = str_replace(['*', "_", "-", "/", "+"], 'x', $options['resolution']);
+
+        //fix output dpi
+        if (strpos($options['resolution'], 'x') === false) {
+            //set the output DPI to the ripping DPI (needed for Ghostscript only but here for compatibility)
+            $options['outputdpi'] = $options['resolution'];
+        } else {
+            //Callas automatically calculates the output DPI when NxN is used so we can leave it null
+            $options['outputdpi'] = null;
+        }
+
+        //fix pagelist
+        $Pages = new Pages();
+        $pageList = $Pages->rangeExpand($options['pagelist'], ['returnFormat' => 'array']);
+        $pageList = $this->getValidatedPageList($pdfPath, $pageList);
+        $pageList = $Pages->rangeCompact($pageList);
+        if (empty($pageList)) {
+            $options['pagelist'] = null;
+        } else {
+            $options['pagelist'] = $pageList;
+        }
+
+        //fix box
+        $masterBoxes = [
+            'MediaBox' => ['media box', 'mediabox', 'media'],
+            'TrimBox' => ['trim box', 'trimbox', 'trim'],
+            'BleedBox' => ['bleed box', 'bleedbox', 'bleed'],
+            'CropBox' => ['crop box', 'cropbox', 'crop'],
+            'ArtBox' => ['art box', 'artbox', 'art']
+        ];
+        $options['pagebox'] = $this->getMasterKeyFromUnknown($masterBoxes, $options['pagebox'], 'MediaBox');
+
+        //fix format
+        $masterFormats = [
+            'jpg' => ['jpeg', 'jpg'],
+            'tif' => ['tif', 'tiff'],
+            'png' => ['png'],
+        ];
+        $options['format'] = $this->getMasterKeyFromUnknown($masterFormats, $options['colorspace'], 'png');
+
+        //fix colorspace
+        /*
+         * gs devices for JPG
+         *
+         * jpeg      JPEG format, RGB output
+         * jpeggray  JPEG format, gray output
+         */
+        $masterColorspaceJpg = [
+            'jpeg' => ['color', 'colour', 'col', 'c', 'rgb', 'rgba', 'process', 'cmyk'],
+            'jpeggray' => ['grey', 'gray', 'greyscale', 'grayscale', 'g', 'k', 'mono', 'monochrome', 'm'],
+        ];
+        /*
+         * gs devices for PNG
+         *
+         * pngmono      Monochrome
+         * pnggray      8-bit gray
+         * png16        4-bit color
+         * png256       8-bit color
+         * png16m       24-bit color
+         * pngalpha     32-bit RGBA color with transparency indicating pixel coverage
+         */
+        $masterColorspacePng = [
+            'pngmono' => ['mono', 'monochrome', 'm'],
+            'pnggray' => ['grey', 'gray', 'greyscale', 'grayscale', 'g', 'k',],
+            'png16' => [16, 'web'],
+            'png256' => [256, 'dither'],
+            'png16m' => ['16m', 'color', 'colour', 'col', 'c', 'rgb', 'process', 'cmyk',],
+            'pngalpha' => ['rgba'],
+        ];
+        /*
+         * gs devices for TIFF
+         *
+         * tiffgray Produces 8-bit gray output.
+         * tiff12nc Produces 12-bit RGB output (4 bits per component).
+         * tiff24nc Produces 24-bit RGB output (8 bits per component).
+         * tiff48nc Produces 48-bit RGB output (16 bits per component).
+         * tiff32nc Produces 32-bit CMYK output (8 bits per component).
+         * tiff64nc Produces 64-bit CMYK output (16 bits per component).
+         * tiffsep The tiffsep device creates multiple output files
+         */
+        $masterColorspaceTif = [
+            'tiffgray' => ['grey', 'gray', 'greyscale', 'grayscale', 'g', 'k', 'mono', 'monochrome', 'm'],
+            'tiff12nc' => [12,],
+            'tiff24nc' => [24, 'color', 'colour', 'col', 'c', 'rgb', 'rgba',],
+            'tiff48nc' => [48],
+            'tiff32nc' => [32, 'process', 'cmyk'],
+            'tiff64nc' => [64],
+            'tiffsep' => ['sep', 'separations'],
+        ];
+        if ($options['format'] == 'jpg') {
+            $options['colorspace'] = $this->getMasterKeyFromUnknown($masterColorspaceJpg, $options['colorspace'], 'jpeg');
+        } elseif ($options['format'] == 'png') {
+            $options['colorspace'] = $this->getMasterKeyFromUnknown($masterColorspacePng, $options['colorspace'], 'png16m');
+        } elseif ($options['format'] == 'tif') {
+            $options['colorspace'] = $this->getMasterKeyFromUnknown($masterColorspaceTif, $options['colorspace'], 'tiff24nc');
+        }
+
+        //fix quality
+        $masterCompressionJpg = [
+            'JPEG_minimum' => ['min', 'minimum'] + range(90, 100),
+            'JPEG_low' => ['low'] + range(51, 90),
+            'JPEG_medium' => ['med', ' medium'] + range(21, 50),
+            'JPEG_maximum' => ['max', 'maximum'] + range(0, 20),
+        ];
+        $masterCompressionTif = [
+            'none' => ['none', null],
+            'lzw' => ['lzw', 'min', 'minimum', 'med', ' medium', 'max', 'maximum'] + range(0, 100),
+            'crle' => ['crle'],
+            'g3' => ['g3'],
+            'g4' => ['g4'],
+            'pack' => ['pack'],
+        ];
+        if ($options['format'] == 'jpg') {
+            $options['quality'] = $this->getMasterKeyFromUnknown($masterCompressionJpg, $options['quality'], 'jpeg');
+        } elseif ($options['format'] == 'png') {
+            $options['quality'] = null; //PNG does not have compression options
+        } elseif ($options['format'] == 'tif') {
+            $options['quality'] = $this->getMasterKeyFromUnknown($masterCompressionTif, $options['quality'], 'lzw');
+        }
+
+        //fix smoothing
+        $masterSmoothing = [
+            '1' => ['1', false],
+            '2' => ['2'],
+            '3' => ['3'],
+            '4' => ['4', true],
+        ];
+        $options['smoothing'] = $this->getMasterKeyFromUnknown($masterSmoothing, $options['smoothing'], '1');
+
+        //fix output folder
+        if ($options['outputfolder']) {
+            $options['outputfolder'] = rtrim($options['outputfolder'], " \t\n\r\0\x0B\\/");
+            if (!is_dir($options['outputfolder'])) {
+                mkdir($options['outputfolder'], 0777, true);
+            }
+        } else {
+            $options['outputfolder'] = pathinfo($pdfPath, PATHINFO_DIRNAME);
+        }
+
+        return $options;
+    }
+
+    /**
      * Compares the requested page range to actual pdf and only returns a valid range.
      *
      * @param string $pdfPath
@@ -1146,20 +1239,32 @@ class GhostscriptCommands
      * @param string $default
      * @return string
      */
-    private function getMasterKeyFromUnknown(array $masters, string $unknown, $default = '')
+    private function getMasterKeyFromUnknown(array $masters, $unknown, $default = '')
     {
         if (is_array($unknown)) {
             $unknown = implode("", $unknown);
         }
 
         foreach ($masters as $masterKey => $values) {
+
+            //check if the $unknown is actually a masterKey
+            if (is_string($unknown)) {
+                if (strtolower($masterKey) === strtolower($unknown)) {
+                    return $masterKey;
+                }
+            }
+
             foreach ($values as $value) {
-                if (($unknown === true || $unknown === false) && $value === $unknown) {
+                if ($unknown === true || $unknown === false || $unknown === null) {
+                    if ($unknown === $value) {
+                        return $masterKey;
+                    }
+                } elseif ($value === $unknown) {
                     return $masterKey;
-                } elseif (($unknown === null) && $value === $unknown) {
-                    return $masterKey;
-                } elseif (strtolower($value) === strtolower($unknown)) {
-                    return $masterKey;
+                } elseif (is_string($value) && is_string($unknown)) {
+                    if (strtolower($value) === strtolower($unknown)) {
+                        return $masterKey;
+                    }
                 }
             }
         }

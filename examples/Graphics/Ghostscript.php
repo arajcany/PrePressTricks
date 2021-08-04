@@ -18,38 +18,56 @@ if (isset($output[0])) {
     $gsPath = false;
 }
 
-$gs = new GhostscriptCommands();
-$gs->setGsPath($gsPath);
-
-$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/001 SDI Iridesse Ink Swatches.pdf';
-$reportOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/001 SDI Iridesse Ink Swatches.ghostscript_report.json';
-$fileTmpOutput = __DIR__ . '/../../tmp/';
-$pdfReport = $gs->getPdfReport($pdfInput, true, true);
-r($pdfReport);
-
-$pdfReportSeps = $gs->getPageSeparationsReport($pdfInput, true, true);
-r($pdfReportSeps);
-
-$pageSizeGroupsReport = $gs->getPageSizeGroupsReport($pdfInput, true, true);
-r($pageSizeGroupsReport);
-
-$callasReport = $gs->getCallasReport($pdfInput, true, $reportOutput);
-r($callasReport);
+$cls = new GhostscriptCommands();
+$cls->setGsPath($gsPath);
 
 
+//------------------------------------------------------------
+// Examples of every type of report that can be output
+//------------------------------------------------------------
+
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getPdfReport($pdfInput, true, true);
+
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getQuickCheckReport($pdfInput, true, true);
+
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getPageSizeGroupsReport($pdfInput, true, true);
+
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getPageSeparationsReport($pdfInput, true, true);
+
+//rip pages as images
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/001 SDI Iridesse Ink Swatches.pdf';
+$pdfFolderOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/Thumbs/';
 $ripOptions = [
-    'format' => 'tiff',
-    'colorspace' => 'tiffsep',
-    //'format' => 'png',
-    //'colorspace' => 'colour',
-    'resolution' => '512x512',
-    //'resolution' => '300',
+    'format' => 'png',
+    'colorspace' => 'rbg',
+    'quality' => '100',
+    'resolution' => '72', //could also be in format NxN where image will fit into box NxN
     'smoothing' => false,
-    //'pagebox' => 'TrimBox',
-    //'pagelist' => [1,2],
-    //'pagelist' => '3,8',
-    //'outputfolder' => pathinfo($pdfInput, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . "meta" . DIRECTORY_SEPARATOR,
-    'outputfolder' => $fileTmpOutput,
+    'pagebox' => 'media',
+    'pagelist' => [1, 3, '7 - 8'],
+    'outputfolder' => $pdfFolderOutput,
 ];
-$images = $gs->savePdfAsImages($pdfInput, $ripOptions);
-r($images);
+//$images contains an array of paths
+$images = $cls->savePdfAsImages($pdfInput, $ripOptions);
+print_r($images);
+
+//rip pages as separations
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/001 SDI Iridesse Ink Swatches.pdf';
+$pdfFolderOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/Ghostscript/Seps/';
+$ripOptions = [
+    'format' => 'png',
+    'colorspace' => 'rgb',
+    'quality' => '100',
+    'resolution' => '500x500', //could also be in format NxN where image will fit into box NxN
+    'smoothing' => false,
+    'pagebox' => 'media',
+    'pagelist' => [1, 3, '7 - 8'],
+    'outputfolder' => $pdfFolderOutput,
+];
+//$images contains an array of paths
+$images = $cls->savePdfAsSeparations($pdfInput, $ripOptions);
+print_r($images);

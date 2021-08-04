@@ -21,33 +21,53 @@ if (isset($output[0])) {
 $cls = new CallasCommands();
 $cls->setCallasPath($callasPath);
 
-$version = $cls->getCliVersion();
-//r($version);
 
-$help = $cls->getCliHelp();
-//r($help);
+//------------------------------------------------------------
+// Examples of every type of report that can be output
+//------------------------------------------------------------
 
-$info = $cls->getCliStatus();
-//r($info);
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getPdfReport($pdfInput, true, true);
 
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getQuickCheckReport($pdfInput, true, true);
 
-$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/001 SDI Iridesse Ink Swatches.pdf';
-$reportOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/001 SDI Iridesse Ink Swatches.callas_report.json';
-$fileTmpOutput = __DIR__ . '/../../tmp/';
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getPageSizeGroupsReport($pdfInput, true, true);
 
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
+$pdfReport = $cls->getPageSeparationsReport($pdfInput, true, true);
 
-//$cls->removeCallasQuickCheckFilter("$.aggregated.pages");
-//$cls->addCallasQuickCheckFilter("$.aggregated.resources", false);
-//$cls->addCallasQuickCheckFilter("$.aggregated.resources.images.summary", true);
-//$cls->insertCallasQuickCheckFilter("$.aggregated.resources.images.summary.bitmap_images.eff_highest_ppi", true);
-//$cls->insertCallasQuickCheckFilter("$.aggregated.resources.images.summary.bitmap_images.eff_lowest_ppi", true);
-//$cls->insertCallasQuickCheckFilter("$.aggregated.resources.images.summary.ct_images.eff_highest_ppi", true);
-//$cls->insertCallasQuickCheckFilter("$.aggregated.resources.images.summary.ct_images.eff_lowest_ppi", true);
-$pdfReport = $cls->getQuickCheckReport($pdfInput, false, $reportOutput);
-r($pdfReport);
+//rip pages as images
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
+$pdfFolderOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/Thumbs/';
+$ripOptions = [
+    'format' => 'png',
+    'colorspace' => 'rbg',
+    'quality' => '100',
+    'resolution' => '72', //could also be in format NxN where image will fit into box NxN
+    'smoothing' => false,
+    'pagebox' => 'media',
+    'pagelist' => [1, 3, '7 - 8'],
+    'outputfolder' => $pdfFolderOutput,
+];
+//$images contains an array of paths
+$images = $cls->savePdfAsImages($pdfInput, $ripOptions);
+print_r($images);
 
-$pdfReportSeps = $cls->getPageSeparationsReport($pdfInput, false, true);
-r($pdfReportSeps);
-
-$pageSizeGroupsReport = $cls->getPageSizeGroupsReport($pdfInput, false, true);
-r($pageSizeGroupsReport);
+//rip pages as separations
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
+$pdfFolderOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/Seps/';
+$ripOptions = [
+    'format' => 'png',
+    'colorspace' => 'rgb',
+    'quality' => '100',
+    'resolution' => '500x500', //could also be in format NxN where image will fit into box NxN
+    'smoothing' => false,
+    'pagebox' => 'media',
+    'pagelist' => [1, 3, '7 - 8'],
+    'outputfolder' => $pdfFolderOutput,
+];
+//$images contains an array of paths
+$images = $cls->savePdfAsSeparations($pdfInput, $ripOptions);
+print_r($images);
