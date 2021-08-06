@@ -14,6 +14,7 @@ class CallasCommands
     private $returnValue = null;
     private $returnMessage = null;
     private $callasQuickCheckFilters = ['$' => []];
+    private $tmpDir;
 
     /**
      * CallasCommands constructor.
@@ -32,6 +33,15 @@ class CallasCommands
                 if (is_file($output[0])) {
                     $this->callasPath = $output[0];
                 }
+            }
+        }
+
+        if (defined(TMP)) {
+            $this->tmpDir = TMP;
+        } else {
+            $this->tmpDir = __DIR__ . '/../../../tmp/';
+            if (!is_dir($this->tmpDir)) {
+                mkdir($this->tmpDir, 0777, true);
             }
         }
 
@@ -391,8 +401,8 @@ class CallasCommands
 
         //The Callas CLI saves the report to disk as opposed to returning the report in the console
         $rnd1 = sha1(mt_rand());
-        $tmpOutputFile = __DIR__ . '/../../../tmp/' . $rnd1 . ".report.json";
-        $tmpQuickCheckConfigFile = __DIR__ . '/../../../tmp/' . $rnd1 . ".quickcheck.cfg";
+        $tmpOutputFile = $this->tmpDir . $rnd1 . ".report.json";
+        $tmpQuickCheckConfigFile = $this->tmpDir . $rnd1 . ".quickcheck.cfg";
         $this->getCallasQuickCheckFilters($tmpQuickCheckConfigFile);
 
         $args = [
@@ -625,7 +635,7 @@ class CallasCommands
 
         //The Callas CLI saves the report to disk as opposed to returning the report in the console
         $rnd1 = sha1(mt_rand());
-        $tmpOutputFile = __DIR__ . '/../../../tmp/' . $rnd1 . ".report.xml";
+        $tmpOutputFile = $this->tmpDir . $rnd1 . ".report.xml";
 
         $args = [
             $this->callasPath,
