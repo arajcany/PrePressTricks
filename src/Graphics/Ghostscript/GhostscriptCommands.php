@@ -39,6 +39,32 @@ class GhostscriptCommands
     }
 
     /**
+     * Check if Callas is alive and working.
+     *
+     * @return bool
+     */
+    public function isAlive()
+    {
+        try {
+            $cliVersion = $this->getCliVersion();
+            $cliStatus = $this->getCliStatus();
+
+            if (!$cliVersion) {
+                return false;
+            }
+
+            if (!$cliStatus) {
+                return false;
+            }
+
+            return true;
+
+        } catch (\Throwable $exception) {
+            return false;
+        }
+    }
+
+    /**
      * @return mixed
      */
     public function getReturnValue()
