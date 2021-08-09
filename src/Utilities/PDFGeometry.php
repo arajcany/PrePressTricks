@@ -103,6 +103,12 @@ class PDFGeometry
         return false;
     }
 
+    /**
+     * Parse an angle so that it returns only 0,90,180 or 270
+     *
+     * @param $angle
+     * @return int
+     */
     public function parseRotation($angle)
     {
         while ($angle >= 360) {
@@ -138,92 +144,21 @@ class PDFGeometry
         $originalLeft = $boundingBoxGeometry['left'];
         $originalBottom = $boundingBoxGeometry['bottom'];
 
-        if ($rotation == 90) {
-            $rotationOrigin = [
-                'x' => $boundingBoxGeometry['left'],
-                'y' => $boundingBoxGeometry['top']
-            ];
-        } elseif ($rotation == 180) {
-            $rotationOrigin = [
-                'x' => $boundingBoxGeometry['right'],
-                'y' => $boundingBoxGeometry['top']
-            ];
-        } elseif ($rotation == 270) {
-            $rotationOrigin = [
-                'x' => $boundingBoxGeometry['right'],
-                'y' => $boundingBoxGeometry['bottom']
-            ];
-        } else {
-            $rotationOrigin = [
-                'x' => $boundingBoxGeometry['left'],
-                'y' => $boundingBoxGeometry['bottom']
-            ];
-        }
+        $rotationOrigin = ['x' => 0, 'y' => 0];
 
         //rotate the **box** around the specified origin
-        $boxCorner1 = [
-            'x' => $boxGeometry['left'],
-            'y' => $boxGeometry['top']
-        ];
-        $boxCorner2 = [
-            'x' => $boxGeometry['right'],
-            'y' => $boxGeometry['top']
-        ];
-        $boxCorner3 = [
-            'x' => $boxGeometry['left'],
-            'y' => $boxGeometry['bottom']
-        ];
-        $boxCorner4 = [
-            'x' => $boxGeometry['right'],
-            'y' => $boxGeometry['bottom']
-        ];
-        $boxCorner1 = $this->rotatePointAroundOrigin($boxCorner1, $rotation, $rotationOrigin);
-        $boxCorner2 = $this->rotatePointAroundOrigin($boxCorner2, $rotation, $rotationOrigin);
-        $boxCorner3 = $this->rotatePointAroundOrigin($boxCorner3, $rotation, $rotationOrigin);
-        $boxCorner4 = $this->rotatePointAroundOrigin($boxCorner4, $rotation, $rotationOrigin);
-        $boxLeft = min($boxCorner1['x'], $boxCorner2['x'], $boxCorner3['x'], $boxCorner4['x']);
-        $boxBottom = min($boxCorner1['y'], $boxCorner2['y'], $boxCorner3['y'], $boxCorner4['y']);
-        $boxRight = max($boxCorner1['x'], $boxCorner2['x'], $boxCorner3['x'], $boxCorner4['x']);
-        $boxTop = max($boxCorner1['y'], $boxCorner2['y'], $boxCorner3['y'], $boxCorner4['y']);
-
+        $boxGeometry = $this->rotateGeometryAroundOrigin($boxGeometry, $rotation, $rotationOrigin);
 
         //rotate the **bounding box** around the specified origin
-        $boundingBoxCorner1 = [
-            'x' => $boundingBoxGeometry['left'],
-            'y' => $boundingBoxGeometry['top']
-        ];
-        $boundingBoxCorner2 = [
-            'x' => $boundingBoxGeometry['right'],
-            'y' => $boundingBoxGeometry['top']
-        ];
-        $boundingBoxCorner3 = [
-            'x' => $boundingBoxGeometry['left'],
-            'y' => $boundingBoxGeometry['bottom']
-        ];
-        $boundingBoxCorner4 = [
-            'x' => $boundingBoxGeometry['right'],
-            'y' => $boundingBoxGeometry['bottom']
-        ];
-        $boundingBoxCorner1 = $this->rotatePointAroundOrigin($boundingBoxCorner1, $rotation, $rotationOrigin);
-        $boundingBoxCorner2 = $this->rotatePointAroundOrigin($boundingBoxCorner2, $rotation, $rotationOrigin);
-        $boundingBoxCorner3 = $this->rotatePointAroundOrigin($boundingBoxCorner3, $rotation, $rotationOrigin);
-        $boundingBoxCorner4 = $this->rotatePointAroundOrigin($boundingBoxCorner4, $rotation, $rotationOrigin);
-        $boundingBoxLeft = min($boundingBoxCorner1['x'], $boundingBoxCorner2['x'], $boundingBoxCorner3['x'], $boundingBoxCorner4['x']);
-        $boundingBoxBottom = min($boundingBoxCorner1['y'], $boundingBoxCorner2['y'], $boundingBoxCorner3['y'], $boundingBoxCorner4['y']);
-        $boundingBoxRight = max($boundingBoxCorner1['x'], $boundingBoxCorner2['x'], $boundingBoxCorner3['x'], $boundingBoxCorner4['x']);
-        $boundingBoxTop = max($boundingBoxCorner1['y'], $boundingBoxCorner2['y'], $boundingBoxCorner3['y'], $boundingBoxCorner4['y']);
+        $boundingBoxGeometry = $this->rotateGeometryAroundOrigin($boundingBoxGeometry, $rotation, $rotationOrigin);
 
-        //figure out how much everything need to shift by to bring it back into the left-bottom position
-        $moveX = $originalLeft - $boundingBoxLeft;
-        $moveY = $originalBottom - $boundingBoxBottom;
-        $boxLeft = $boxLeft + $moveX;
-        $boxBottom = $boxBottom + $moveY;
-        $boxRight = $boxRight + $moveX;
-        $boxTop = $boxTop + $moveY;
-        $boundingBoxLeft = $boundingBoxLeft + $moveX;
-        $boundingBoxBottom = $boundingBoxBottom + $moveY;
-        $boundingBoxRight = $boundingBoxRight + $moveX;
-        $boundingBoxTop = $boundingBoxTop + $moveY;
+        //figure out how much everything needs to shift by in order to bring it back into the left-bottom position
+        $moveX = $originalLeft - $boundingBoxGeometry['left'];
+        $moveY = $originalBottom - $boundingBoxGeometry['bottom'];
+        $boxLeft = $boxGeometry['left'] + $moveX;
+        $boxBottom = $boxGeometry['bottom'] + $moveY;
+        $boxRight = $boxGeometry['right'] + $moveX;
+        $boxTop = $boxGeometry['top'] + $moveY;
 
         $boxGeometry = [
             'left' => $boxLeft,
@@ -246,109 +181,6 @@ class PDFGeometry
         ];
 
         return $boxGeometry;
-    }
-
-    private function scaleGeometry($parsedGeometry, $scalingFactor)
-    {
-        $parsedGeometry['left'] = $parsedGeometry['left'] * $scalingFactor;
-        $parsedGeometry['bottom'] = $parsedGeometry['bottom'] * $scalingFactor;
-        $parsedGeometry['right'] = $parsedGeometry['right'] * $scalingFactor;
-        $parsedGeometry['top'] = $parsedGeometry['top'] * $scalingFactor;
-
-        return $parsedGeometry;
-    }
-
-    private function rotateGeometry($parsedGeometry, $parsedRotation)
-    {
-        if ($parsedRotation == 0 || $parsedRotation == 180) {
-            $width = $parsedGeometry['right'] - $parsedGeometry['left'];
-            $height = $parsedGeometry['top'] - $parsedGeometry['bottom'];
-        } else {
-            $width = $parsedGeometry['top'] - $parsedGeometry['bottom'];
-            $height = $parsedGeometry['right'] - $parsedGeometry['left'];
-        }
-
-        if ($parsedRotation == 90) {
-            //left takes value from top
-            //bottom takes value from left
-            //right takes value from bottom
-            //top takes value from right
-            $tmpGeo = [
-                'left' => $parsedGeometry['top'] - $width,
-                'bottom' => $parsedGeometry['left'],
-                'right' => $parsedGeometry['bottom'] + $width,
-                'top' => $parsedGeometry['right'],
-            ];
-        } elseif ($parsedRotation == 180) {
-            //left takes value from right
-            //bottom takes value from top
-            //right takes value from left
-            //top takes value from bottom
-            $tmpGeo = [
-                'left' => $parsedGeometry['right'] - $width,
-                'bottom' => $parsedGeometry['top'] - $height,
-                'right' => $parsedGeometry['left'] + $width,
-                'top' => $parsedGeometry['bottom'] + $height,
-            ];
-        } elseif ($parsedRotation == 270) {
-            //left takes value from bottom
-            //bottom takes value from right
-            //right takes value from top
-            //top takes value from left
-            $tmpGeo = [
-                'left' => $parsedGeometry['bottom'],
-                'bottom' => $parsedGeometry['right'] - $height,
-                'right' => $parsedGeometry['top'],
-                'top' => $parsedGeometry['left'] + $height,
-            ];
-        } else {
-            //no rotation
-            $tmpGeo = [
-                'left' => $parsedGeometry['left'],
-                'bottom' => $parsedGeometry['bottom'],
-                'right' => $parsedGeometry['right'],
-                'top' => $parsedGeometry['top'],
-            ];
-        }
-
-        return $tmpGeo;
-    }
-
-    private function rotateTranslation($parsedTranslation, $ccwRotation)
-    {
-
-        while ($ccwRotation >= 360) {
-            $ccwRotation = $ccwRotation - 360;
-        }
-
-        while ($ccwRotation <= -360) {
-            $ccwRotation = $ccwRotation + 360;
-        }
-
-        if ($ccwRotation == 90) {
-            $tmpTranslation = [
-                'x' => -1 * $parsedTranslation['y'],
-                'y' => $parsedTranslation['x'],
-            ];
-        } elseif ($ccwRotation == 180) {
-            $tmpTranslation = [
-                'x' => -1 * $parsedTranslation['x'],
-                'y' => -1 * $parsedTranslation['y'],
-            ];
-        } elseif ($ccwRotation == 270) {
-            $tmpTranslation = [
-                'x' => $parsedTranslation['y'],
-                'y' => -1 * $parsedTranslation['x'],
-            ];
-        } else {
-            //no rotation
-            $tmpTranslation = [
-                'x' => $parsedTranslation['x'],
-                'y' => $parsedTranslation['y'],
-            ];
-        }
-
-        return $tmpTranslation;
     }
 
     public function getWidth($geometry, $rotation = 0, $scaling = 1)
@@ -485,11 +317,64 @@ class PDFGeometry
         return $default;
     }
 
-    public function rotateGeometryAroundOrigin($parsedGeometry, $angle, $xyOrigin)
-    {
 
+    /**
+     * Scale the geometry by a give factor.
+     *
+     *
+     * @param $parsedGeometry
+     * @param $scalingFactor
+     * @return mixed
+     */
+    private function scaleGeometry($parsedGeometry, $scalingFactor)
+    {
+        $parsedGeometry['left'] = $parsedGeometry['left'] * $scalingFactor;
+        $parsedGeometry['bottom'] = $parsedGeometry['bottom'] * $scalingFactor;
+        $parsedGeometry['right'] = $parsedGeometry['right'] * $scalingFactor;
+        $parsedGeometry['top'] = $parsedGeometry['top'] * $scalingFactor;
+
+        return $parsedGeometry;
     }
 
+    /**
+     * Rotate geometry around the given origin.
+     *
+     * @param $parsedGeometry
+     * @param $angle
+     * @param $xyOrigin
+     * @return array
+     */
+    private function rotateGeometryAroundOrigin($parsedGeometry, $angle, $xyOrigin)
+    {
+        $boxCorner1 = [
+            'x' => $parsedGeometry['left'],
+            'y' => $parsedGeometry['top']
+        ];
+        $boxCorner2 = [
+            'x' => $parsedGeometry['right'],
+            'y' => $parsedGeometry['top']
+        ];
+        $boxCorner3 = [
+            'x' => $parsedGeometry['left'],
+            'y' => $parsedGeometry['bottom']
+        ];
+        $boxCorner4 = [
+            'x' => $parsedGeometry['right'],
+            'y' => $parsedGeometry['bottom']
+        ];
+        $boxCorner1 = $this->rotatePointAroundOrigin($boxCorner1, $angle, $xyOrigin);
+        $boxCorner2 = $this->rotatePointAroundOrigin($boxCorner2, $angle, $xyOrigin);
+        $boxCorner3 = $this->rotatePointAroundOrigin($boxCorner3, $angle, $xyOrigin);
+        $boxCorner4 = $this->rotatePointAroundOrigin($boxCorner4, $angle, $xyOrigin);
+
+        $geo = [];
+        $geo['left'] = min($boxCorner1['x'], $boxCorner2['x'], $boxCorner3['x'], $boxCorner4['x']);
+        $geo['bottom'] = min($boxCorner1['y'], $boxCorner2['y'], $boxCorner3['y'], $boxCorner4['y']);
+        $geo['right'] = max($boxCorner1['x'], $boxCorner2['x'], $boxCorner3['x'], $boxCorner4['x']);
+        $geo['top'] = max($boxCorner1['y'], $boxCorner2['y'], $boxCorner3['y'], $boxCorner4['y']);
+
+        return $geo;
+    }
 
     /**
      * Wrapper function
@@ -499,7 +384,7 @@ class PDFGeometry
      * @param $xyOrigin
      * @return array
      */
-    function rotatePointAroundOrigin($xyCoordinates, $angle, $xyOrigin)
+    private function rotatePointAroundOrigin($xyCoordinates, $angle, $xyOrigin)
     {
         $c = $this->_rotatePoint($xyCoordinates['x'], $xyCoordinates['y'], $angle, $xyOrigin['x'], $xyOrigin['y']);
         return ['x' => $c[0], 'y' => $c[1]];
