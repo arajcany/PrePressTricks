@@ -123,7 +123,7 @@ class GhostscriptCommandsTest extends TestCase
 
         $expected = [];
         foreach ($pages as $page) {
-            $expected[] = $imgDir . "For_The_Term_of_His_Natural_Life-{$page}.png";
+            $expected[] = $imgDir . "For_The_Term_of_His_Natural_Life_{$page}.png";
         }
 
         $this->assertEquals($expected, $images);
