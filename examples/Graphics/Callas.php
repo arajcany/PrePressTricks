@@ -38,6 +38,9 @@ $pdfReport = $cls->getPageSizeGroupsReport($pdfInput, true, true);
 $pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
 $pdfReport = $cls->getPageSeparationsReport($pdfInput, true, true);
 
+$pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/SampleCanvaBrochure.pdf';
+$pdfReport = $cls->getImagesReportXml($pdfInput, true, true);
+
 //rip pages as images
 $pdfInput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/001 SDI Iridesse Ink Swatches.pdf';
 $pdfFolderOutput = __DIR__ . '/../../tests/Graphics/SampleFiles/Callas/Thumbs/';

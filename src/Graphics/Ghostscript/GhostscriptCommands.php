@@ -4,10 +4,11 @@
 namespace arajcany\PrePressTricks\Graphics\Ghostscript;
 
 
+use arajcany\PrePressTricks\Graphics\Common\BaseCommands;
 use arajcany\PrePressTricks\Utilities\Boxes;
 use arajcany\PrePressTricks\Utilities\Pages;
 
-class GhostscriptCommands
+class GhostscriptCommands extends BaseCommands
 {
     private $gsPath = null;
     private $returnValue = null;
@@ -20,6 +21,8 @@ class GhostscriptCommands
      */
     public function __construct($gsPath = null)
     {
+        parent::__construct();
+
         if ($gsPath) {
             $this->gsPath = $gsPath;
             $this->setPdfInfoPath();
@@ -62,38 +65,6 @@ class GhostscriptCommands
         } catch (\Throwable $exception) {
             return false;
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getReturnValue()
-    {
-        return $this->returnValue;
-    }
-
-    /**
-     * @param mixed $returnValue
-     */
-    public function setReturnValue($returnValue)
-    {
-        $this->returnValue = $returnValue;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getReturnMessage()
-    {
-        return $this->returnMessage;
-    }
-
-    /**
-     * @param mixed $returnMessage
-     */
-    public function setReturnMessage($returnMessage)
-    {
-        $this->returnMessage = $returnMessage;
     }
 
     /**
@@ -278,6 +249,7 @@ class GhostscriptCommands
         }
         $report = $this->convertPdfReportToCallasJsonReport($report);
 
+        $report = $this->populateQuickCheckReportWithEffectiveGeometry($report);
 
         if ($saveReport) {
             $reportString = json_encode($report, JSON_PRETTY_PRINT);
@@ -335,7 +307,7 @@ class GhostscriptCommands
         if (!isset($report['aggregated']['pages']['page'])) {
             return false;
         }
-        $report = $this->convertCallasJsonReportToPageSizeGroupsReport($report);
+        $report = $this->convertQuickCheckReportToPageSizeGroupsReport($report);
 
 
         if ($saveReport) {
@@ -411,70 +383,6 @@ class GhostscriptCommands
         $this->setReturnValue(0);
 
         return $report;
-    }
-
-
-    /**
-     * Formats a Callas PDF Toolbox quickcheck JSON report as Page Size Groups report.
-     * Return format is an array, be sure to json_encode() before saving this report to FSO.
-     *
-     * @param $reportStringOrPath
-     * @return array[]|false
-     */
-    private function convertCallasJsonReportToPageSizeGroupsReport($reportStringOrPath)
-    {
-        if (is_string($reportStringOrPath) && is_file($reportStringOrPath)) {
-            $rawReport = file_get_contents($reportStringOrPath);
-            $rawReport = json_decode($rawReport, JSON_OBJECT_AS_ARRAY);
-        } elseif (is_string($reportStringOrPath)) {
-            $rawReport = json_decode($reportStringOrPath, JSON_OBJECT_AS_ARRAY);
-        } elseif (is_array($reportStringOrPath)) {
-            $rawReport = $reportStringOrPath;
-        } else {
-            return false;
-        }
-
-        $pages = $rawReport['aggregated']['pages']['page'];
-
-        $boxTypes = [
-            'MediaBox', //MediaBox is first as it MUST be defined as per PDF specification
-            'TrimBox',
-            'BleedBox',
-            'CropBox',
-            'ArtBox'
-        ];
-
-        $pageGroups = [];
-
-        foreach ($pages as $p => $page) {
-            foreach ($boxTypes as $b => $boxType) {
-                if (isset($page['geometry'][$boxType])) {
-                    $pageNumber = $page['info']['pagenum'];
-                    $eWidth = $page['geometry'][$boxType]['width_eff'];
-                    $eHeight = $page['geometry'][$boxType]['height_eff'];
-                    $pageGroups[$boxType]['pages_grouped_by_size'][$eWidth . '_' . $eHeight][] = $pageNumber;
-                } else {
-                    $pageGroups[$boxType]['pages_grouped_by_size']['0_0'][] = $pageNumber;
-                }
-            }
-        }
-
-        foreach ($boxTypes as $b => $boxType) {
-            $count = count($pageGroups[$boxType]['pages_grouped_by_size']);
-            if ($count == 1) {
-                $pageGroups[$boxType]['all_same_size'] = true;
-            } else {
-                $pageGroups[$boxType]['all_same_size'] = false;
-            }
-            $pageGroups[$boxType]['size_count'] = $count;
-            $pageGroups[$boxType]['sizes'] = array_keys($pageGroups[$boxType]['pages_grouped_by_size']);
-
-            $pbs = $pageGroups[$boxType]['pages_grouped_by_size'];
-            unset($pageGroups[$boxType]['pages_grouped_by_size']);
-            $pageGroups[$boxType]['pages_grouped_by_size'] = $pbs;
-        }
-
-        return $pageGroups;
     }
 
 
@@ -604,7 +512,7 @@ class GhostscriptCommands
             'CropBox' => [],
             'MediaBox' => [],
             'Rotate' => 0,
-            'UserUnit' => 1, //TODO figure out what a UserUnit is???
+            'UserUnit' => 1,
         ];
 
         //extract page info
@@ -655,12 +563,13 @@ class GhostscriptCommands
                         $pageCompiledData['geometry'][$boxType]['width'] = $pageCompiledData['geometry'][$boxType]['right'] - $pageCompiledData['geometry'][$boxType]['left'];
                         $pageCompiledData['geometry'][$boxType]['height'] = $pageCompiledData['geometry'][$boxType]['top'] - $pageCompiledData['geometry'][$boxType]['bottom'];
 
+                        //todo need to get rid of _eff once the JS GUI is updated
                         if ($rotation == 0 || $rotation == 180) {
-                            $pageCompiledData['geometry'][$boxType]['width_eff'] = $pageCompiledData['geometry'][$boxType]['width'];
-                            $pageCompiledData['geometry'][$boxType]['height_eff'] = $pageCompiledData['geometry'][$boxType]['height'];
+                            $pageCompiledData['geometry_eff'][$boxType]['width'] = $pageCompiledData['geometry'][$boxType]['width'];
+                            $pageCompiledData['geometry_eff'][$boxType]['height'] = $pageCompiledData['geometry'][$boxType]['height'];
                         } elseif ($rotation == 90 || $rotation == 270) {
-                            $pageCompiledData['geometry'][$boxType]['width_eff'] = $pageCompiledData['geometry'][$boxType]['height'];
-                            $pageCompiledData['geometry'][$boxType]['height_eff'] = $pageCompiledData['geometry'][$boxType]['width'];
+                            $pageCompiledData['geometry_eff'][$boxType]['width'] = $pageCompiledData['geometry'][$boxType]['height'];
+                            $pageCompiledData['geometry_eff'][$boxType]['height'] = $pageCompiledData['geometry'][$boxType]['width'];
                         }
 
                     } else {
@@ -1246,56 +1155,6 @@ class GhostscriptCommands
         }
 
         return array_intersect($pageList, $pdfPages);
-    }
-
-    /**
-     * Extract the Key from the nested arrays.
-     *
-     * e.g. consider the following array.
-     * [
-     *  'foo' => [a,b,c,d,e],
-     *  'bar' => [f,g,h,i,j]
-     * ]
-     *  - 'e' would return 'foo'
-     *  - 'g' would return 'bar'
-     *  - 'xxx' would return $default
-     *
-     * @param array $masters
-     * @param string|bool|null $unknown
-     * @param string $default
-     * @return string
-     */
-    private function getMasterKeyFromUnknown(array $masters, $unknown, $default = '')
-    {
-        if (is_array($unknown)) {
-            $unknown = implode("", $unknown);
-        }
-
-        foreach ($masters as $masterKey => $values) {
-
-            //check if the $unknown is actually a masterKey
-            if (is_string($unknown)) {
-                if (strtolower($masterKey) === strtolower($unknown)) {
-                    return $masterKey;
-                }
-            }
-
-            foreach ($values as $value) {
-                if ($unknown === true || $unknown === false || $unknown === null) {
-                    if ($unknown === $value) {
-                        return $masterKey;
-                    }
-                } elseif ($value === $unknown) {
-                    return $masterKey;
-                } elseif (is_string($value) && is_string($unknown)) {
-                    if (strtolower($value) === strtolower($unknown)) {
-                        return $masterKey;
-                    }
-                }
-            }
-        }
-
-        return $default;
     }
 
 }
