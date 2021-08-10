@@ -126,7 +126,27 @@ class PDFGeometry
         return $angle;
     }
 
-
+    /**
+     * Get the effective geometry.
+     *
+     * PDF internals specifies that left bottom corner is origin [0,0].
+     * UP and RIGHT is positive
+     * DOWN and LEFT is negative
+     *
+     * Effective geometry applies the following in order:
+     *      - apply scaling
+     *      - apply rotation (around [0,0])
+     *      - shifts back coordinates so that left-bottom aligns
+     *      - calculates width and height
+     *      - calculates [x,y] coordinates of the $boxGeometry anchors
+     *      - calculates the % position of the anchors (% is in relation to the $boundingBoxGeometry)
+     *
+     * @param $boxGeometry
+     * @param int $rotation
+     * @param int $scaling
+     * @param null $boundingBoxGeometry
+     * @return array
+     */
     public function getEffectiveGeometry($boxGeometry, $rotation = 0, $scaling = 1, $boundingBoxGeometry = null)
     {
         if ($boundingBoxGeometry == null) {
@@ -140,33 +160,46 @@ class PDFGeometry
         $boxGeometry = $this->scaleGeometry($boxGeometry, $scaling);
         $boundingBoxGeometry = $this->scaleGeometry($boundingBoxGeometry, $scaling);
 
-        //after rotation, the object needs to sit in the same left-bottom position
+        //after rotation, the object needs to sit in the same left-bottom position so save the original left-bottom position
         $originalLeft = $boundingBoxGeometry['left'];
         $originalBottom = $boundingBoxGeometry['bottom'];
 
+        //rotate the **box** around [0,0]
         $rotationOrigin = ['x' => 0, 'y' => 0];
-
-        //rotate the **box** around the specified origin
         $boxGeometry = $this->rotateGeometryAroundOrigin($boxGeometry, $rotation, $rotationOrigin);
 
-        //rotate the **bounding box** around the specified origin
+        //rotate the **bounding box** around [0,0]
         $boundingBoxGeometry = $this->rotateGeometryAroundOrigin($boundingBoxGeometry, $rotation, $rotationOrigin);
 
-        //figure out how much everything needs to shift by in order to bring it back into the left-bottom position
+        //figure out how much everything needs to shift by in order to bring the newly rotated coordinates back to original left-bottom position
         $moveX = $originalLeft - $boundingBoxGeometry['left'];
         $moveY = $originalBottom - $boundingBoxGeometry['bottom'];
+
+        //figure out how much everything needs to shift by in order to move left-bottom position to [0,0]
+        $moveOriginX = 0 - $originalLeft;
+        $moveOriginY = 0 - $originalBottom;
+
         $boxLeft = $boxGeometry['left'] + $moveX;
         $boxBottom = $boxGeometry['bottom'] + $moveY;
         $boxRight = $boxGeometry['right'] + $moveX;
         $boxTop = $boxGeometry['top'] + $moveY;
+        $boxWidth = $boxRight - $boxLeft;
+        $boxHeight = $boxTop - $boxBottom;
+
+        $boundingBoxLeft = $boundingBoxGeometry['left'] + $moveX;
+        $boundingBoxBottom = $boundingBoxGeometry['bottom'] + $moveY;
+        $boundingBoxRight = $boundingBoxGeometry['right'] + $moveX;
+        $boundingBoxTop = $boundingBoxGeometry['top'] + $moveY;
+        $boundingBoxWidth = $boundingBoxRight - $boundingBoxLeft;
+        $boundingBoxHeight = $boundingBoxTop - $boundingBoxBottom;
 
         $boxGeometry = [
             'left' => $boxLeft,
             'bottom' => $boxBottom,
             'right' => $boxRight,
             'top' => $boxTop,
-            'width' => $boxRight - $boxLeft,
-            'height' => $boxTop - $boxBottom,
+            'width' => $boxWidth,
+            'height' => $boxHeight,
             'anchors' => [
                 7 => [$boxLeft, $boxTop],
                 8 => [($boxLeft + $boxRight) / 2, $boxTop],
@@ -177,7 +210,18 @@ class PDFGeometry
                 1 => [$boxLeft, $boxBottom],
                 2 => [($boxLeft + $boxRight) / 2, $boxBottom],
                 3 => [$boxRight, $boxBottom],
-            ]
+            ],
+            'anchors_percent' => [
+                7 => [($boxLeft + $moveOriginX) / $boundingBoxWidth, ($boxTop + $moveOriginY) / $boundingBoxHeight],
+                8 => [((($boxLeft + $moveOriginX) / $boundingBoxWidth) + (($boxRight + $moveOriginX) / $boundingBoxWidth)) / 2, ($boxTop + $moveOriginY) / $boundingBoxHeight],
+                9 => [($boxRight + $moveOriginX) / $boundingBoxWidth, ($boxTop + $moveOriginY) / $boundingBoxHeight],
+                4 => [($boxLeft + $moveOriginX) / $boundingBoxWidth, ((($boxBottom + $moveOriginY) / $boundingBoxHeight) + (($boxTop + $moveOriginY) / $boundingBoxHeight)) / 2],
+                5 => [((($boxLeft + $moveOriginX) / $boundingBoxWidth) + (($boxRight + $moveOriginX) / $boundingBoxWidth)) / 2, ((($boxBottom + $moveOriginY) / $boundingBoxHeight) + (($boxTop + $moveOriginY) / $boundingBoxHeight)) / 2],
+                6 => [($boxRight + $moveOriginX) / $boundingBoxWidth, ((($boxBottom + $moveOriginY) / $boundingBoxHeight) + (($boxTop + $moveOriginY) / $boundingBoxHeight)) / 2],
+                1 => [($boxLeft + $moveOriginX) / $boundingBoxWidth, ($boxBottom + $moveOriginY) / $boundingBoxHeight],
+                2 => [((($boxLeft + $moveOriginX) / $boundingBoxWidth) + (($boxRight + $moveOriginX) / $boundingBoxWidth)) / 2, ($boxBottom + $moveOriginY) / $boundingBoxHeight],
+                3 => [($boxRight + $moveOriginX) / $boundingBoxWidth, ($boxBottom + $moveOriginY) / $boundingBoxHeight],
+            ],
         ];
 
         return $boxGeometry;
@@ -249,10 +293,14 @@ class PDFGeometry
         return $effectiveGeo['anchors'][3];
     }
 
-
-    public function getAnchorCoordinates($geometry, $rotation = 0, $scaling = 1)
+    /**
+     * Mapping table of AnchorPoint Names
+     *
+     * @return array[]
+     */
+    public function getAnchorCoordinatesMap()
     {
-        $masters = [
+        return [
             '2' => ['AnchorPoint.BOTTOM_CENTER_ANCHOR', 'BOTTOM_CENTER_ANCHOR', 1095656035, 'ANbc', 2, 'bc', '2', 'bottom center'],
             '1' => ['AnchorPoint.BOTTOM_LEFT_ANCHOR', 'BOTTOM_LEFT_ANCHOR', 1095656044, 'ANbl', 1, 'bl', '1', 'bottom left'],
             '3' => ['AnchorPoint.BOTTOM_RIGHT_ANCHOR', 'BOTTOM_RIGHT_ANCHOR', 1095656050, 'ANbr', 3, 'br', '3', 'bottom right'],
@@ -263,8 +311,96 @@ class PDFGeometry
             '7' => ['AnchorPoint.TOP_LEFT_ANCHOR', 'TOP_LEFT_ANCHOR', 1095660652, 'ANtl', 7, 'tl', '7', 'top left'],
             '9' => ['AnchorPoint.TOP_RIGHT_ANCHOR', 'TOP_RIGHT_ANCHOR', 1095660658, 'ANtr', 9, 'tr', '9', 'top right']
         ];
+    }
 
-        //$anchorPoint = $this->getMasterKeyFromUnknown($masters, $anchorPoint, 5);
+    /**
+     * Convert a number between ruler units
+     *
+     * @param $number
+     * @param $fromUnit
+     * @param $toUnit
+     * @param int $precision
+     * @return float
+     */
+    public function convertUnit($number, $fromUnit, $toUnit, $precision = 10)
+    {
+        $fromUnit = $this->getMasterKeyFromUnknown($this->getUnitsMap(), $fromUnit, false);
+        $toUnit = $this->getMasterKeyFromUnknown($this->getUnitsMap(), $toUnit, false);
+
+        if (!$fromUnit || !$toUnit) {
+            return $number;
+        }
+
+        $unitsConversionTable = $this->getUnitsConversionTable();
+
+        $tableDivisor = 1;
+        if (isset($unitsConversionTable[$fromUnit])) {
+            $tableDivisor = $unitsConversionTable[$fromUnit];
+        }
+
+        //alter the table to make the '$fromUnit' = 1;
+        foreach ($unitsConversionTable as $unitType => $factor) {
+            $unitsConversionTable[$unitType] = $unitsConversionTable[$unitType] / $tableDivisor;
+        }
+
+        //do the conversion
+        $conversionFactor = $unitsConversionTable[$toUnit];
+        return round($number * $conversionFactor, $precision);
+    }
+
+    /**
+     * Conversion factors. Since PDF uses Points as the internal unit of measure,
+     * "POINTS" => 1 and other units are relative to Points
+     *
+     * @return array
+     */
+    public function getUnitsConversionTable()
+    {
+        return [
+            "POINTS" => 1,
+            "PICAS" => 0.08333333333333,
+            "INCHES" => 0.01388888888889,
+            "INCHES_DECIMAL" => 0.01388888888889,
+            "MILLIMETERS" => 0.35277777777778,
+            "CENTIMETERS" => 0.03527777777778,
+            "CICEROS" => 0.07819907407414,
+            "CUSTOM" => 1,
+            "AGATES" => 0.19444444444444,
+            "U" => 1,
+            "BAI" => 1,
+            "MILS" => 1,
+            "PIXELS" => 1,
+            "Q" => 1,
+            "HA" => 1,
+            "AMERICAN_POINTS" => 1
+        ];
+    }
+
+    /**
+     * Mapping table for Unit names.
+     *
+     * @return array[]
+     */
+    public function getUnitsMap()
+    {
+        return [
+            "POINTS" => ['points', 'point', 'pts', 'pt'],
+            "PICAS" => ['picas', 'pica'],
+            "INCHES" => ['inches', 'inch', 'i', 'in', '"',],
+            "INCHES_DECIMAL" => ['inches_decimal',],
+            "MILLIMETERS" => ['millimeters', 'millimeter', 'mms', 'mm',],
+            "CENTIMETERS" => ['centimeters', 'centimeter', 'cms', 'cm',],
+            "CICEROS" => ['ciceros', 'cicero', 'c'],
+            "CUSTOM" => ['custom',],
+            "AGATES" => ['agates', 'agate',],
+            "U" => ['u',],
+            "BAI" => ['bai',],
+            "MILS" => ['mils',],
+            "PIXELS" => ['pixels', 'pixel', 'px'],
+            "Q" => ['q',],
+            "HA" => ['ha', 'h',],
+            "AMERICAN_POINTS" => ['american_points', 'ap']
+        ];
     }
 
     /**
@@ -316,7 +452,6 @@ class PDFGeometry
 
         return $default;
     }
-
 
     /**
      * Scale the geometry by a give factor.

@@ -42,10 +42,10 @@ foreach ($boxes as $box) {
 
 
 //$box = [0, 0, 297, 210];
-//
-//$geo = $pdfGeometry->getEffectiveGeometry($box, 0, 1);
-////print_r($geo);
-//
+$box = [7, 10, 297, 210];
+$geo = $pdfGeometry->getEffectiveGeometry($box, 0, 1);
+print_r($geo);
+
 //$geo = $pdfGeometry->getEffectiveGeometry($box, 90, 1);
 ////print_r($geo);
 //
@@ -87,8 +87,8 @@ foreach ($boxes as $box) {
 //print_r($geo);
 
 
-$box = [70, -17, (70 + 120), (-17 + 247)];
-$boundingBox = [30, -47, (30 + 210), (-47 + 297)];
+//$box = [70, -17, (70 + 120), (-17 + 247)];
+//$boundingBox = [30, -47, (30 + 210), (-47 + 297)];
 //
 //$geo = $pdfGeometry->getEffectiveGeometry($box, 0, 1, $boundingBox);
 //print_r($geo);
@@ -99,5 +99,26 @@ $boundingBox = [30, -47, (30 + 210), (-47 + 297)];
 //$geo = $pdfGeometry->getEffectiveGeometry($box, 180, 1, $boundingBox);
 //print_r($geo);
 //
-$geo = $pdfGeometry->getEffectiveGeometry($box, 270, 1, $boundingBox);
-print_r($geo);
+//$geo = $pdfGeometry->getEffectiveGeometry($box, 270, 1, $boundingBox);
+//print_r($geo);
+
+
+//$x = 10;
+//$y = 15;
+//$box = [105 + $x, 148.5 + $y, 210 + $x, 297 + $y];
+//$boundingBox = [0 + $x, 0 + $y, 210 + $x, 297 + $y];
+
+//$geo = $pdfGeometry->getEffectiveGeometry($box, 0, 1, $boundingBox);
+//print_r($geo);
+//
+//$geo = $pdfGeometry->getEffectiveGeometry($box, 90, 1, $boundingBox);
+//print_r($geo);
+//
+//$geo = $pdfGeometry->getEffectiveGeometry($box, 180, 1, $boundingBox);
+//print_r($geo);
+
+//$geo = $pdfGeometry->getEffectiveGeometry($box, 270, 1, $boundingBox);
+//print_r($geo);
+
+
+//print_r($pdfGeometry->convertUnit(1, 'in', 'mm'));
