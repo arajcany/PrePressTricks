@@ -565,11 +565,11 @@ class GhostscriptCommands extends BaseCommands
 
                         //todo need to get rid of _eff once the JS GUI is updated
                         if ($rotation == 0 || $rotation == 180) {
-                            $pageCompiledData['geometry_eff'][$boxType]['width'] = $pageCompiledData['geometry'][$boxType]['width'];
-                            $pageCompiledData['geometry_eff'][$boxType]['height'] = $pageCompiledData['geometry'][$boxType]['height'];
+                            $pageCompiledData['geometry'][$boxType]['width_eff'] = $pageCompiledData['geometry'][$boxType]['width'];
+                            $pageCompiledData['geometry'][$boxType]['height_eff'] = $pageCompiledData['geometry'][$boxType]['height'];
                         } elseif ($rotation == 90 || $rotation == 270) {
-                            $pageCompiledData['geometry_eff'][$boxType]['width'] = $pageCompiledData['geometry'][$boxType]['height'];
-                            $pageCompiledData['geometry_eff'][$boxType]['height'] = $pageCompiledData['geometry'][$boxType]['width'];
+                            $pageCompiledData['geometry'][$boxType]['width_eff'] = $pageCompiledData['geometry'][$boxType]['height'];
+                            $pageCompiledData['geometry'][$boxType]['height_eff'] = $pageCompiledData['geometry'][$boxType]['width'];
                         }
 
                     } else {
