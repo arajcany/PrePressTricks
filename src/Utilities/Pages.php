@@ -304,7 +304,15 @@ class Pages
         return $difference;
     }
 
-
+    /**
+     * getMinToMax
+     *
+     * Simple way to get the min and max page number from a string.
+     *
+     * @param null $rangeInput
+     * @param array $options
+     * @return array|false|string
+     */
     public function getMinToMax($rangeInput = null, $options = [])
     {
         if ($this->is_blank($rangeInput)) {
@@ -341,5 +349,81 @@ class Pages
     public function is_blank($value)
     {
         return empty($value) && !is_numeric($value);
+    }
+
+
+    /**
+     * Sort an array of values into logical groups (with natural sorting applied) based on sequential numbering.
+     * This function only looks for Number Sequences at the start or end of a filename.
+     *
+     * Consider the following array:
+     * [
+     *  'file_9_bar_02.png',
+     *  'file_0_a_002.png',
+     *  'file_9_bar_12.png',
+     *  'file_0_a_001.png',
+     *  'file_9_bar_04.png',
+     *  'unrelated_file_001.png',
+     *  'file_0_a_003.png',
+     *  'file_0_a_004.png',
+     *  'file_9_bar_05.png',
+     * ]
+     *
+     * Function will return the following:
+     * [
+     *    [
+     *      'file_0_a_001.png',
+     *      'file_0_a_002.png',
+     *      'file_0_a_003.png',
+     *      'file_0_a_004.png',
+     *    ],
+     *    [
+     *      'file_9_bar_02.png',
+     *      'file_9_bar_04.png',
+     *      'file_9_bar_05.png',
+     *      'file_9_bar_12.png',
+     *    ],
+     *    [
+     *      'unrelated_file_001.png',
+     *    ]
+     * ]
+     *
+     * As you can see, this would be really handy if you had a folder full of images from
+     * multiple ripped PDF files and you needed to group them by the original document.
+     *
+     * @param $pages
+     * @param bool $considerOnlyStartAndEnd
+     * @return array
+     */
+    public function groupByPageSequences($pages, $considerOnlyStartAndEnd = true)
+    {
+        //sort the pages
+        natsort($pages);
+        $pages = array_values($pages);
+
+        $pagesNumbersRemoved = [];
+        foreach ($pages as $page) {
+            if ($considerOnlyStartAndEnd) {
+                $pageTmp = pathinfo($page, PATHINFO_FILENAME);
+                $pageExtTmp = str_replace($pageTmp, '', $page);
+                $pagesNumbersRemoved[] = trim($pageTmp, "0123456789") . $pageExtTmp;
+            } else {
+                $pagesNumbersRemoved[] = str_replace(range(0, 9), '', $page);
+            }
+        }
+
+        $uniquePageSequences = array_unique($pagesNumbersRemoved);
+
+        $grouped = [];
+        foreach ($uniquePageSequences as $k => $uniquePageName) {
+            foreach ($pagesNumbersRemoved as $p => $pageNumbersRemoved) {
+                if ($uniquePageName === $pageNumbersRemoved) {
+                    $grouped[$k][] = $pages[$p];
+                }
+            }
+        }
+        $grouped = array_values($grouped);
+
+        return $grouped;
     }
 }

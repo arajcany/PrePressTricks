@@ -29,4 +29,9 @@ function getFileLine($file = null, $startLine = 1, $numberOfLinesToRead = 1)
     return trim($txt);
 }
 
+function drawLine()
+{
+    echo "<br><hr style='border-top: 5px dotted #8c8b8b;'><br>";
+}
+
 
