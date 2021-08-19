@@ -733,6 +733,8 @@ class GhostscriptCommands extends BaseCommands
         if (strpos($options['resolution'], 'x') === false) {
             //pass straight through as no need to fit a specific dimension
             $compiledReturns = array_merge($compiledReturns, $this->convertPdfToImages($pdfPath, $options));
+            $compiledReturns = array_unique($compiledReturns);
+            $compiledReturns = array_values($compiledReturns);
             return $compiledReturns;
         } else {
             //reformat the resolution as there could be mixed Box sizes
