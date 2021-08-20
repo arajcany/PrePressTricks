@@ -216,4 +216,32 @@ class BaseCommands
 
         return $rawReport;
     }
+
+
+    public function groupImagesByPage($images)
+    {
+        $grouped = [];
+        foreach ($images as $image) {
+            $re = '/\_[0-9]\((.*?)\)./m';
+            preg_match($re, $image, $matches, PREG_OFFSET_CAPTURE, 0);
+            if (isset($matches[0][0]) && isset($matches[1][0])) {
+                $pageAndColour = $matches[0][0];
+                $colour = $matches[1][0];
+
+                $page = str_replace($colour, '', $pageAndColour);
+                $page = preg_replace('/[^0-9]/', '', $page);
+
+                $grouped[$page][$colour] = $image;
+            } else {
+                $re = '/\_[0-9]./m';
+                preg_match($re, $image, $matches, PREG_OFFSET_CAPTURE, 0);
+                if (isset($matches[0][0])) {
+                    $page = (str_replace(['_', '.'], '', $matches[0][0])) + 0;
+                    $grouped[$page]['All'] = $image;
+                }
+            }
+        }
+
+        return $grouped;
+    }
 }

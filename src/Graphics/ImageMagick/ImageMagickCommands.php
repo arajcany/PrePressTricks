@@ -4,6 +4,7 @@
 namespace arajcany\PrePressTricks\Graphics\ImageMagick;
 
 
+use arajcany\PrePressTricks\Graphics\Common\GetCommands;
 use Imagick;
 use ImagickPixel;
 
@@ -349,4 +350,157 @@ class ImageMagickCommands
 
         return $report;
     }
+
+    /**
+     * Analyse the SDI.
+     *
+     *
+     *
+     * @param $pdfPath
+     * @param bool $useCached
+     * @param false $saveReport
+     * @param array $ripOptions
+     * @param $search
+     * @param $replace
+     * @return false|mixed|string
+     */
+    public function analyseSpecialtyDryInks($pdfPath, $useCached = true, $saveReport = false, $ripOptions = [], $search = '', $replace = '')
+    {
+        $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".sdi_analysis.json";
+
+        if ($useCached) {
+            //try and find existing report files
+            if (is_file($defaultSavePath)) {
+                $this->setReturnMessage('Using cached ANALYSIS report');
+                $this->setReturnValue(0);
+                return file_get_contents($defaultSavePath);
+            }
+
+            if ($saveReport !== true && $saveReport !== false && is_file($saveReport)) {
+                $this->setReturnMessage('Using cached ANALYSIS report');
+                $this->setReturnValue(0);
+                return file_get_contents($saveReport);
+            }
+        }
+
+
+        $prepressCommands = GetCommands::getPrepressCommands();
+
+        $ripOptionsDefault = [
+            'format' => 'tiff',
+            'colorspace' => 'tiffsep',
+            'resolution' => '72',
+            'smoothing' => false,
+            'outputfolder' => null,
+        ];
+
+        $ripOptions = array_merge($ripOptionsDefault, $ripOptions);
+
+        if (is_null($ripOptions['outputfolder'])) {
+            $ripOptions['outputfolder'] = pathinfo($pdfPath, PATHINFO_DIRNAME) . '/analysis/';
+        }
+
+        $allImages = $prepressCommands->savePdfAsSeparations($pdfPath, $ripOptions);
+        $imagesByPages = $prepressCommands->groupImagesByPage($allImages);
+        $pdfSeparationImagesJsonOutput = $ripOptions['outputfolder'] . pathinfo($pdfPath, PATHINFO_FILENAME) . '.separation_images.json';
+        file_put_contents($pdfSeparationImagesJsonOutput, json_encode($imagesByPages, JSON_PRETTY_PRINT));
+
+        $histograms = [];
+        $report = [];
+        foreach ($imagesByPages as $pageOfImages) {
+            foreach ($pageOfImages as $image) {
+                //next loop if this colour is CMYK - we only need SDI
+                $baseSeps = ['Cyan', 'Magenta', 'Yellow', 'Black'];
+                foreach ($baseSeps as $baseSep) {
+                    if (strpos($image, $baseSep) !== false) {
+                        continue 2;
+                    }
+                }
+
+                //next loop if this is not a spot colour separation
+                if (strpos($image, "(") === false && strpos($image, ")") === false) {
+                    continue;
+                }
+
+                $ext = pathinfo($image, PATHINFO_EXTENSION);
+                $saveHistogramLocation = str_replace($ext, "histogram.json", $image);
+                $histograms[] = $saveHistogramLocation;
+                $histogram = $this->getHistogramJson($image, false, $saveHistogramLocation);
+                $histogram = json_decode($histogram, JSON_OBJECT_AS_ARRAY);
+
+                $re = '/\_[0-9]\((.*?)\)./m';
+                preg_match($re, $saveHistogramLocation, $matches, PREG_OFFSET_CAPTURE, 0);
+
+                if (isset($matches[0][0]) && isset($matches[1][0])) {
+                    $pageAndColour = $matches[0][0];
+                    $colour = $matches[1][0];
+
+                    $page = str_replace($colour, '', $pageAndColour);
+                    $page = preg_replace('/[^0-9]/', '', $page);
+
+                    $report[$page]['thumbnail_paths'] = $pageOfImages;
+                    //$report[$page]['separations'][$colour]['histogram_unc'] = $saveHistogramLocation;
+                    $report[$page]['separations'][$colour]['histogram_url'] = $saveHistogramLocation;
+                    //$report[$page]['separations'][$colour]['image_unc'] = $image;
+                    $report[$page]['separations'][$colour]['image_url'] = $image;
+                    $report[$page]['separations'][$colour]['sdi_units_total'] = 0;
+
+                    foreach ($histogram as $entry) {
+                        $inkTint = ((255 - $entry['colour_value'][0]) / 255);
+
+                        $a4PixelWidth = (210 / 25.4) * $entry['resolution'][0];
+                        $a4PixelHeight = (297 / 25.4) * $entry['resolution'][1];
+                        $a4PixelCount = $a4PixelWidth * $a4PixelHeight;
+
+                        $a4Coverage = ($entry['pixels'] / $a4PixelCount);
+
+                        $sdiCoverage = ($inkTint * $a4Coverage);
+                        $sdiUnits = ($inkTint * $a4Coverage) / 0.075;
+
+                        $report[$page]['separations'][$colour]['sdi_units_total'] += $sdiUnits;
+
+                        $report[$page]['separations'][$colour]['calculations'][] = [
+                            'ink_tint_percent' => ($inkTint * 100) . "%",
+                            'ink_tint' => $inkTint,
+                            'a4_coverage_percentage' => $a4Coverage,
+                            'sdi_coverage' => $sdiCoverage,
+                            'sdi_units' => $sdiUnits,
+                        ];
+                    }
+
+                }
+
+            }
+        }
+
+        $report = $this->str_replace_multidimensional($search, $replace, $report);
+
+        if ($saveReport) {
+            $reportJson = json_encode($report, JSON_PRETTY_PRINT);
+            if ($saveReport === true) {
+                file_put_contents($defaultSavePath, $reportJson);
+            } else {
+                $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
+                @mkdir($savePath);
+                if (is_dir($savePath)) {
+                    file_put_contents($saveReport, $reportJson);
+                }
+            }
+        }
+
+        $this->setReturnMessage('Analysis report generated');
+        $this->setReturnValue(0);
+
+        return $report;
+    }
+
+    private function str_replace_multidimensional($search, $replace, $multidimentionalArray, &$count = null)
+    {
+        array_walk_recursive($multidimentionalArray, function (&$element, $index) use ($search, $replace) {
+            $element = str_replace($search, $replace, $element, $count);
+        });
+
+        return $multidimentionalArray;
+    }
+
 }
