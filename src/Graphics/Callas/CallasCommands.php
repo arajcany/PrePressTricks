@@ -68,6 +68,16 @@ class CallasCommands extends BaseCommands
                 return false;
             }
 
+            foreach ($cliStatus as $status) {
+                if (strpos($status, "Serialization") !== false) {
+                    if (strpos($status, "Trial	Expired") !== false) {
+                        return false;
+                    } elseif (strpos($status, "No License") !== false) {
+                        return false;
+                    }
+                }
+            }
+
             return true;
 
         } catch (\Throwable $exception) {
