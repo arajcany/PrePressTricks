@@ -438,6 +438,7 @@ class ImageMagickCommands
                     $page = str_replace($colour, '', $pageAndColour);
                     $page = preg_replace('/[^0-9]/', '', $page);
 
+                    $report[$page]['thumbnail_resolution'] = $ripOptions['resolution'];
                     $report[$page]['thumbnail_paths'] = $pageOfImages;
                     //$report[$page]['separations'][$colour]['histogram_unc'] = $saveHistogramLocation;
                     $report[$page]['separations'][$colour]['histogram_url'] = $saveHistogramLocation;
