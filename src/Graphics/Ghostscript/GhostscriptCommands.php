@@ -330,8 +330,8 @@ class GhostscriptCommands extends BaseCommands
     }
 
     /**
-     * Report on the page sizes in the PDF.
-     * Handy for when you need to RIP a PDF as images.
+     * Report on the page separations in the PDF.
+     * Handy for when you need to get the spot colours.
      *
      * @param $pdfPath
      * @param bool $useCached

@@ -314,7 +314,7 @@ class PDFGeometry
     }
 
     /**
-     * Convert a number between ruler units
+     * Convert a number between ruler units.
      *
      * @param $number
      * @param $fromUnit
@@ -349,7 +349,9 @@ class PDFGeometry
     }
 
     /**
-     * Conversion factors. Since PDF uses Points as the internal unit of measure,
+     * Conversion factors.
+     *
+     * Since PDF uses Points as the internal unit of measure,
      * "POINTS" => 1 and other units are relative to Points
      *
      * @return array

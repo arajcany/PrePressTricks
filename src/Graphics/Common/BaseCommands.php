@@ -165,7 +165,13 @@ class BaseCommands
         return $pageGroups;
     }
 
-
+    /**
+     * Populates the effective geometry for the given report.
+     * Returns the report as an array, even if given a report FSO location.
+     *
+     * @param string|array $reportStringOrPath
+     * @return array|false|mixed
+     */
     protected function populateQuickCheckReportWithEffectiveGeometry($reportStringOrPath)
     {
         if (is_string($reportStringOrPath) && is_file($reportStringOrPath)) {
@@ -187,27 +193,46 @@ class BaseCommands
             'ArtBox'
         ];
 
+        $renders = [
+            'eff' => ['Rotate' => null],
+            'applied_0' => ['Rotate' => 0],
+            'applied_90' => ['Rotate' => 90],
+            'applied_180' => ['Rotate' => 180],
+            'applied_270' => ['Rotate' => 270],
+        ];
+
         $pdfGeometry = new PDFGeometry();
 
         $pages = $rawReport['aggregated']['pages']['page'];
         foreach ($pages as $pKey => $page) {
-            $geo = $page['geometry'];
-            $boundingBox = $geo['MediaBox'];
-            $pages[$pKey]['geometry_eff'] = [
-                "Applied_Rotate" => $geo['Rotate'],
-                "Applied_UserUnit" => $geo['UserUnit']
-            ];
-            foreach ($boxTypes as $boxType) {
-                $pages[$pKey]['geometry_eff'][$boxType] = $pdfGeometry->getEffectiveGeometry($geo[$boxType], $geo['Rotate'], $geo['UserUnit'], $boundingBox);
+            foreach ($renders as $renderKey => $renderValue) {
+                $geo = $page['geometry'];
 
-                if (isset($pages[$pKey]['geometry'][$boxType]['width_eff'])) {
-                    //todo need to implement next line once JS GUI is updated
-                    //unset($pages[$pKey]['geometry'][$boxType]['width_eff']);
+                if ($renderKey == 'eff') {
+                    $appliedRotation = $geo['Rotate'];
+                    $appliedUserUnit = $geo['UserUnit'];
+                } else {
+                    $appliedRotation = $renderValue['Rotate'];
+                    $appliedUserUnit = $geo['UserUnit'];
                 }
 
-                if (isset($pages[$pKey]['geometry'][$boxType]['height_eff'])) {
-                    //todo need to implement next line once JS GUI is updated
-                    //unset($pages[$pKey]['geometry'][$boxType]['height_eff']);
+                $boundingBox = $geo['MediaBox'];
+                $pages[$pKey]['geometry_' . $renderKey] = [
+                    "Applied_Rotate" => $appliedRotation,
+                    "Applied_UserUnit" => $appliedUserUnit
+                ];
+                foreach ($boxTypes as $boxType) {
+                    $pages[$pKey]['geometry_' . $renderKey][$boxType] = $pdfGeometry->getEffectiveGeometry($geo[$boxType], $appliedRotation, $appliedUserUnit, $boundingBox);
+
+                    if (isset($pages[$pKey]['geometry'][$boxType]['width_eff'])) {
+                        //todo need to implement next line once JS GUI is updated
+                        unset($pages[$pKey]['geometry'][$boxType]['width_eff']);
+                    }
+
+                    if (isset($pages[$pKey]['geometry'][$boxType]['height_eff'])) {
+                        //todo need to implement next line once JS GUI is updated
+                        unset($pages[$pKey]['geometry'][$boxType]['height_eff']);
+                    }
                 }
             }
         }

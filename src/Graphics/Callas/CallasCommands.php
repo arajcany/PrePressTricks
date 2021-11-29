@@ -508,7 +508,7 @@ class CallasCommands extends BaseCommands
 
     /**
      * Report on the page separations in the PDF.
-     * Handy for when you need to RIP a PDF as images.
+     * Handy for when you need to get the spot colours.
      *
      * @param $pdfPath
      * @param bool $useCached
@@ -949,7 +949,7 @@ class CallasCommands extends BaseCommands
             }
         }
 
-        //rename files like Ghostscript because its nicer.
+        //rename files like Ghostscript because it's nicer.
         foreach ($imagePaths as $k => $imagePath) {
             $pdfFileName = pathinfo($pdfPath, PATHINFO_FILENAME);
             $tmpImageDir = explode($pdfFileName, $imagePath)[0];
