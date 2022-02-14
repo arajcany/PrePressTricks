@@ -7,6 +7,7 @@ namespace arajcany\PrePressTricks\Graphics\ImageMagick;
 use arajcany\PrePressTricks\Graphics\Common\GetCommands;
 use Imagick;
 use ImagickPixel;
+use Intervention\Image\ImageManager;
 
 class ImageMagickCommands
 {
@@ -310,8 +311,7 @@ class ImageMagickCommands
         $geometry = [$geometry[0], $geometry[1]];
         $resolution = explode("x", $identifyReport['Resolution']);
         $colour_space = $identifyReport['Colorspace'];
-        //$print_size = $identifyReport['Print size'];
-        //$units = $identifyReport['Units'];
+        $units = $identifyReport['Units'];
 
         $histogramReport = [];
 
@@ -322,8 +322,7 @@ class ImageMagickCommands
                 'colour_space' => $colour_space,
                 'geometry' => $geometry,
                 'resolution' => $resolution,
-                //'print_size' => $print_size,
-                //'units' => $units,
+                'units' => $units,
                 'pixels' => $pixelCount,
                 'colour_value' => explode(',', trim($colourValues[0], '()')),
                 'hex' => $colourValues[1],
@@ -347,6 +346,163 @@ class ImageMagickCommands
 
         $this->setReturnMessage('Histogram report generated');
         $this->setReturnValue($report);
+
+        return $report;
+    }
+
+    /**
+     * Analyse PDF Separations toner/ink usage.
+     *
+     * @param $pdfPath
+     * @param bool $useCached
+     * @param false $saveReport
+     * @param array $ripOptions
+     * @param array $analysisOptions
+     * @return false|mixed|string
+     */
+    public function analysePdfSeparations($pdfPath, $useCached = true, $saveReport = false, $ripOptions = [], $analysisOptions = [])
+    {
+        $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".separations_analysis.json";
+
+        if ($useCached) {
+            //try and find existing report files
+            if (is_file($defaultSavePath)) {
+                $this->setReturnMessage('Using cached ANALYSIS report');
+                $this->setReturnValue(0);
+                return file_get_contents($defaultSavePath);
+            }
+
+            if ($saveReport !== true && $saveReport !== false && is_file($saveReport)) {
+                $this->setReturnMessage('Using cached ANALYSIS report');
+                $this->setReturnValue(0);
+                return file_get_contents($saveReport);
+            }
+        }
+
+        $prepressCommands = GetCommands::getPrepressCommands();
+
+        $ripOptionsDefault = [
+            'format' => 'tiff',
+            'colorspace' => 'tiffsep',
+            'resolution' => '72',
+            'smoothing' => false,
+            'outputfolder' => null,
+        ];
+
+        $ripOptions = array_merge($ripOptionsDefault, $ripOptions);
+
+        if (is_null($ripOptions['outputfolder'])) {
+            $ripOptions['outputfolder'] = pathinfo($pdfPath, PATHINFO_DIRNAME) . '/analysis/';
+        }
+
+        //produce separation images
+        $allImages = $prepressCommands->savePdfAsSeparations($pdfPath, $ripOptions);
+        //make sure images are PNG (GS makes TIF images)
+        foreach ($allImages as $k => $image) {
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
+            if (!in_array($ext, ['png', 'PNG'])) {
+                $newFile = str_replace("." . $ext, ".png", $image);
+                $Intervention = new ImageManager(['driver' => 'imagick']);
+                $Intervention->make($image)->save($newFile);
+                unlink($image);
+                $allImages[$k] = $newFile;
+            }
+        }
+
+        //compile what to analyse based on whitelist/blacklist
+        $report = $prepressCommands->getPageSeparationsReport($pdfPath, true, false);
+        $allSeparations = [];
+        foreach ($report as $page) {
+            $allSeparations = array_merge($allSeparations, array_values($page));
+        }
+        $allSeparations = array_values(array_unique($allSeparations));
+        $allSeparations = array_map('strtolower', $allSeparations);
+
+        if (isset($analysisOptions['whitelist'])) {
+            $sepsToAnalyse = array_map('strtolower', $analysisOptions['whitelist']);
+            $sepsToAnalyse = array_intersect($allSeparations, $sepsToAnalyse);
+            $sepsToAnalyse = array_values($sepsToAnalyse);
+        } elseif (isset($analysisOptions['blacklist'])) {
+            $sepsToAnalyse = array_map('strtolower', $analysisOptions['blacklist']);
+            $sepsToAnalyse = array_diff($allSeparations, $sepsToAnalyse);
+            $sepsToAnalyse = array_values($sepsToAnalyse);
+        } else {
+            $sepsToAnalyse = $allSeparations;
+        }
+
+        //group the folder of images by their page number
+        $imagesByPages = $prepressCommands->groupImagesByPage($allImages);
+        $pdfSeparationImagesJsonOutput = $ripOptions['outputfolder'] . pathinfo($pdfPath, PATHINFO_FILENAME) . '.separation_images.json';
+        file_put_contents($pdfSeparationImagesJsonOutput, json_encode($imagesByPages, JSON_PRETTY_PRINT));
+
+        //make the report
+        $histograms = [];
+        $report = [];
+        foreach ($imagesByPages as $page => $pageOfImages) {
+            foreach ($pageOfImages as $image) {
+                foreach ($sepsToAnalyse as $sepToAnalyse) {
+                    $haystack = strtolower($image);
+                    $needle = __("({0})", $sepToAnalyse);
+                    if (strpos($haystack, $needle) === false) {
+                        continue;
+                    }
+
+                    $ext = pathinfo($image, PATHINFO_EXTENSION);
+                    $saveHistogramLocation = str_replace($ext, "histogram.json", $image);
+                    $histograms[] = $saveHistogramLocation;
+                    $histogram = $this->getHistogramJson($image, false, $saveHistogramLocation);
+                    $histogram = json_decode($histogram, JSON_OBJECT_AS_ARRAY);
+
+                    $re = '/\_[0-9]\((.*?)\)./m';
+                    preg_match($re, $saveHistogramLocation, $matches, PREG_OFFSET_CAPTURE, 0);
+
+                    if (isset($matches[0][0]) && isset($matches[1][0])) {
+                        $pageAndColour = $matches[0][0];
+                        $colour = $matches[1][0];
+
+                        $report[$page]['thumbnail_resolution'] = $ripOptions['resolution'];
+                        $report[$page]['thumbnail_paths'] = $pageOfImages;
+                        $report[$page]['separations'][$colour]['histogram_unc'] = $saveHistogramLocation;
+                        $report[$page]['separations'][$colour]['histogram_url'] = '';
+                        $report[$page]['separations'][$colour]['image_unc'] = $image;
+                        $report[$page]['separations'][$colour]['image_url'] = '';
+
+                        foreach ($histogram as $entry) {
+                            $inkTint = ((255 - $entry['colour_value'][0]) / 255);
+
+                            //FYI: IM resolution in histogram is PixelsPerCentimeter
+                            $pixelWidthMm = 1 / ($entry['resolution'][0] / 10);
+                            $pixelHeightMm = 1 / ($entry['resolution'][1] / 10);
+                            $coverageSquareMm = ($pixelWidthMm * $pixelHeightMm) * $entry['pixels'];
+
+                            $report[$page]['separations'][$colour]['calculations'][] = [
+                                'ink_tint_percent' => ($inkTint * 100) . "%",
+                                'ink_tint' => $inkTint,
+                                'ink_coverage_square_mm' => $coverageSquareMm,
+                            ];
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        if ($saveReport) {
+            $reportJson = json_encode($report, JSON_PRETTY_PRINT);
+            if ($saveReport === true) {
+                file_put_contents($defaultSavePath, $reportJson);
+            } else {
+                $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
+                @mkdir($savePath);
+                if (is_dir($savePath)) {
+                    file_put_contents($saveReport, $reportJson);
+                }
+            }
+        }
+
+        $this->setReturnMessage('Analysis report generated');
+        $this->setReturnValue(0);
 
         return $report;
     }

@@ -22,7 +22,8 @@
     "ext-json": "*",
     "ext-dom": "*",
     "ext-imagick": "*",
-    "ext-soap": "*"
+    "ext-soap": "*",
+    "intervention/image": "^2.7"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
