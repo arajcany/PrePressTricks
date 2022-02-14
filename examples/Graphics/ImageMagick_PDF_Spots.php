@@ -25,12 +25,14 @@ $imCommands->setImPath($imPath);
 
 $pdf = __DIR__ . '/../../tests/Graphics/SampleFiles/000 SDI Base Test Pages.pdf';
 $ripOptions = [
-    'resolution' => '300',
+    'resolution' => '10',
 ];
 $analysisOptions = [
 //    'whitelist' => ['cYan', 'maGenTa'],
 //    'blacklist' => ['cYan', 'maGenTa'],
     'whitelist' => ['gold'],
+    'base_unc' => pathinfo($pdf, PATHINFO_DIRNAME),
+    'base_url' => 'https://www.example.com/some/repo/path/',
 ];
 $report = $imCommands->analysePdfSeparations($pdf, false, true, $ripOptions, $analysisOptions);
 //print_r($report);

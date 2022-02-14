@@ -463,9 +463,12 @@ class ImageMagickCommands
                         $report[$page]['thumbnail_resolution'] = $ripOptions['resolution'];
                         $report[$page]['thumbnail_paths'] = $pageOfImages;
                         $report[$page]['separations'][$colour]['histogram_unc'] = $saveHistogramLocation;
-                        $report[$page]['separations'][$colour]['histogram_url'] = '';
                         $report[$page]['separations'][$colour]['image_unc'] = $image;
-                        $report[$page]['separations'][$colour]['image_url'] = '';
+
+                        if (isset($analysisOptions['base_unc']) && isset($analysisOptions['base_url'])) {
+                            $report[$page]['separations'][$colour]['histogram_url'] = str_replace($analysisOptions['base_unc'], $analysisOptions['base_url'], $saveHistogramLocation);
+                            $report[$page]['separations'][$colour]['image_url'] = str_replace($analysisOptions['base_unc'], $analysisOptions['base_url'], $image);
+                        }
 
                         foreach ($histogram as $entry) {
                             $inkTint = ((255 - $entry['colour_value'][0]) / 255);
@@ -488,9 +491,6 @@ class ImageMagickCommands
             }
         }
 
-        if (isset($analysisOptions['search']) && isset($analysisOptions['replace'])) {
-            $report = $this->str_replace_multidimensional($analysisOptions['search'], $analysisOptions['replace'], $report);
-        }
 
         if ($saveReport) {
             $reportJson = json_encode($report, JSON_PRETTY_PRINT);
