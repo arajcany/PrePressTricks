@@ -488,6 +488,10 @@ class ImageMagickCommands
             }
         }
 
+        if (isset($analysisOptions['search']) && isset($analysisOptions['replace'])) {
+            $report = $this->str_replace_multidimensional($analysisOptions['search'], $analysisOptions['replace'], $report);
+        }
+
         if ($saveReport) {
             $reportJson = json_encode($report, JSON_PRETTY_PRINT);
             if ($saveReport === true) {
