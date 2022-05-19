@@ -15,15 +15,14 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
-    "cakephp/utility": "~4.3.0",
-    "cakephp/i18n": "~4.3.0",
+    "php": ">=8.0",
     "ext-json": "*",
     "ext-dom": "*",
-    "ext-gd": "*",
     "ext-imagick": "*",
     "ext-soap": "*",
-    "intervention/image": "~2.7.0"
+    "intervention/image": "^2.7",
+    "cakephp/core": "^4.3",
+    "cakephp/i18n": "^4.3"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
