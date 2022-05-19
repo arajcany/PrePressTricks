@@ -44,7 +44,7 @@ foreach ($boxes as $box) {
 //$box = [0, 0, 297, 210];
 $box = [7, 10, 297, 210];
 $geo = $pdfGeometry->getEffectiveGeometry($box, 0, 1);
-print_r($geo);
+dump($geo);
 
 //$geo = $pdfGeometry->getEffectiveGeometry($box, 90, 1);
 ////print_r($geo);

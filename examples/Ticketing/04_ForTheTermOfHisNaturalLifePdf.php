@@ -90,4 +90,4 @@ foreach (explode(',', $chapterStarts) as $chapterStart) {
 }
 
 $xpifXml = $ticket->render();
-r($xpifXml);
+dump($xpifXml);

@@ -61,4 +61,4 @@ $ticket->setForceFrontSide([1, 5, 9, 12]);
 
 //render the ticket (returns xml string AND optionally writes to filesystem)
 $string = $ticket->render();
-r($string);
+dump($string);

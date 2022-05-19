@@ -28,4 +28,4 @@ $ripOptions = [
     'resolution' => '2',
 ];
 $report = $imCommands->analyseSpecialtyDryInks($pdf, false, false, $ripOptions);
-r($report);
+dump($report);

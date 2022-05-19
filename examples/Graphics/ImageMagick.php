@@ -29,10 +29,10 @@ $file = __DIR__ . '/../../tests/Graphics/SampleFiles/000 SDI Base Test Pages-3(G
 $file = __DIR__ . '/../../tests/Graphics/SampleFiles/000 SDI Base Test Pages-4(Gold).tif';
 
 $report = $imCommands->getIdentifyReportViaCli($file, true, true);
-r($report);
+dump($report);
 
 $reportFormatted = (new IdentifyParser())->parse($report)->toArray();
-r($reportFormatted);
+dump($reportFormatted);
 
 $reportHistogram = $imCommands->getHistogramJson($file, false, false);
-r($reportHistogram);
+dump($reportHistogram);

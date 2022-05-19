@@ -119,4 +119,4 @@ $ticket->setPageOverridesCollection($yellowPageOverridesCollection);
 
 //render the ticket (returns xml string AND optionally writes to filesystem)
 $string = $ticket->render();
-r($string);
+dump($string);

@@ -22,7 +22,7 @@ Boxes Class
 
 Ticketing Classes
 
-- How do i generate an XPIF ticket for Xerox Printing Devices?
+- How do I generate an XPIF ticket for Xerox Printing Devices?
 
 ## Installation
 
@@ -31,10 +31,18 @@ The recommended method of installation is via Composer.
 ```json
 {
   "require": {
-    "php": ">=7.0.0",
-    "arajcany/pre-press-tricks": "*"
+    "php": ">=7.4",
+    "arajcany/pre-press-tricks": ""
   }
 }
+```
+Version compatibility
+```text
+PHP 7.4 (last compatible version for PHP 7.4)
+composer require arajcany/pre-press-tricks:^0.0.7
+
+PHP 8.x
+composer require arajcany/pre-press-tricks:^1.0.0
 ```
 
 ## Basic Usage - XPIF Ticket Maker
