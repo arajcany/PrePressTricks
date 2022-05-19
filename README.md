@@ -31,7 +31,7 @@ The recommended method of installation is via Composer.
 ```json
 {
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.0",
     "arajcany/pre-press-tricks": ""
   }
 }

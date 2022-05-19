@@ -3,6 +3,8 @@
 
 namespace Graphics\Ghostscript;
 
+use Imagick;
+use Intervention\Image\ImageManager;
 use PHPUnit\Framework\TestCase;
 use arajcany\PrePressTricks\Graphics\Ghostscript\GhostscriptCommands;
 use arajcany\PrePressTricks\Utilities\Boxes;
@@ -108,12 +110,12 @@ class GhostscriptCommandsTest extends TestCase
         }
 
         $pages = [3, 8, 420];
-        $resolution = 36;
+        $rippingResolution = 36;
 
         $ripOptions = [
             'format' => 'png',
             'colorspace' => 'colour',
-            'resolution' => $resolution,
+            'resolution' => $rippingResolution,
             'smoothing' => false,
             'pagebox' => 'MediaBox',
             'pagelist' => $pages,
@@ -130,12 +132,34 @@ class GhostscriptCommandsTest extends TestCase
 
         foreach ($images as $image) {
             $this->assertFileExists($image);
-            $img = imagecreatefrompng($image);
-            $outputRes = imageresolution($img);
-            $this->assertEquals([36, 36], $outputRes);
-            unlink($image);
+
+            $image = new Imagick($image);
+            $imageResolution = $image->getImageResolution();
+
+            if (!empty($imageResolution['y'])) {
+                $y = intval(round($imageResolution['y'] * 2.54, 0));
+            } else {
+                $y = 0;
+            }
+
+            if (!empty($imageResolution['x'])) {
+                $x = intval(round($imageResolution['x'] * 2.54, 0));
+            } else {
+                $x = 0;
+            }
+
+            $this->assertEquals([$rippingResolution, $rippingResolution], [$x, $y]);
+
+            try {
+                unlink($image);
+            } catch (\Throwable $exception) {
+            }
         }
-        rmdir($imgDir);
+
+        try {
+            rmdir($imgDir);
+        } catch (\Throwable $exception) {
+        }
 
     }
 
@@ -174,9 +198,17 @@ class GhostscriptCommandsTest extends TestCase
             $this->assertFileExists($image);
             $outputSize = getimagesize($image);
             $this->assertEquals($resolution, max($outputSize));
-            unlink($image);
+
+            try {
+                unlink($image);
+            } catch (\Throwable $exception) {
+            }
         }
-        rmdir($imgDir);
+
+        try {
+            rmdir($imgDir);
+        } catch (\Throwable $exception) {
+        }
 
     }
 
