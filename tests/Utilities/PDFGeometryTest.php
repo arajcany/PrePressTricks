@@ -25,11 +25,14 @@ class PDFGeometryTest extends TestCase
         $original = [10, 20, 307, 230];
 
         $actual = $this->pdfGeometry->getEffectiveGeometry($original, 0, 1);
+        unset($actual['anchors'], $actual['anchors_percent']);
         $expected = [
-            "left" => 10,
-            "bottom" => 20,
-            "right" => 307,
-            "top" => 230,
+            "left" => 10.0,
+            "bottom" => 20.0,
+            "right" => 307.0,
+            "top" => 230.0,
+            "width" => 297.0,
+            "height" => 210.0
         ];
         $this->assertEquals($actual, $expected);
 
