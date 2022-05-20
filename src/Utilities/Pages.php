@@ -18,7 +18,7 @@ class Pages
      * @param array $options
      * @return array
      */
-    public function pagesToCutAndStack($pp = null, $options = [])
+    public function pagesToCutAndStack($pp = null, $options = []): array
     {
         $defaultOptions = [
             'total_stacks' => null,
@@ -64,7 +64,6 @@ class Pages
             $sheets_per_stack = $options['sheets_per_stack'];
             $pages_per_stack = $sheets_per_stack * $options['plex'];
 
-
             $counter = range(1, $total_stacks);
             $pagePositionStart = 1;
             foreach ($counter as $count) {
@@ -82,7 +81,6 @@ class Pages
         }
 
         return $pageStacks;
-
     }
 
 
@@ -94,11 +92,11 @@ class Pages
      * Will correct overlapping page ranges.
      * e.g. '12-13,1-4,6' => '1,2,3,4,6,12,13'
      *
-     * @param string|array $rangeInput
+     * @param array|string|null $rangeInput
      * @param array $options
-     * @return mixed
+     * @return false|array|string
      */
-    public function rangeExpand($rangeInput = null, $options = [])
+    public function rangeExpand(array|string $rangeInput = null, array $options = []): false|array|string
     {
         if ($this->is_blank($rangeInput)) {
             return false;
@@ -146,8 +144,7 @@ class Pages
         if ($options['returnFormat'] == 'array') {
             return $rangeFinal;
         } elseif ($options['returnFormat'] == 'string') {
-            $rangeFinal = implode(",", $rangeFinal);
-            return $rangeFinal;
+            return implode(",", $rangeFinal);
         } else {
             return false;
         }
@@ -165,11 +162,11 @@ class Pages
      * will display as a range.
      * e.g. '3,4,6,12,13,10-20,1,2,8' => '1-4,6-6,8-8,10-20'
      *
-     * @param string $rangeInput
+     * @param array|string|null $rangeInput
      * @param array $options
-     * @return mixed
+     * @return false|array|string
      */
-    public function rangeCompact($rangeInput = null, $options = [])
+    public function rangeCompact(array|string $rangeInput = null, array $options = []): false|array|string
     {
         if ($this->is_blank($rangeInput)) {
             return false;
@@ -247,8 +244,7 @@ class Pages
                     $rangeFinalStringArray[] = $range['double'];
                 }
             }
-            $rangeFinalString = implode(",", $rangeFinalStringArray);
-            return $rangeFinalString;
+            return implode(",", $rangeFinalStringArray);
         } else {
             return false;
         }
@@ -257,7 +253,7 @@ class Pages
     /**
      * rangeFlip
      *
-     * Takes a page range and inverts it. In other words, if finds the missing numbers.
+     * Takes a page range and inverts it. In other words, it finds the missing numbers.
      * You can define the lower and upper bounds of the final range
      *
      * Without lower and upper bounds
@@ -267,18 +263,24 @@ class Pages
      * With lower and upper bounds
      * rangeFlip('3-4,10-20', 1, 24) => '1,2,5,6,7,8,9,21,22,23,24'
      *
-     * Will always return a string so rangeCompact() or rangeExpand() and define 'array' if needed
+     * Will always return a string. Use rangeCompact() or rangeExpand() and define 'array' if needed
      *
      * @param null $rangeInput
      * @param null $lowerBound
      * @param null $upperBound
-     * @return array|bool|string
+     * @param array $options
+     * @return bool|array|string
      */
-    public function rangeFlip($rangeInput = null, $lowerBound = null, $upperBound = null)
+    public function rangeFlip($rangeInput = null, $lowerBound = null, $upperBound = null, array $options = []): bool|array|string
     {
         if ($this->is_blank($rangeInput)) {
             return false;
         }
+
+        $defaultOptions = [
+            'returnFormat' => 'string',
+        ];
+        $options = array_merge($defaultOptions, $options);
 
         //expand the range first as this will clean
         $numbers = $this->rangeExpand($rangeInput, ['returnFormat' => 'array']);
@@ -299,9 +301,14 @@ class Pages
         $bounds = range($lowerBound, $upperBound);
 
         $difference = array_diff($bounds, $numbers);
-        $difference = implode(',', $difference);
 
-        return $difference;
+        if ($options['returnFormat'] == 'array') {
+            return $difference;
+        } elseif ($options['returnFormat'] == 'string') {
+            return implode(",", $difference);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -313,7 +320,7 @@ class Pages
      * @param array $options
      * @return array|false|string
      */
-    public function getMinToMax($rangeInput = null, $options = [])
+    public function getMinToMax($rangeInput = null, array $options = []): bool|array|string
     {
         if ($this->is_blank($rangeInput)) {
             return false;
@@ -337,7 +344,6 @@ class Pages
         } else {
             return false;
         }
-
     }
 
     /**
@@ -346,7 +352,7 @@ class Pages
      * @param $value
      * @return bool
      */
-    public function is_blank($value)
+    public function is_blank($value): bool
     {
         return empty($value) && !is_numeric($value);
     }
@@ -395,7 +401,7 @@ class Pages
      * @param bool $considerOnlyStartAndEnd
      * @return array
      */
-    public function groupByPageSequences($pages, $considerOnlyStartAndEnd = true)
+    public function groupByPageSequences($pages, bool $considerOnlyStartAndEnd = true): array
     {
         //sort the pages
         natsort($pages);
@@ -422,8 +428,7 @@ class Pages
                 }
             }
         }
-        $grouped = array_values($grouped);
 
-        return $grouped;
+        return array_values($grouped);
     }
 }

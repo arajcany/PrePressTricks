@@ -22,7 +22,8 @@
     "ext-soap": "*",
     "intervention/image": "^2.7",
     "cakephp/core": "^4.3",
-    "cakephp/i18n": "^4.3"
+    "cakephp/i18n": "^4.3",
+    "ext-gd": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

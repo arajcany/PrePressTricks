@@ -189,7 +189,7 @@ class GhostscriptCommandsTest extends TestCase
             'pagelist' => $pages,
             'outputfolder' => $imgDir,
         ];
-        $images = $gs->savePdfAsImages($pdf, $ripOptions);
+        $images = $gs->savePdfAsSeparations($pdf, $ripOptions);
 
         //should have produced 53 separations
         $this->assertEquals(count($images), 53);
@@ -197,8 +197,7 @@ class GhostscriptCommandsTest extends TestCase
         foreach ($images as $image) {
             $this->assertFileExists($image);
             $outputSize = getimagesize($image);
-            $this->assertEquals($resolution, max($outputSize));
-
+            $this->assertEquals($resolution, max($outputSize[0], $outputSize[1]));
             try {
                 unlink($image);
             } catch (\Throwable $exception) {
