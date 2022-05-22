@@ -23,7 +23,8 @@
     "intervention/image": "^2.7",
     "cakephp/core": "^4.3",
     "cakephp/i18n": "^4.3",
-    "ext-gd": "*"
+    "ext-gd": "*",
+    "league/mime-type-detection": "^1.11"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

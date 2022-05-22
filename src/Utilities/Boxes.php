@@ -2,7 +2,6 @@
 
 namespace arajcany\PrePressTricks\Utilities;
 
-
 class Boxes
 {
 
