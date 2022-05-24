@@ -8,26 +8,12 @@ use arajcany\PrePressTricks\Utilities\ImageInfo;
 
 $imageGeometry = new ImageInfo();
 
-$image = "W:\\arajcany_Projects\\PhotoPackageAdapter\\tests\\InDesignMaterial\\PeopleShots1.jpg";
-$image = "c:\\tmp\\cow-army-2000.jpg";
+$image = "C:\\Users\\arajcany\\Pictures\\DSCF4617.JPG";
+$image = "C:\\Users\\arajcany\\Pictures\\DSCF4617.RAF";
+$image = "C:\\Users\\arajcany\\Pictures\\DSCF4618.JPG";
+$image = "C:\\Users\\arajcany\\Pictures\\DSCF4618.RAF";
 $meta = $imageGeometry->getImageMeta($image);
-dump($meta);
+//dump($meta);
+//print_r($meta);
 
-////clone image
-//$rotations = 64;
-//$image = "c:\\tmp\\cow-army-2000.jpg";
-//$imageSaved = "c:\\tmp\\cow-army-2000-rotated-{$rotations}.jpg";
-//copy($image, $imageSaved);
-//
-//// create image manager with desired driver
-//$manager = new ImageManager(['driver' => 'imagick']);
-//foreach (range(1, $rotations) as $count) {
-//    // read image from file system
-//    $imageLoaded = $manager->make($imageSaved);
-//    //rotate the image
-//    $imageLoaded->rotate(90);
-//    // save modified image
-//    $imageLoaded->save($imageSaved);
-//    dump("Round {$count} Completed.");
-//}
 
