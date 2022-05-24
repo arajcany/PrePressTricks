@@ -13,6 +13,7 @@ class ImageInfo
     private $imageCache = [];
     private $imagickColourSpaces = [];
     private $mimeDetector;
+    private $exifToolPath = null;
 
     /**
      * ImageGeometry constructor
@@ -33,6 +34,9 @@ class ImageInfo
         } catch (\Throwable) {
 
         }
+
+        //populate the path
+        $this->setExifToolPath();
 
         $this->mimeDetector = new FinfoMimeTypeDetector();
     }
@@ -62,49 +66,48 @@ class ImageInfo
 
         $imageMeta = [];
 
-        $imageResolution = null;
+
+        try {
+            $imageManager = new ImageManager(['driver' => 'imagick']);
+        } catch (\Throwable $exception) {
+            $imageManager = new ImageManager(['driver' => 'gd']);
+        }
+        $image = $imageManager->make($imageFilePath);
+
         $colourSpace = '';
 
-        if (!$imageResolution) {
-            try {
-                $image = new Imagick($imageFilePath);
-                $imageResolution = $image->getImageResolution();
-                $colourSpace = $this->imageColourSpaceConstantToWord($image->getImageColorspace());
-                dump('Imagick');
-            } catch (\Throwable $exception) {
-            }
-        }
-
-        if (!$imageResolution) {
-            try {
-                $image = imagecreatefromstring(file_get_contents($imageFilePath));
-                $imageResolution = imageresolution($image);
-                $imageResolution = [
-                    'x' => $imageResolution[0],
-                    'y' => $imageResolution[1],
-                ];
-                $colourSpace = '';
-            } catch (\Throwable $exception) {
-            }
-        }
-
-        if (!$imageResolution) {
+        if ($image->getDriver()->getDriverName() === 'Imagick') {
+            $core = $image->getCore();
+            $imageResolution = $core->getImageResolution();
+            $colourSpace = $this->imageColourSpaceConstantToWord($core->getImageColorspace());
+        } else if ($image->getDriver()->getDriverName() === 'Gd') {
+            $core = $image->getCore();
+            $imageResolution = imageresolution($core);
+            $imageResolution = [
+                'x' => $imageResolution[0],
+                'y' => $imageResolution[1],
+            ];
+            $colourSpace = '';
+        } else {
             $imageResolution = ['x' => 0, 'y' => 0];
         }
-
-        $imageManager = new ImageManager();
-        $image = $imageManager->make($imageFilePath);
         $width = $image->getWidth();
         $height = $image->getHeight();
-        $exif = $image->exif();
+
+        try {
+            $exif = $image->exif();
+            if (!$exif) {
+                $exif = $this->getExifViaExifTool($imageFilePath);
+            }
+        } catch (\Throwable $exception) {
+            $exif = null;
+        }
 
         if ($height >= $width) {
             $orientation = 'portrait';
         } else {
             $orientation = 'landscape';
         }
-
-        $core = $image->getCore();
 
         //build the meta array
         $imageMeta['width'] = $width;
@@ -135,5 +138,47 @@ class ImageInfo
         }
     }
 
+    /**
+     * Populate the ExifTool path
+     */
+    private function setExifToolPath()
+    {
+        $command = "where exiftool";
+        $output = [];
+        $return_var = '';
+        exec($command, $output, $return_var);
+        if (isset($output[0])) {
+            if (is_file($output[0])) {
+                $this->exifToolPath = $output[0];
+            }
+        }
+    }
 
+    private function getExifViaExifTool($pathToImage)
+    {
+        if (!$this->exifToolPath) {
+            return null;
+        }
+
+        $command = "\"{$this->exifToolPath}\" \"{$pathToImage}\"";
+
+        $output = [];
+        $return_var = '';
+        exec($command, $output, $return_var);
+        if ($return_var !== 0) {
+            return null;
+        }
+
+        $compiled = [];
+        foreach ($output as $property) {
+            $property = explode(':', $property);
+            if (isset($property[0]) && isset($property[1])) {
+                $key = str_replace(" ", "", trim($property[0]));
+                $value = trim($property[1]);
+                $compiled[$key] = $value;
+            }
+        }
+
+        return $compiled;
+    }
 }
