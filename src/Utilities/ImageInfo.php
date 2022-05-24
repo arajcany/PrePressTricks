@@ -96,6 +96,7 @@ class ImageInfo
 
         try {
             $exif = $image->exif();
+            $exif = $this->cleanExifData($exif);
             if (!$exif) {
                 $exif = $this->getExifViaExifTool($imageFilePath);
             }
@@ -180,5 +181,15 @@ class ImageInfo
         }
 
         return $compiled;
+    }
+
+    private function cleanExifData($dirtyExif)
+    {
+        $cleanExif = $dirtyExif;
+        array_walk_recursive($cleanExif, function (&$element, $index) {
+            $element = trim(mb_convert_encoding($element, 'UTF-8', 'UTF-8'));
+        });
+
+        return $cleanExif;
     }
 }
