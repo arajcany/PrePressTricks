@@ -65,10 +65,10 @@ class InDesignServer
     }
 
     /**
-     * @param mixed $hostWithPortNumber
+     * @param string $hostWithPortNumber
      * @return InDesignServer
      */
-    public function setHost($hostWithPortNumber)
+    public function setHost(string $hostWithPortNumber): static
     {
         $hostWithPortNumber = rtrim($hostWithPortNumber, "\\/");
 
@@ -81,17 +81,17 @@ class InDesignServer
      * @param mixed $debugInfo
      * @return InDesignServer
      */
-    public function setDebugInfo($debugInfo)
+    public function setDebugInfo(mixed $debugInfo): static
     {
         $this->debugInfo = $debugInfo;
         return $this;
     }
 
     /**
-     * @param mixed $sslSecurity
+     * @param bool $sslSecurity
      * @return InDesignServer
      */
-    public function setSslSecurity($sslSecurity)
+    public function setSslSecurity(bool $sslSecurity): static
     {
         $this->sslSecurity = $sslSecurity;
         return $this;
@@ -101,7 +101,7 @@ class InDesignServer
      * @param string $scriptText
      * @return InDesignServer
      */
-    public function setScriptText($scriptText)
+    public function setScriptText(string $scriptText): static
     {
         $this->scriptText = $scriptText;
         return $this;
@@ -111,43 +111,80 @@ class InDesignServer
      * @param string $scriptLanguage
      * @return InDesignServer
      */
-    public function setScriptLanguage($scriptLanguage)
+    public function setScriptLanguage(string $scriptLanguage): static
     {
         $this->scriptLanguage = $scriptLanguage;
         return $this;
     }
 
     /**
-     * @param string $scriptFile
+     * @param null|string $scriptFile
      * @return InDesignServer
      */
-    public function setScriptFile($scriptFile)
+    public function setScriptFile(null|string $scriptFile): InDesignServer
     {
         $this->scriptFile = $scriptFile;
         return $this;
     }
 
     /**
-     * @param array $scriptArgs
+     * Set arguments in the Script
+     *
+     * Can be set as simple associative array of key=>value
+     *  [
+     *      'doc_name' => date("Ymd_His") . '_bar',
+     *      'delay' => 0
+     *      'foo' => 'bar'
+     *  ]
+     *
+     * Or set as a SOAP like array
+     *  [
+     *      ['name' => 'doc_name', 'value' => date("Ymd_His") . '_bar'],
+     *      ['name' => 'delay', 'value' => 0]
+     *      ['name' => 'foo', 'value' => foo]
+     *  ]
+     *
+     * Both of the above produce the same result.
+     *
+     * @param null|array $scriptArgs
      * @return InDesignServer
      */
-    public function setScriptArgs($scriptArgs)
+    public function setScriptArgs(null|array $scriptArgs): static
     {
-        $this->scriptArgs = $scriptArgs;
+        $clean = [];
+
+        if ($scriptArgs === null) {
+            $clean = null;
+        } else {
+            if (count(array_filter(array_keys($scriptArgs), 'is_string')) === 0) {
+                //this is a numerically indexed array
+                foreach ($scriptArgs as $arg) {
+                    if (isset($arg['name']) && isset($arg['value'])) {
+                        $clean[] = $arg;
+                    }
+                }
+            } else {
+                foreach ($scriptArgs as $key => $value) {
+                    $clean[] = ['name' => $key, 'value' => $value];
+                }
+            }
+        }
+
+        $this->scriptArgs = $clean;
         return $this;
     }
 
 
     /**
      * Main function to send a command to AIS.
-     * Before running this function, you must runs the setter functions to configure the call.
-     * Otherwise use the wrapper function to auto set.
+     * Before running this function, you must run the setter functions to configure the call.
+     * Otherwise, use the wrapper function to auto set.
      *
-     * @return \Exception|SoapFault
+     * @return false|stdClass
      */
-    public function aisRunScript()
+    public function aisRunScript(): bool|stdClass
     {
-        $soapOptions = $hostOptions = ['trace' => $this->debugInfo, 'encoding' => 'utf-8', 'location' => $this->host];
+        $soapOptions = ['trace' => $this->debugInfo, 'encoding' => 'utf-8', 'location' => $this->host];
 
         if ($this->sslSecurity === false) {
             $context = stream_context_create([
@@ -216,10 +253,9 @@ class InDesignServer
                 }
             }
         } catch (SoapFault $exception) {
-            $result = $exception;
-
             $this->setReturnValue($exception->getCode());
             $this->setReturnMessage($exception->getMessage());
+            $result = false;
         }
 
         return $result;
@@ -229,9 +265,9 @@ class InDesignServer
      * Wrapper function to auto configure and run
      *
      * @param $options
-     * @return \Exception|false|SoapFault|stdClass
+     * @return false|stdClass
      */
-    public function setOptionsRunScript($options)
+    public function setOptionsRunScript($options): bool|stdClass
     {
         $defaultOptions = [
             'host' => null,
