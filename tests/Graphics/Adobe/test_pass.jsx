@@ -21,7 +21,7 @@ var delayInSec = app.scriptArgs.isDefined("delay") ? parseInt(app.scriptArgs.get
 sleep(delayInSec * 1000);
 
 
-myDocument.save(File( savePath + docName + ".indd"));
+myDocument.save(File(savePath + docName + ".indd"));
 myDocument.close();
 
 var returnValue;
@@ -41,5 +41,7 @@ returnValue;
 
 function sleep(delay) {
     var start = new Date().getTime();
-    while (new Date().getTime() < start + delay) ;
+    while (new Date().getTime() < start + delay) {
+
+    }
 }
