@@ -94,15 +94,7 @@ class ImageInfo
         $width = $image->getWidth();
         $height = $image->getHeight();
 
-        try {
-            $exif = $image->exif();
-            $exif = $this->cleanExifData($exif);
-            if (!$exif) {
-                $exif = $this->getExifViaExifTool($imageFilePath);
-            }
-        } catch (\Throwable $exception) {
-            $exif = null;
-        }
+        $exif = $this->getExif($imageFilePath);
 
         if ($height >= $width) {
             $orientation = 'portrait';
@@ -155,32 +147,48 @@ class ImageInfo
         }
     }
 
-    private function getExifViaExifTool($pathToImage)
+    /**
+     * @param string $path
+     * @return array|false
+     */
+    private function getExif($path)
     {
-        if (!$this->exifToolPath) {
-            return null;
-        }
+        if ($this->exifToolPath) {
+            $command = "\"{$this->exifToolPath}\" \"{$path}\"";
 
-        $command = "\"{$this->exifToolPath}\" \"{$pathToImage}\"";
-
-        $output = [];
-        $return_var = '';
-        exec($command, $output, $return_var);
-        if ($return_var !== 0) {
-            return null;
-        }
-
-        $compiled = [];
-        foreach ($output as $property) {
-            $property = explode(':', $property);
-            if (isset($property[0]) && isset($property[1])) {
-                $key = str_replace(" ", "", trim($property[0]));
-                $value = trim($property[1]);
-                $compiled[$key] = $value;
+            $output = [];
+            $return_var = '';
+            exec($command, $output, $return_var);
+            if ($return_var !== 0) {
+                return null;
             }
+
+            $compiled = [];
+            foreach ($output as $property) {
+                $property = explode(':', $property, 2);
+                if (isset($property[0]) && isset($property[1])) {
+                    $key = trim(str_replace([" ", "/", "\\"], "", $property[0]));
+                    $value = trim($property[1]);
+                    $compiled[$key] = $value;
+                }
+            }
+            return $compiled;
         }
 
-        return $compiled;
+        try {
+            $exif = exif_read_data($path);
+            return $this->cleanExifData($exif);
+        } catch (\Throwable $exception) {
+        }
+
+        try {
+            $im = new Imagick($path);
+            $exif = $im->getImageProperties();
+            return $this->cleanExifData($exif);
+        } catch (\Throwable $exception) {
+        }
+
+        return false;
     }
 
     private function cleanExifData($dirtyExif)
