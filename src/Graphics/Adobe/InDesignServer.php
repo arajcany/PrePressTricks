@@ -141,10 +141,19 @@ class InDesignServer
      *  [
      *      ['name' => 'doc_name', 'value' => date("Ymd_His") . '_bar'],
      *      ['name' => 'delay', 'value' => 0]
-     *      ['name' => 'foo', 'value' => foo]
+     *      ['name' => 'foo', 'value' => bar]
      *  ]
      *
      * Both of the above produce the same result.
+     *
+     * The ExtendScript Interface does not have a method to get the incoming arguments as an array.
+     * This is problematic arguments are dynamically set. You have no idea what they are.
+     * To ease this pain, this method will create a '_map' argument that is populated with a
+     * JSON string of k=>v pairs. You can extract the map in the IDN script as follows:
+     *
+     * var argMap = app.scriptArgs.isDefined("_map") ? app.scriptArgs.getValue("_map") : "{}";
+     * var argMapJson = JSON.parse(argMap);
+     * //argMap var holds the string "{"doc_name":"20220525_092047_bar","delay":0,"foo":"bar}"
      *
      * @param null|array $scriptArgs
      * @return InDesignServer
@@ -152,6 +161,7 @@ class InDesignServer
     public function setScriptArgs(null|array $scriptArgs): static
     {
         $clean = [];
+        $_map = [];
 
         if ($scriptArgs === null) {
             $clean = null;
@@ -161,14 +171,19 @@ class InDesignServer
                 foreach ($scriptArgs as $arg) {
                     if (isset($arg['name']) && isset($arg['value'])) {
                         $clean[] = $arg;
+                        $_map[$arg['name']] = $arg['value'];
                     }
                 }
             } else {
                 foreach ($scriptArgs as $key => $value) {
                     $clean[] = ['name' => $key, 'value' => $value];
+                    $_map[$key] = $value;
                 }
             }
         }
+
+        $_map = json_encode($_map);
+        $clean[] = ['name' => '_map', 'value' => $_map];
 
         $this->scriptArgs = $clean;
         return $this;
@@ -232,8 +247,13 @@ class InDesignServer
                     if (is_string($data)) {
                         $this->setReturnMessage($data);
                     } elseif (is_object($data)) {
-                        $compiled = json_decode(json_encode($data->item), JSON_OBJECT_AS_ARRAY);
-                        if (count($compiled) * 2 === count($compiled, COUNT_RECURSIVE)) {
+                        if (property_exists($data, 'item')) {
+                            $compiled = json_decode(json_encode($data->item), JSON_OBJECT_AS_ARRAY);
+                        } else {
+                            $compiled = false;
+                        }
+
+                        if ($compiled && (count($compiled) * 2 === count($compiled, COUNT_RECURSIVE))) {
                             //simple top level array so squash it down
                             $simplified = [];
                             foreach ($compiled as $item) {
@@ -243,10 +263,9 @@ class InDesignServer
                             }
                             $this->setReturnMessage($simplified);
                         } else {
-                            //complex nested array so just leave as is
-                            $this->setReturnMessage($compiled);
+                            //complex nested array so return raw data
+                            $this->setReturnMessage($data);
                         }
-
                     }
                 } else {
                     $this->setReturnMessage(null);

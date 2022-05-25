@@ -54,7 +54,7 @@ foreach ($modes as $mode) {
         }
 
         //$result has the native SOAP response
-        //dump($result);
+        //dump("SOAP Response: ",$result);
 
         //$result is automatically parsed for convenience
         dump("Return Var: ", $idn->getReturnValue());

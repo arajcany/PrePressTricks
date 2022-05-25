@@ -1,4 +1,7 @@
-﻿var env = [
+﻿var argMap = app.scriptArgs.isDefined("_map") ? app.scriptArgs.getValue("_map") : "{}";
+//var argMapJson = JSON.parse(argMap);
+
+var env = [
     "INDESIGN_SERVER_VERSION = " + app.version,
     "COMPUTERNAME = " + $.getenv("COMPUTERNAME"),
     "USERDOMAIN = " + $.getenv("USERDOMAIN"),
@@ -35,6 +38,8 @@ returnValue = [
 returnValue = "abc";
 returnValue = ["a", "b", "c"];
 returnValue = env;
+returnValue = argMap;
+
 
 //return something
 returnValue;
