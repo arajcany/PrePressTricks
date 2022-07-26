@@ -22,9 +22,9 @@ class GhostscriptCommandsTest extends TestCase
         parent::__construct($name, $data, $dataName);
 
         $this->now = date("Y-m-d H:i:s");
-        $this->tstHomeDir = str_replace("\\Graphics\\Ghostscript", '', __DIR__) . DS;
-        $this->tstTmpDir = __DIR__ . "\\..\\..\\..\\tmp\\";
-        $this->tstSampleFilesDir = __DIR__ . DS . ".." . DS . "SampleFiles" . DS;
+        $this->tstHomeDir = str_replace(DIRECTORY_SEPARATOR ."Graphics".DIRECTORY_SEPARATOR."Ghostscript", '', __DIR__) . DIRECTORY_SEPARATOR;
+        $this->tstTmpDir = __DIR__ . DIRECTORY_SEPARATOR . "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."tmp".DIRECTORY_SEPARATOR."";
+        $this->tstSampleFilesDir = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "SampleFiles" . DIRECTORY_SEPARATOR;
 
         //print_r("\r\n{$this->tstSampleFilesDir}\r\n");
 

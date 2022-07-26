@@ -623,7 +623,7 @@ class CallasCommands extends BaseCommands
      */
     public function getImagesReportXml($pdfPath, $useCached = true, $saveReport = false)
     {
-        $preflightProfile = __DIR__ . "\\ImagesHigher.kfp";
+        $preflightProfile = __DIR__ . DIRECTORY_SEPARATOR."ImagesHigher.kfp";
         $defaultSavePath = pathinfo($pdfPath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($pdfPath, PATHINFO_FILENAME) . ".images_raw.xml";
 
         if ($useCached) {

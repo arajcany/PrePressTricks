@@ -20,8 +20,8 @@ class StringToTicketTest extends TestCase
         parent::__construct($name, $data, $dataName);
 
         $this->now = date("Y-m-d H:i:s");
-        $this->tstHomeDir = __DIR__ . "\\..\\";
-        $this->tstTmpDir = __DIR__ . "\\..\\..\\tmp\\";
+        $this->tstHomeDir = __DIR__ . DIRECTORY_SEPARATOR .".." . DIRECTORY_SEPARATOR;
+        $this->tstTmpDir = __DIR__ . DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."tmp".DIRECTORY_SEPARATOR;
     }
 
     /**

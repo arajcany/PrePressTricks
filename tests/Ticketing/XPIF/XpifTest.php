@@ -31,10 +31,10 @@ class XpifTest extends TestCase
         parent::__construct($name, $data, $dataName);
 
         $this->now = date("Y-m-d H:i:s");
-        $this->tstHomeDir = str_replace("\\Ticketing\\XPIF", '', __DIR__) . DS;
-        $this->tstTmpDir = __DIR__ . "\\..\\..\\..\\tmp\\";
-        $this->tstSampleTicketsDir = __DIR__ . DS . "SampleTickets" . DS;
-        $this->dtdMappingDir = __DIR__ . "\\..\\..\\..\\src\\Ticketing\\XPIF\\XpifDtdMapping\\";
+        $this->tstHomeDir = str_replace(DIRECTORY_SEPARATOR."Ticketing".DIRECTORY_SEPARATOR."XPIF", '', __DIR__) . DIRECTORY_SEPARATOR;
+        $this->tstTmpDir = __DIR__ . DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."tmp".DIRECTORY_SEPARATOR;
+        $this->tstSampleTicketsDir = __DIR__ . DIRECTORY_SEPARATOR . "SampleTickets" . DIRECTORY_SEPARATOR;
+        $this->dtdMappingDir = __DIR__ . DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."Ticketing".DIRECTORY_SEPARATOR."XPIF".DIRECTORY_SEPARATOR."XpifDtdMapping".DIRECTORY_SEPARATOR;
 
     }
 
@@ -47,7 +47,7 @@ class XpifTest extends TestCase
             return;
         }
 
-        $dtdGlob = $ffcHome . "Platform\\*.dtd";
+        $dtdGlob = $ffcHome . "Platform".DIRECTORY_SEPARATOR."*.dtd";
         $dtdFiles = glob($dtdGlob);
 
         $versionMap = [];
