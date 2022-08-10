@@ -268,12 +268,55 @@ class CallasCommands extends BaseCommands
         return $responseData;
     }
 
+
+    /**
+     * @param string $registrationName
+     * @param string $companyName
+     * @param string $licenseKey
+     * @param string $returnFormat
+     * @return array|false|string
+     */
+    public function requestActivationCallas($registrationName, $companyName, $licenseKey, $returnFormat = 'array')
+    {
+        $options = [
+            $this->callasPath,
+            $registrationName,
+            $companyName,
+            $licenseKey,
+        ];
+
+        $cmd = __('"{0}" -k "{1}" "{2}" "{3}"', $options);
+        exec($cmd, $out, $ret);
+
+        if ($ret == 0) {
+            $status = "OK";
+        } else {
+            $status = "KO";
+        }
+
+        $resp = [
+            'status' => $status,
+            'return' => $ret,
+            'message' => $out,
+        ];
+
+        if (strtolower($returnFormat) == 'text' || strtolower($returnFormat) == 'txt') {
+            $responseData = print_r($resp, true);
+        } elseif (strtolower($returnFormat) == 'json') {
+            $responseData = json_encode($resp, JSON_PRETTY_PRINT);
+        } else {
+            $responseData = $resp;
+        }
+
+        return $responseData;
+    }
+
     /**
      * @param $activationPDF
      * @param string $returnFormat
      * @return array|false|string|true
      */
-    public function registerCallas($activationPDF, $returnFormat = 'array')
+    public function activateCallas($activationPDF, $returnFormat = 'array')
     {
         if (!is_file($activationPDF)) {
             $resp = [
