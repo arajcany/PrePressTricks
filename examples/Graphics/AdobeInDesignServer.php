@@ -7,7 +7,7 @@ use arajcany\PrePressTricks\Graphics\Adobe\InDesignServer;
 $idn = new InDesignServer();
 
 $modes = ['fluent', 'array']; //fluent||array
-$idnServerUrl = "http://192.168.0.136:12348";
+$idnServerUrl = "http://192.168.0.136:12355";
 $jsxFiles = [
     __DIR__ . '/../../tests/Graphics/Adobe/test_pass.jsx',
     __DIR__ . '/../../tests/Graphics/Adobe/test_fail.jsx'
@@ -57,6 +57,7 @@ foreach ($modes as $mode) {
         //dump("SOAP Response: ",$result);
 
         //$result is automatically parsed for convenience
+        dump("\$result: ",$result);
         dump("Return Var: ", $idn->getReturnValue());
         dump("Return Msg: ", $idn->getReturnMessage());
     }
