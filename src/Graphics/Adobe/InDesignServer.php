@@ -98,10 +98,10 @@ class InDesignServer
     }
 
     /**
-     * @param string $scriptText
+     * @param string|null $scriptText
      * @return InDesignServer
      */
-    public function setScriptText(string $scriptText): static
+    public function setScriptText(null|string $scriptText): static
     {
         $this->scriptText = $scriptText;
         return $this;
