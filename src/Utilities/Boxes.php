@@ -7,6 +7,7 @@ class Boxes
 
     /**
      * Wrapper function for scaleInBox
+     * 
      *
      * @param float|int $inWidth
      * @param float|int $inHeight
