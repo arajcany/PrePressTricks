@@ -102,6 +102,10 @@ class Pages
             return false;
         }
 
+        //replace en and em dashes with a plain dash
+        $dashesEnEm = ['–', '—'];
+        $rangeInput = str_replace($dashesEnEm, '-', $rangeInput);
+
         $defaultOptions = [
             'returnFormat' => 'string'
         ];
@@ -123,13 +127,13 @@ class Pages
             $range = explode("-", $range);
 
             if (isset($range[0])) {
-                $lower = ceil(1 * $range[0]);
+                $lower = strval(intval(ceil(1 * $range[0])));
             } else {
                 return false;
             }
 
             if (isset($range[1])) {
-                $upper = ceil(1 * $range[1]);
+                $upper = strval(intval(ceil(1 * $range[1])));
             } else {
                 $upper = $lower;
             }
