@@ -448,7 +448,7 @@ class StringToTicket
         $strNormalised = $str;
 
         if ($this->getExtensionCheck() === true) {
-            $strNormalised = pathinfo($str, PATHINFO_DIRNAME) . '\\' . pathinfo($str, PATHINFO_FILENAME);
+            $strNormalised = pathinfo($str, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($str, PATHINFO_FILENAME);
         }
 
         if ($this->getFilepathCheck() === true) {

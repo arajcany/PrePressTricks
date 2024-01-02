@@ -372,7 +372,7 @@ class XpifDtd
     private function _cpssMap($format = 'map', $listSeparator = ',')
     {
         $map = json_decode(
-            file_get_contents(__DIR__ . "\\XpifDtdMapping\\_version.json"),
+            file_get_contents(__DIR__ . DIRECTORY_SEPARATOR."XpifDtdMapping".DIRECTORY_SEPARATOR."_version.json"),
             JSON_OBJECT_AS_ARRAY);
 
         $list = array_keys($map);
@@ -393,7 +393,7 @@ class XpifDtd
     private function _dtdMap()
     {
         $map = json_decode(
-            file_get_contents(__DIR__ . "\\XpifDtdMapping\\{$this->cpss_version}.json"),
+            file_get_contents(__DIR__ . DIRECTORY_SEPARATOR."XpifDtdMapping".DIRECTORY_SEPARATOR."{$this->cpss_version}.json"),
             JSON_OBJECT_AS_ARRAY);
         return $map;
     }
