@@ -170,6 +170,9 @@ class BaseCommands
         }
 
         foreach ($boxTypes as $b => $boxType) {
+            if (empty($pageGroups[$boxType]['pages_grouped_by_size'])) {
+                continue;
+            }
             $count = count($pageGroups[$boxType]['pages_grouped_by_size']);
             if ($count == 1) {
                 $pageGroups[$boxType]['all_same_size'] = true;
