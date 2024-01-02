@@ -56,7 +56,7 @@ class XpifTicket extends XpifBase
         $this->_populateCollection();
 
         //main domDocument
-        $mainDomDocument = new \DOMDocument();
+        $mainDomDocument = new \DOMDocument('1.0', 'UTF-8');
         $mainDomDocument->preserveWhiteSpace = true;
         $mainDomDocument->formatOutput = true;
         $docType = (new \DOMImplementation())->createDocumentType('xpif', '', $this->dtd_version);
