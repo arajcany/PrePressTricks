@@ -41,9 +41,7 @@ class CallasCommands extends BaseCommands
             $this->tmpDir = TMP;
         } else {
             $this->tmpDir = __DIR__ . '/../../../tmp/';
-            if (!is_dir($this->tmpDir)) {
-                mkdir($this->tmpDir, 0777, true);
-            }
+            $this->mkdirWithCheck($this->tmpDir);
         }
 
         $this->resetCallasQuickCheckFilters();
@@ -406,7 +404,7 @@ class CallasCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $report);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $report);
                 }
@@ -478,7 +476,7 @@ class CallasCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $reportString);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportString);
                 }
@@ -536,7 +534,7 @@ class CallasCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $reportString);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportString);
                 }
@@ -593,7 +591,7 @@ class CallasCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $reportString);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportString);
                 }
@@ -640,7 +638,7 @@ class CallasCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $reportString);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportString);
                 }
@@ -709,7 +707,7 @@ class CallasCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $report);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $report);
                 }
@@ -1173,9 +1171,7 @@ class CallasCommands extends BaseCommands
         //fix output folder
         if ($options['outputfolder']) {
             $options['outputfolder'] = rtrim($options['outputfolder'], " \t\n\r\0\x0B\\/");
-            if (!is_dir($options['outputfolder'])) {
-                mkdir($options['outputfolder'], 0777, true);
-            }
+            $this->mkdirWithCheck($options['outputfolder']);
         } else {
             $options['outputfolder'] = pathinfo($pdfPath, PATHINFO_DIRNAME);
         }

@@ -142,6 +142,27 @@ class ImageMagickCommands
         return $version;
     }
 
+    /**
+     * Wrapper function to make a directory - check first to avoid errors.
+     *
+     * @param string $directory
+     * @param int $permissions
+     * @param bool $recursive
+     * @param $context
+     * @return bool
+     */
+    public function mkdirWithCheck(string $directory, int $permissions = 0777, bool $recursive = true, $context = null): bool
+    {
+        if (is_dir($directory)) {
+            return true;
+        }
+
+        if ($context) {
+            return mkdir($directory, $permissions, $recursive, $context);
+        } else {
+            return mkdir($directory, $permissions, $recursive);
+        }
+    }
 
     /**
      * Get a IMAGE report in the Native PHP Extension format.
@@ -195,7 +216,7 @@ class ImageMagickCommands
                 file_put_contents($defaultSavePath, $report);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $report);
                 }
@@ -259,7 +280,7 @@ class ImageMagickCommands
                 file_put_contents($defaultSavePath, $report);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $report);
                 }
@@ -337,7 +358,7 @@ class ImageMagickCommands
                 file_put_contents($defaultSavePath, $report);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $report);
                 }
@@ -498,7 +519,7 @@ class ImageMagickCommands
                 file_put_contents($defaultSavePath, $reportJson);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportJson);
                 }
@@ -642,7 +663,7 @@ class ImageMagickCommands
                 file_put_contents($defaultSavePath, $reportJson);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportJson);
                 }

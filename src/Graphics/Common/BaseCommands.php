@@ -52,6 +52,28 @@ class BaseCommands
     }
 
     /**
+     * Wrapper function to make a directory - check first to avoid errors.
+     *
+     * @param string $directory
+     * @param int $permissions
+     * @param bool $recursive
+     * @param $context
+     * @return bool
+     */
+    public function mkdirWithCheck(string $directory, int $permissions = 0777, bool $recursive = true, $context = null): bool
+    {
+        if (is_dir($directory)) {
+            return true;
+        }
+
+        if ($context) {
+            return mkdir($directory, $permissions, $recursive, $context);
+        } else {
+            return mkdir($directory, $permissions, $recursive);
+        }
+    }
+
+    /**
      * Extract the Key from the nested arrays.
      *
      * e.g. consider the following array.

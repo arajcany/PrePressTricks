@@ -15,9 +15,9 @@ class StringToTicketTest extends TestCase
     public $now;
     public $str2ticket;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null)
     {
-        parent::__construct($name, $data, $dataName);
+        parent::__construct($name);
 
         $this->now = date("Y-m-d H:i:s");
         $this->tstHomeDir = __DIR__ . "\\..\\";

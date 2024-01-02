@@ -201,7 +201,7 @@ class GhostscriptCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $report);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $report);
                 }
@@ -257,7 +257,7 @@ class GhostscriptCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $reportString);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportString);
                 }
@@ -316,7 +316,7 @@ class GhostscriptCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $reportString);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportString);
                 }
@@ -372,7 +372,7 @@ class GhostscriptCommands extends BaseCommands
                 file_put_contents($defaultSavePath, $reportString);
             } else {
                 $savePath = pathinfo($saveReport, PATHINFO_DIRNAME);
-                @mkdir($savePath);
+                $this->mkdirWithCheck($savePath);
                 if (is_dir($savePath)) {
                     file_put_contents($saveReport, $reportString);
                 }
@@ -1127,9 +1127,7 @@ class GhostscriptCommands extends BaseCommands
         //fix output folder
         if ($options['outputfolder']) {
             $options['outputfolder'] = rtrim($options['outputfolder'], " \t\n\r\0\x0B\\/");
-            if (!is_dir($options['outputfolder'])) {
-                mkdir($options['outputfolder'], 0777, true);
-            }
+            $this->mkdirWithCheck($options['outputfolder']);
         } else {
             $options['outputfolder'] = pathinfo($pdfPath, PATHINFO_DIRNAME);
         }
