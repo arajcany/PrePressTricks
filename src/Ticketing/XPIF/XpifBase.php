@@ -3,6 +3,7 @@
 namespace arajcany\PrePressTricks\Ticketing\XPIF;
 
 use Cake\Utility\Hash;
+use Exception;
 
 /**
  * Class XpifBase
@@ -43,7 +44,7 @@ class XpifBase
      *
      * @param null $cpss_version
      * @param string $lang
-     * @throws \Exception
+     * @throws Exception
      */
     function __construct($cpss_version = null, $lang = "en")
     {

@@ -6,6 +6,8 @@ use League\MimeTypeDetection\FinfoMimeTypeDetector;
 use Imagick;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
+use ReflectionClass;
+use Throwable;
 
 class ImageInfo
 {
@@ -21,7 +23,7 @@ class ImageInfo
     public function __construct()
     {
         try {
-            $reflection = new \ReflectionClass("\Imagick");
+            $reflection = new ReflectionClass("\Imagick");
             $this->imagickColourSpaces = array_flip(
                 array_filter(
                     $reflection->getConstants(),
@@ -31,7 +33,7 @@ class ImageInfo
                     ARRAY_FILTER_USE_KEY
                 )
             );
-        } catch (\Throwable) {
+        } catch (Throwable) {
 
         }
 
@@ -69,7 +71,7 @@ class ImageInfo
 
         try {
             $imageManager = new ImageManager(['driver' => 'imagick']);
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $imageManager = new ImageManager(['driver' => 'gd']);
         }
         $image = $imageManager->make($imageFilePath);
@@ -178,14 +180,14 @@ class ImageInfo
         try {
             $exif = exif_read_data($path);
             return $this->cleanExifData($exif);
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
         }
 
         try {
             $im = new Imagick($path);
             $exif = $im->getImageProperties();
             return $this->cleanExifData($exif);
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
         }
 
         return false;

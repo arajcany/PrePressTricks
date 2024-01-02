@@ -6,8 +6,10 @@ namespace arajcany\PrePressTricks\Graphics\ImageMagick;
 
 use arajcany\PrePressTricks\Graphics\Common\GetCommands;
 use Imagick;
+use ImagickException;
 use ImagickPixel;
 use Intervention\Image\ImageManager;
+use Throwable;
 
 class ImageMagickCommands
 {
@@ -82,7 +84,7 @@ class ImageMagickCommands
 
     /**
      * @return bool
-     * @throws \ImagickException
+     * @throws ImagickException
      */
     public function isImExtension()
     {
@@ -91,7 +93,7 @@ class ImageMagickCommands
             $image->newImage(1, 1, new ImagickPixel('#ffffff'));
             $image->setImageFormat('png');
             $pngData = $image->getImagesBlob();
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $pngData = '';
         }
 
@@ -194,7 +196,7 @@ class ImageMagickCommands
         try {
             $imageReport = new Imagick($imagePath);
             $output = $imageReport->identifyImage(true);
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             $this->setReturnValue(1);
             $this->setReturnMessage('Failed to use the Imagick extension to create a report');
             return false;

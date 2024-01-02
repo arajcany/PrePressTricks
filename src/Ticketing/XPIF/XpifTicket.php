@@ -3,6 +3,8 @@
 namespace arajcany\PrePressTricks\Ticketing\XPIF;
 
 use Cake\Utility\Xml;
+use DOMDocument;
+use DOMImplementation;
 use Exception;
 
 /**
@@ -56,10 +58,10 @@ class XpifTicket extends XpifBase
         $this->_populateCollection();
 
         //main domDocument
-        $mainDomDocument = new \DOMDocument('1.0', 'UTF-8');
+        $mainDomDocument = new DOMDocument('1.0', 'UTF-8');
         $mainDomDocument->preserveWhiteSpace = true;
         $mainDomDocument->formatOutput = true;
-        $docType = (new \DOMImplementation())->createDocumentType('xpif', '', $this->dtd_version);
+        $docType = (new DOMImplementation())->createDocumentType('xpif', '', $this->dtd_version);
         $mainDomDocument->appendChild($docType);
 
         //xpif domDocument

@@ -22,8 +22,8 @@ class GhostscriptCommandsTest extends TestCase
         parent::__construct($name);
 
         $this->now = date("Y-m-d H:i:s");
-        $this->tstHomeDir = str_replace(DIRECTORY_SEPARATOR ."Graphics".DIRECTORY_SEPARATOR."Ghostscript", '', __DIR__) . DIRECTORY_SEPARATOR;
-        $this->tstTmpDir = __DIR__ . DIRECTORY_SEPARATOR . "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."tmp".DIRECTORY_SEPARATOR."";
+        $this->tstHomeDir = str_replace(DIRECTORY_SEPARATOR . "Graphics" . DIRECTORY_SEPARATOR . "Ghostscript", '', __DIR__) . DIRECTORY_SEPARATOR;
+        $this->tstTmpDir = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "tmp" . DIRECTORY_SEPARATOR . "";
         $this->tstSampleFilesDir = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "SampleFiles" . DIRECTORY_SEPARATOR;
 
         //print_r("\r\n{$this->tstSampleFilesDir}\r\n");
@@ -133,8 +133,8 @@ class GhostscriptCommandsTest extends TestCase
         foreach ($images as $image) {
             $this->assertFileExists($image);
 
-            $image = new Imagick($image);
-            $imageResolution = $image->getImageResolution();
+            $imageResource = new Imagick($image);
+            $imageResolution = $imageResource->getImageResolution();
 
             if (!empty($imageResolution['y'])) {
                 $y = intval(round($imageResolution['y'] * 2.54, 0));
@@ -160,7 +160,6 @@ class GhostscriptCommandsTest extends TestCase
             rmdir($imgDir);
         } catch (\Throwable $exception) {
         }
-
     }
 
     public function testPdfSeparation()

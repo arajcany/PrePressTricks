@@ -3,6 +3,7 @@
 namespace arajcany\PrePressTricks\Ticketing\XPIF;
 
 use Cake\Utility\Xml;
+use Exception;
 
 /**
  * Class XpifFrontCoverCollection
@@ -17,7 +18,7 @@ class XpifCoverFrontCollection extends XpifBase
      *
      * @param null $cpss_version
      * @param string $lang
-     * @throws \Exception
+     * @throws Exception
      */
     function __construct($cpss_version = null, $lang = "en")
     {

@@ -7,6 +7,7 @@ namespace arajcany\PrePressTricks\Graphics\Ghostscript;
 use arajcany\PrePressTricks\Graphics\Common\BaseCommands;
 use arajcany\PrePressTricks\Utilities\Boxes;
 use arajcany\PrePressTricks\Utilities\Pages;
+use Throwable;
 
 class GhostscriptCommands extends BaseCommands
 {
@@ -62,7 +63,7 @@ class GhostscriptCommands extends BaseCommands
 
             return true;
 
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             return false;
         }
     }
