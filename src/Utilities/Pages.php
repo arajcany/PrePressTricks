@@ -102,8 +102,12 @@ class Pages
             return false;
         }
 
-        //replace en and em dashes with a plain dash
-        $dashesEnEm = ['–', '—'];
+        //Replace en and em dashes and minus sign with a plain hyphen.
+        //- (Hyphen-Minus)
+        //– (En Dash)
+        //— (Em Dash)
+        //− (Minus Sign)
+        $dashesEnEm = ['–', '—', '−'];
         $rangeInput = str_replace($dashesEnEm, '-', $rangeInput);
 
         $defaultOptions = [
