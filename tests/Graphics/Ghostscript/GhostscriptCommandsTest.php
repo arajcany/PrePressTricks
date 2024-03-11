@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Graphics\Ghostscript;
 
 use Imagick;
@@ -9,6 +8,9 @@ use PHPUnit\Framework\TestCase;
 use arajcany\PrePressTricks\Graphics\Ghostscript\GhostscriptCommands;
 use arajcany\PrePressTricks\Utilities\Boxes;
 
+/**
+ * Class GhostscriptCommandsTest
+ */
 class GhostscriptCommandsTest extends TestCase
 {
     public $tstHomeDir;
