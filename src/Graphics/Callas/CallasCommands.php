@@ -14,7 +14,6 @@ class CallasCommands extends BaseCommands
 {
     private $callasPath = null;
     private $callasQuickCheckFilters = ['$' => []];
-    private $tmpDir;
 
     /**
      * CallasCommands constructor.
@@ -36,13 +35,6 @@ class CallasCommands extends BaseCommands
                     $this->callasPath = $output[0];
                 }
             }
-        }
-
-        if (defined('TMP')) {
-            $this->tmpDir = TMP;
-        } else {
-            $this->tmpDir = __DIR__ . '/../../../tmp/';
-            $this->mkdirWithCheck($this->tmpDir);
         }
 
         $this->resetCallasQuickCheckFilters();

@@ -10,13 +10,19 @@ class BaseCommands
 {
     private $returnValue = 0;
     private $returnMessage = [];
+    protected $tmpDir;
 
     /**
      * BaseCommands constructor.
      */
     public function __construct()
     {
-
+        if (defined('TMP')) {
+            $this->tmpDir = TMP;
+        } else {
+            $this->tmpDir = __DIR__ . '/../../../tmp/';
+            $this->mkdirWithCheck($this->tmpDir);
+        }
     }
 
     /**
