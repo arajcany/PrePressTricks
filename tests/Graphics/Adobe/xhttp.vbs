@@ -6,9 +6,11 @@ dim url
 dim data
 dim returnValue
 
-method = arguments(0)
-url = arguments(1)
-data = arguments(2)
+On Error Resume Next
+
+method = WScript.Arguments(0)
+url = WScript.Arguments(1)
+data = WScript.Arguments(2)
 
 rem 'Method, URL, Async, User, Password
 xHttp.Open method, url, False
@@ -26,8 +28,14 @@ Else
     xHttp.send
 End If
 
-rem 'read response body
-responseBody = xHttp.responseBody
-responseText = xHttp.responseText
+If Err.Number <> 0 Then
+    WScript.Echo "Error: " & Err.Description
+Else
+    rem 'read response body
+    responseBody = xHttp.responseBody
+    responseText = xHttp.responseText
+    returnValue = responseText
+    WScript.Echo returnValue
+End If
 
-returnValue = responseText
+On Error GoTo 0
