@@ -31,7 +31,7 @@ foreach ($images as $image) {
     $pageProperties = [
         'unit' => 'mm',
         'page_width' => '600',
-        //'page_height' => '600',
+        'page_height' => 'auto',
         'crop_length' => 5,
         'crop_offset' => 5,
         'bleed' => 5,
