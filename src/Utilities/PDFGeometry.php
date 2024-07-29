@@ -141,7 +141,7 @@ class PDFGeometry
      *      - calculates [x,y] coordinates of the $boxGeometry anchors
      *      - calculates the % position of the anchors (% is in relation to the $boundingBoxGeometry)
      *
-     * @param $boxGeometry
+     * @param string|array $boxGeometry
      * @param int $rotation
      * @param int $scaling
      * @param null $boundingBoxGeometry
@@ -239,6 +239,12 @@ class PDFGeometry
         return $effectiveGeo['height'];
     }
 
+    public function getArea($geometry, $rotation = 0, $scaling = 1)
+    {
+        $effectiveGeo = $this->getEffectiveGeometry($geometry, $rotation, $scaling);
+        return $effectiveGeo['height'] * $effectiveGeo['width'];
+    }
+
     public function getAnchorTopLeft($geometry, $rotation = 0, $scaling = 1)
     {
         $effectiveGeo = $this->getEffectiveGeometry($geometry, $rotation, $scaling);
@@ -291,6 +297,28 @@ class PDFGeometry
     {
         $effectiveGeo = $this->getEffectiveGeometry($geometry, $rotation, $scaling);
         return $effectiveGeo['anchors'][3];
+    }
+
+    public function getOverlappingGeometry($geometryA, $geometryB)
+    {
+        $geometryA = $this->parseGeometry($geometryA);
+        $geometryB = $this->parseGeometry($geometryB);
+
+        $xOverlap = max(0, min($geometryA[2], $geometryB[2]) - max($geometryA[0], $geometryB[0]));
+        $yOverlap = max(0, min($geometryA[3], $geometryB[3]) - max($geometryA[1], $geometryB[1]));
+
+        if ($xOverlap > 0 && $yOverlap > 0) {
+            $overlapGeometry = [
+                max($geometryA[0], $geometryB[0]),
+                max($geometryA[1], $geometryB[1]),
+                min($geometryA[2], $geometryB[2]),
+                min($geometryA[3], $geometryB[3])
+            ];
+
+            return $overlapGeometry;
+        }
+
+        return false;
     }
 
     /**
@@ -418,11 +446,11 @@ class PDFGeometry
      *  - 'xxx' would return $default
      *
      * @param array $masters
-     * @param string|bool|null $unknown
+     * @param bool|string|null $unknown
      * @param string $default
      * @return string
      */
-    private function getMasterKeyFromUnknown(array $masters, $unknown, $default = '')
+    public function getMasterKeyFromUnknown(array $masters, bool|string|null $unknown, string $default = ''): string
     {
         if (is_array($unknown)) {
             $unknown = implode("", $unknown);
@@ -463,7 +491,7 @@ class PDFGeometry
      * @param $scalingFactor
      * @return mixed
      */
-    private function scaleGeometry($parsedGeometry, $scalingFactor)
+    private function scaleGeometry($parsedGeometry, $scalingFactor): array
     {
         $parsedGeometry['left'] = $parsedGeometry['left'] * $scalingFactor;
         $parsedGeometry['bottom'] = $parsedGeometry['bottom'] * $scalingFactor;
