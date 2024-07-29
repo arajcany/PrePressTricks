@@ -66,3 +66,5 @@ Temporary Items
 
 .phpunit.result.cache
 /tests/Graphics/SampleFiles/
+tests/Graphics/Images/alex-tyson-xiiX89sNvkc-unsplash.jpg.pdf
+tests/Graphics/Images/tomas-malik-yeLp8cX1BP4-unsplash.jpg.pdf
