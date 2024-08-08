@@ -693,6 +693,9 @@ class GhostscriptCommands extends BaseCommands
                 $imageHeightInches = ($imageHeight / 72);
                 $outputDpi = floor(min(($newResolution['width'] / $imageWidthInches), ($newResolution['height'] / $imageHeightInches)));
 
+                //Ghostscript cannot output an image at 1dpi so force a minimum of 2dpi
+                $outputDpi = max($outputDpi, 2);
+
                 $intersectingPages = (new Pages())->rangeExpand($options['pagelist'], ['returnFormat' => 'array']);
                 $intersectingPages = array_intersect($intersectingPages, $pages);
                 $intersectingPages = implode(',', $intersectingPages);
