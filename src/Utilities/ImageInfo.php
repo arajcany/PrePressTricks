@@ -69,12 +69,27 @@ class ImageInfo
         $imageMeta = [];
 
 
+        //try the IMAGICK driver first
         try {
             $imageManager = new ImageManager(['driver' => 'imagick']);
+            $image = $imageManager->make($imageFilePath);
         } catch (Throwable $exception) {
-            $imageManager = new ImageManager(['driver' => 'gd']);
+            $image = false;
         }
-        $image = $imageManager->make($imageFilePath);
+
+        //fallback to the GD driver
+        if (!$image) {
+            try {
+                $imageManager = new ImageManager(['driver' => 'gd']);
+                $image = $imageManager->make($imageFilePath);
+            } catch (Throwable $exception) {
+                $image = false;
+            }
+        }
+
+        if (!$image) {
+            return false;
+        }
 
         $colourSpace = '';
 
@@ -150,10 +165,18 @@ class ImageInfo
     }
 
     /**
-     * @param string $path
-     * @return array|false
+     * @return null
      */
-    private function getExif($path)
+    public function getExifToolPath()
+    {
+        return $this->exifToolPath;
+    }
+
+    /**
+     * @param string $path
+     * @return bool|array
+     */
+    public function getExif($path): bool|array
     {
         if ($this->exifToolPath) {
             $command = "\"{$this->exifToolPath}\" \"{$path}\"";
@@ -161,15 +184,16 @@ class ImageInfo
             $output = [];
             $return_var = '';
             exec($command, $output, $return_var);
-            if ($return_var !== 0) {
-                return null;
+            if (intval($return_var) !== 0) {
+                return false;
             }
 
             $compiled = [];
             foreach ($output as $property) {
                 $property = explode(':', $property, 2);
                 if (isset($property[0]) && isset($property[1])) {
-                    $key = trim(str_replace([" ", "/", "\\"], "", $property[0]));
+                    $key = trim($property[0]);
+                    $key = str_replace([" ", "/", "\\"], "_", $key);
                     $value = trim($property[1]);
                     $compiled[$key] = $value;
                 }

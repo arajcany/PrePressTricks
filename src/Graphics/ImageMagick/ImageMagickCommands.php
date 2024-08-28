@@ -84,7 +84,6 @@ class ImageMagickCommands
 
     /**
      * @return bool
-     * @throws ImagickException
      */
     public function isImExtension()
     {
@@ -103,13 +102,36 @@ class ImageMagickCommands
     /**
      * Get the version string
      *
+     * @return false|string
+     */
+    public function getExtensionVersion()
+    {
+        try {
+            $version = Imagick::getVersion();
+            $version = $version['versionString'] ?? false;
+            if (!$version) {
+                return false;
+            }
+            preg_match('/ImageMagick \d+\.\d+\.\d+-\d+ Q\d+-HDRI x(?:64|86)/', $version, $match);
+
+            return $match[0] ?? false;
+        } catch (Throwable $exception) {
+            return false;
+        }
+    }
+
+    /**
+     * Get the version string
+     *
      * @return false|mixed
      */
     public function getCliVersion()
     {
         $version = $this->cli("-version");
         if (isset($version[0])) {
-            return $version[0];
+            preg_match('/ImageMagick \d+\.\d+\.\d+-\d+ Q\d+-HDRI x(?:64|86)/', $version[0], $match);
+
+            return $match[0] ?? false;
         } else {
             return false;
         }
