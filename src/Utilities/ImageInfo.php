@@ -172,6 +172,32 @@ class ImageInfo
         return $this->exifToolPath;
     }
 
+
+    /**
+     * @return null
+     */
+    public function getExifToolVersion()
+    {
+        if ($this->exifToolPath) {
+            $command = "\"{$this->exifToolPath}\" -ver";
+
+            $output = [];
+            $return_var = '';
+            exec($command, $output, $return_var);
+            if (intval($return_var) !== 0) {
+                return false;
+            }
+
+            if (isset($output[0]) && is_numeric($output[0])) {
+                return $output[0];
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * @param string $path
      * @return bool|array
