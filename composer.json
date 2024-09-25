@@ -15,18 +15,18 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "ext-json": "*",
     "ext-dom": "*",
     "ext-soap": "*",
     "ext-gd": "*",
     "ext-exif": "*",
-    "cakephp/core": ">=4.5",
-    "cakephp/i18n": ">=4.5",
+    "cakephp/core": ">=5.0",
+    "cakephp/i18n": ">=5.0",
     "intervention/image": "^2.7",
     "league/mime-type-detection": "^1.11",
     "tecnickcom/tc-lib-pdf": "^8.0",
-    "arajcany/tool-box": "^2.1"
+    "arajcany/tool-box": "^2.3"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
