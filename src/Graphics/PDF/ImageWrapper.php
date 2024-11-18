@@ -102,12 +102,13 @@ class ImageWrapper
          */
 
         $defaultImageProperties = [
-            'format' => 'jpg',      //jpg of tif
-            'quality' => 100,       //0 = min quality, 100 = max quality when using lossy compression
-            'anchor' => 5,          //int 1-9. Corresponds to an anchor point based on keyboard numberpad (e.g. 7 = top-left)
-            'fitting' => 'fit',     //fit, fill, stretch
-            'resolution' => null,   //int=desired resolution || null=any resolution || @=adaptive resolution
-            'clipping' => true,     //clip portions of the image outside the bleed
+            'format' => 'jpg',          //jpg of tif
+            'quality' => 100,           //0 = min quality, 100 = max quality when using lossy compression
+            'anchor' => 5,              //int 1-9. Corresponds to an anchor point based on keyboard numberpad (e.g. 7 = top-left)
+            'fitting' => 'fit',         //fit, fill, stretch
+            'resolution' => null,       //int=desired resolution || null=any resolution || @=adaptive resolution
+            'clipping' => true,         //clip portions of the image outside the bleed
+            'auto_rotate' => false,     //rotate the image to fit the page
         ];
         $imageProperties = array_merge($defaultImageProperties, $imageProperties);
 
@@ -151,14 +152,39 @@ class ImageWrapper
             return $this->PDF;
         }
 
+        $imagePixelWidth = $imageResource->getWidth();
+        $imagePixelHeight = $imageResource->getHeight();
+        $imageOrientation = ($imagePixelWidth <= $imagePixelHeight) ? "P" : "L";
+        $this->addInfoAlerts("Image orientation is '{$imageOrientation}'");
+
+        $imageMime = $imageResource->mime();
+
+        $pageOrientation = ($pageProperties['page_width'] <= $pageProperties['page_height']) ? "P" : "L";
+
         //convert to JPG if required
         $mimeTypes = ["image/jpeg", /*"image/pjpeg", "image/jp2"*/];
-        if (!in_array($imageResource->mime(), $mimeTypes)) {
+        if (!in_array($imageMime, $mimeTypes)) {
             $this->addInfoAlerts("Converting {$imageResource->mime()} to JPG.");
         }
 
-        $imagePixelWidth = $imageResource->getWidth();
-        $imagePixelHeight = $imageResource->getHeight();
+        //rotate the image if required
+        if ($imageOrientation !== $pageOrientation) {
+            if ($imageProperties['auto_rotate']) {
+                if ($imageProperties['auto_rotate'] === 'cww') {
+                    $angle = 90;
+                } elseif ($imageProperties['auto_rotate'] === 'cw') {
+                    $angle = -90;
+                } else {
+                    $angle = 90;
+                }
+
+                $this->addInfoAlerts("Rotating image to best fit the page.");
+                $imageResource->rotate($angle);
+                $imagePixelWidth = $imageResource->getWidth();
+                $imagePixelHeight = $imageResource->getHeight();
+                $imageOrientation = ($imagePixelWidth <= $imagePixelHeight) ? "P" : "L";
+            }
+        }
 
         if ($pageProperties['page_width'] === 'auto') {
             $pageProperties['page_width'] = ((($pageProperties['page_height'] + (2 * $pageProperties['bleed'])) / $imagePixelHeight) * $imagePixelWidth) - (2 * $pageProperties['bleed']);
