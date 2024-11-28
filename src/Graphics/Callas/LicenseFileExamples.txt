@@ -1,0 +1,51 @@
+Trial Activation
+[0] =>
+[1] => Serialization:
+[2] => Serialization	callas pdfToolbox Server
+[3] => Serialization	Trial
+[4] => Serialization	Expiration Date	11/12/2024
+[5] => Serialization	User	ACME Print Hub
+[6] => Serialization	Company	ACME Print Hub
+[7] => Serialization	Email	sample@acme.com
+[8] => Serialization	Path	C:\Windows\system32\config\systemprofile\AppData\Roaming\callas software\callas pdfToolbox CLI 13\License.txt
+[9] => Serialization
+[10] => Serialization	callas pdfToolbox Server (Dispatcher)
+[11] => Serialization	No License
+[12] =>
+[13] => Activations
+[14] => Activation	S3AXQGSMS4T3EJ3BG3SZEYSXVFSYE5U25JXWYHCVB2UA	callas pdfToolbox Server (Unlimited CPU) (Trial)	C:\Windows\system32\config\systemprofile\AppData\Roaming\callas software\callas pdfToolbox CLI 13\License.txt
+
+
+
+No Activation
+0 => ""                                        
+1 => "Serialization:"                          
+2 => "Serialization	callas pdfToolbox Server" 
+3 => "Serialization	No License"               
+4 => "Serialization"                           
+5 => "Serialization	callas pdfToolbox Server (Dispatcher)"
+6 => "Serialization	No License"
+7 => ""
+8 => "Activations"
+9 => "Activation	None"
+
+
+
+cold/developer
+[0] =>
+[1] => Serialization:
+[2] => Serialization	callas pdfToolbox Server
+[3] => Serialization	Full
+[4] => Serialization	Coldspare/Developer
+[5] => Serialization	S/N	100******
+[6] => Serialization	User	ACME Print Hub
+[7] => Serialization	Company	ACME Print Hub
+[8] => Serialization	Email	sample@acme.com
+[9] => Serialization	ActivationCode	MS****************************************4S
+[10] => Serialization	Path	C:\Windows\system32\config\systemprofile\AppData\Roaming\callas software\callas pdfToolbox CLI 13\License.txt
+[11] => Serialization
+[12] => Serialization	callas pdfToolbox Server (Dispatcher)
+[13] => Serialization	No License
+[14] =>
+[15] => Activations
+[16] => Activation	MS****************************************4S	callas pdfT

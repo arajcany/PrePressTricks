@@ -27,7 +27,7 @@ foreach ($images as $image) {
         'fitting' => 'fill',    //fit, fill, stretch
         'resolution' => '@',    //int=desired resolution || null=any resolution || @=adaptive resolution
         'clipping' => false,    //clip portions of the image outside the bleed
-        'auto_rotate' => true,     //rotate the image to fit the page
+        'auto_rotate' => false,     //rotate the image to fit the page
     ];
     $pageProperties = [
         'unit' => 'mm',
@@ -36,7 +36,7 @@ foreach ($images as $image) {
         'crop_length' => 5,
         'crop_offset' => 5,
         'bleed' => 5,
-        'slug' => 50,
+        'slug' => 0,
         'info' => true,
     ];
     $pdfSavePath = $image . ".pdf";

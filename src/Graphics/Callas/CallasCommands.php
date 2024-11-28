@@ -59,17 +59,28 @@ class CallasCommands extends BaseCommands
                 return false;
             }
 
+            $parts = [];
             foreach ($cliStatus as $status) {
-                if (strpos($status, "Serialization") !== false) {
-                    if (strpos($status, "Trial	Expired") !== false) {
-                        return false;
-                    } elseif (strpos($status, "No License") !== false) {
-                        return false;
+                $status = explode("\t", $status);
+                if (isset($status[0]) && isset($status[1])) {
+                    $parts[$status[0]][] = $status[1];
+                }
+            }
+
+            if (isset($parts['Serialization']) & isset($parts['Activation'][0])) {
+                if (in_array("Trial", $parts['Serialization'])) {
+                    if (strlen($parts['Activation'][0]) > 40) {
+                        return true;
+                    }
+                }
+                if (in_array("Full", $parts['Serialization'])) {
+                    if (strlen($parts['Activation'][0]) > 40) {
+                        return true;
                     }
                 }
             }
 
-            return true;
+            return false;
 
         } catch (Throwable $exception) {
             return false;
