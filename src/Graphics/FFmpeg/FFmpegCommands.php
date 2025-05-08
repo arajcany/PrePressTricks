@@ -21,9 +21,6 @@ class FFmpegCommands extends BaseCommands
 
     private array $analysisCache = [];
 
-    private null|int $returnValue = null;
-    private null|string $returnMessage = null;
-
     /**
      * GhostscriptCommands constructor.
      * @param null $ffPath
