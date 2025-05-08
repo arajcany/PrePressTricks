@@ -1,30 +1,18 @@
 <?php
 
-
 namespace arajcany\PrePressTricks\Graphics\FFmpeg;
-
 
 use arajcany\PrePressTricks\Graphics\Common\BaseCommands;
 use arajcany\ToolBox\Utility\TextFormatter;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe;
 use Throwable;
 
 class FFmpegCommands extends BaseCommands
 {
-    private null|string $ffmpegPath = null;
-    private null|FFMpeg $FFMpeg = null;
-
-    private null|string $ffprobePath = null;
-    private null|FFProbe $FFProbe = null;
+    private ?string $ffmpegPath = null;
+    private ?string $ffprobePath = null;
 
     private array $analysisCache = [];
 
-    /**
-     * GhostscriptCommands constructor.
-     * @param null $ffPath
-     */
     public function __construct($ffPath = null)
     {
         parent::__construct();
@@ -33,177 +21,96 @@ class FFmpegCommands extends BaseCommands
 
         if ($ffPath) {
             if (is_dir($ffPath)) {
-                $basePath = $ffPath;
-                $basePath = TextFormatter::makeDirectoryTrailingSmartSlash($basePath);
+                $basePath = TextFormatter::makeDirectoryTrailingSmartSlash($ffPath);
             } elseif (is_file($ffPath)) {
-                $basePath = pathinfo($ffPath, PATHINFO_DIRNAME);
-                $basePath = TextFormatter::makeDirectoryTrailingSmartSlash($basePath);
+                $basePath = TextFormatter::makeDirectoryTrailingSmartSlash(pathinfo($ffPath, PATHINFO_DIRNAME));
             }
         } else {
-            $command = "where ffprobe";
-            $output = [];
-            $return_var = '';
-            exec($command, $output, $return_var);
-            if (isset($output[0])) {
-                if (is_file($output[0])) {
-                    $basePath = pathinfo($output[0], PATHINFO_DIRNAME);
-                    $basePath = TextFormatter::makeDirectoryTrailingSmartSlash($basePath);
-                }
+            exec('where ffprobe', $output);
+            if (!empty($output[0]) && is_file($output[0])) {
+                $basePath = TextFormatter::makeDirectoryTrailingSmartSlash(pathinfo($output[0], PATHINFO_DIRNAME));
             }
         }
 
         $ffmpegPath = "{$basePath}ffmpeg.exe";
         $ffprobePath = "{$basePath}ffprobe.exe";
 
-        if (is_file($ffprobePath) && is_file($ffmpegPath)) {
+        if (is_file($ffmpegPath) && is_file($ffprobePath)) {
             $this->ffmpegPath = $ffmpegPath;
             $this->ffprobePath = $ffprobePath;
-
-            $options = [
-                'ffmpeg.binaries' => $this->ffmpegPath,
-                'ffprobe.binaries' => $this->ffprobePath,
-            ];
-            $this->FFMpeg = FFMpeg::create($options);
-            $this->FFProbe = FFProbe::create($options);
         }
-
     }
 
-    public function getFFMpeg(): FFMpeg|null
+    public function getFFMpeg(): ?string
     {
-        return $this->FFMpeg;
+        return $this->ffmpegPath;
     }
 
-    public function getFFProbe(): FFProbe|null
+    public function getFFProbe(): ?string
     {
-        return $this->FFProbe;
+        return $this->ffprobePath;
     }
 
-    /**
-     * Check if Callas is alive and working.
-     *
-     * @return bool
-     */
     public function isAlive(): bool
     {
         try {
-            $cliVersion = $this->getCliVersion();
-
-            if (!$cliVersion) {
-                return false;
-            }
-
-            return true;
-        } catch (Throwable $exception) {
+            return (bool)$this->getCliVersion();
+        } catch (Throwable $e) {
             return false;
         }
     }
 
-    /**
-     * Get the version string
-     *
-     * @return false|mixed
-     */
     public function getCliVersion(): mixed
     {
-        $version = $this->cli("-version");
-        if (isset($version[0])) {
-            return $version[0];
-        } else {
+        $version = $this->cli('-version');
+        if (!isset($version[0])) {
             return false;
         }
-    }
 
-    /**
-     * Generic function to run a command
-     *
-     * @param string $cliCommand
-     * @return array|false
-     */
-    private function cli(string $cliCommand): array|false
-    {
-        $cmd = "\"{$this->ffmpegPath}\" {$cliCommand}";
-        exec($cmd, $out, $ret);
-
-        if ($ret == 0) {
-            if (isset($out[0])) {
-                $return = $out;
-            } else {
-                $return = false;
-            }
-        } else {
-            $return = false;
+        // Match the version pattern after "ffmpeg version" and before " Copyright"
+        if (preg_match('/^ffmpeg version ([^\s]+) /', $version[0], $matches)) {
+            return $matches[1];
         }
 
-        return $return;
+        return false;
     }
 
-    /**
-     * @param string $videoClipPath
-     * @return float|false
-     */
+
+    private function cli(string $cliCommand): array|false
+    {
+        if (!$this->ffmpegPath || !is_file($this->ffmpegPath)) {
+            return false;
+        }
+
+        $cmd = "\"{$this->ffmpegPath}\" {$cliCommand}";
+        exec($cmd, $out, $ret);
+        return $ret === 0 && !empty($out) ? $out : false;
+    }
+
     public function videoFramerate(string $videoClipPath): float|false
     {
         $val = $this->videoAnalyse($videoClipPath)['frame_rate'] ?? false;
-
-        if ($val) {
-            return floatval($val);
-        } else {
-            return $val;
-        }
+        return $val ? floatval($val) : false;
     }
 
-    /**
-     * @param string $videoClipPath
-     * @return false|int
-     */
-    public function videoWidth(string $videoClipPath): false|int
+    public function videoWidth(string $videoClipPath): int|false
     {
         $val = $this->videoAnalyse($videoClipPath)['width'] ?? false;
-
-        if ($val) {
-            return intval($val);
-        } else {
-            return $val;
-        }
+        return $val ? intval($val) : false;
     }
 
-    /**
-     * @param string $videoClipPath
-     * @return false|int
-     */
-    public function videoHeight(string $videoClipPath): false|int
+    public function videoHeight(string $videoClipPath): int|false
     {
         $val = $this->videoAnalyse($videoClipPath)['height'] ?? false;
-
-        if ($val) {
-            return intval($val);
-        } else {
-            return $val;
-        }
+        return $val ? intval($val) : false;
     }
 
-    /**
-     * @param string $videoClipPath
-     * @return false|float
-     */
     public function videoDuration(string $videoClipPath): float|false
     {
         $val = $this->videoAnalyse($videoClipPath)['duration'] ?? false;
-
-        if ($val) {
-            return floatval($val);
-        } else {
-            return $val;
-        }
+        return $val ? floatval($val) : false;
     }
 
-    /**
-     * @param string $videoClipPath
-     * @param string $thumbnailOutput
-     * @param float|int $timePosition
-     * @return bool
-     */
     public function videoThumbnail(string $videoClipPath, string $thumbnailOutput, float|int $timePosition = 0): bool
     {
         $analysis = $this->videoAnalyse($videoClipPath);
@@ -211,29 +118,23 @@ class FFmpegCommands extends BaseCommands
             return false;
         }
 
-        $duration = $this->videoDuration($videoClipPath);
-        $lastFrameTimePosition = floor($duration); //gives a time somewhere near the end of the clip
+        $duration = $analysis['duration'] ?? 0;
+        $lastFrameTimePosition = floor($duration);
+        $timePosition = min($lastFrameTimePosition, $timePosition);
 
-        $timePosition = min($lastFrameTimePosition, $timePosition); //make sure the $timePosition is within the duration
+        // Escape paths to ensure Windows backslashes are handled
+        $videoClipPath = str_replace('/', DIRECTORY_SEPARATOR, $videoClipPath);
+        $thumbnailOutput = str_replace('/', DIRECTORY_SEPARATOR, $thumbnailOutput);
 
-        $video = $this->FFMpeg->open($videoClipPath);
+        $cmd = "\"{$this->ffmpegPath}\" -loglevel error -hide_banner -y -ss {$timePosition} -i \"{$videoClipPath}\" -frames:v 1 \"{$thumbnailOutput}\"";
 
-        $frame = $video
-            ->frame(TimeCode::fromSeconds($timePosition))
-            ->save($thumbnailOutput);
+        exec($cmd, $out, $ret);
 
-        if ($frame && is_file($thumbnailOutput)) {
-            return true;
-        } else {
-            return false;
-        }
+        return $ret === 0 && is_file($thumbnailOutput);
     }
 
-    /**
-     * @param string $videoClipPath
-     * @return array|false
-     */
-    public function videoAnalyse(string $videoClipPath): false|array
+
+    public function videoAnalyse(string $videoClipPath): array|false
     {
         if (!is_file($videoClipPath)) {
             return false;
@@ -244,28 +145,56 @@ class FFmpegCommands extends BaseCommands
             return $this->analysisCache[$cacheKey];
         }
 
-        $analysisData = $this->FFProbe
-            ->format($videoClipPath)
-            ->all();
+        $cmd = "\"{$this->ffprobePath}\" -v quiet -print_format json -show_format -show_streams \"{$videoClipPath}\"";
+        exec($cmd, $output, $ret);
 
-        $videoStream = $this->FFProbe
-            ->streams($videoClipPath)
-            ->videos()
-            ->first();
+        if ($ret !== 0 || empty($output)) {
+            return false;
+        }
 
-        $width = $videoStream->get('width');
-        $height = $videoStream->get('height');
-        $frameRate = $videoStream->get('r_frame_rate'); // returns a string like "30000/1001"
-        list($num, $den) = explode('/', $frameRate);
-        $frameRateFloat = $den != 0 ? floatval($num) / floatval($den) : 0.0;
+        $json = json_decode(implode('', $output), true);
 
-        $analysisData["width"] = $width;
-        $analysisData["height"] = $height;
-        $analysisData["frame_rate"] = $frameRateFloat;
+        if (!is_array($json)) {
+            return false;
+        }
 
-        $this->analysisCache[$cacheKey] = $analysisData;
+        $streams = $json['streams'] ?? [];
+        $format = $json['format'] ?? [];
 
-        return $this->analysisCache[$cacheKey];
+        $videoStream = null;
+        foreach ($streams as $stream) {
+            if (isset($stream['codec_type']) && $stream['codec_type'] === 'video') {
+                $videoStream = $stream;
+                break;
+            }
+        }
+
+        if (!$videoStream) {
+            return false;
+        }
+
+        $width = $videoStream['width'] ?? null;
+        $height = $videoStream['height'] ?? null;
+        $frameRateRaw = $videoStream['r_frame_rate'] ?? '0/1';
+        [$num, $den] = explode('/', $frameRateRaw);
+        $frameRate = ($den != 0) ? floatval($num) / floatval($den) : 0.0;
+        $duration = isset($format['duration']) ? floatval($format['duration']) : 0.0;
+
+        $analysis = [
+            'width' => $width,
+            'height' => $height,
+            'frame_rate' => $frameRate,
+            'duration' => $duration,
+        ];
+
+        $analysis = array_merge($format, $analysis);
+
+        $analysis['start_time'] = floatval($analysis['start_time']);
+        $analysis['size'] = intval($analysis['size']);
+        $analysis['bit_rate'] = intval($analysis['bit_rate']);
+
+        $this->analysisCache[$cacheKey] = $analysis;
+
+        return $analysis;
     }
-
 }
