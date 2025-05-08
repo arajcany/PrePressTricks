@@ -26,8 +26,7 @@
     "intervention/image": "^2.7",
     "league/mime-type-detection": "^1.11",
     "tecnickcom/tc-lib-pdf": "^8.0",
-    "arajcany/tool-box": "^2.3",
-    "php-ffmpeg/php-ffmpeg": "^1.3"
+    "arajcany/tool-box": "^2.3"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
