@@ -89,25 +89,25 @@ class FFmpegCommands extends BaseCommands
 
     public function videoFramerate(string $videoClipPath): float|false
     {
-        $val = $this->videoAnalyse($videoClipPath)['frame_rate'] ?? false;
+        $val = $this->videoAnalyse($videoClipPath)['summary']['frame_rate'] ?? false;
         return $val ? floatval($val) : false;
     }
 
     public function videoWidth(string $videoClipPath): int|false
     {
-        $val = $this->videoAnalyse($videoClipPath)['width'] ?? false;
+        $val = $this->videoAnalyse($videoClipPath)['summary']['width'] ?? false;
         return $val ? intval($val) : false;
     }
 
     public function videoHeight(string $videoClipPath): int|false
     {
-        $val = $this->videoAnalyse($videoClipPath)['height'] ?? false;
+        $val = $this->videoAnalyse($videoClipPath)['summary']['height'] ?? false;
         return $val ? intval($val) : false;
     }
 
     public function videoDuration(string $videoClipPath): float|false
     {
-        $val = $this->videoAnalyse($videoClipPath)['duration'] ?? false;
+        $val = $this->videoAnalyse($videoClipPath)['summary']['duration'] ?? false;
         return $val ? floatval($val) : false;
     }
 
