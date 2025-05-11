@@ -118,7 +118,7 @@ class FFmpegCommands extends BaseCommands
             return false;
         }
 
-        $duration = $analysis['duration'] ?? 0;
+        $duration = $analysis['summary']['duration'] ?? 0;
         $lastFrameTimePosition = floor($duration);
         $timePosition = min($lastFrameTimePosition, $timePosition);
 
@@ -187,11 +187,15 @@ class FFmpegCommands extends BaseCommands
             'duration' => $duration,
         ];
 
-        $analysis = array_merge($format, $analysis);
+        $format['start_time'] = floatval($format['start_time']);
+        $format['size'] = intval($format['size']);
+        $format['bit_rate'] = intval($format['bit_rate']);
 
-        $analysis['start_time'] = floatval($analysis['start_time']);
-        $analysis['size'] = intval($analysis['size']);
-        $analysis['bit_rate'] = intval($analysis['bit_rate']);
+        $analysis =[
+            'summary' => $analysis,
+            'format' => $format,
+            'streams' => $streams,
+        ];
 
         $this->analysisCache[$cacheKey] = $analysis;
 
