@@ -49,7 +49,7 @@ class ImageInfo
      * @param $imageFilePath
      * @return array|false
      */
-    public function getImageMeta($imageFilePath)
+    public function getImageMeta($imageFilePath): false|array
     {
         if (!is_file($imageFilePath)) {
             return false;
@@ -106,7 +106,7 @@ class ImageInfo
             ];
             $colourSpace = '';
         } else {
-            $imageResolution = ['x' => 0, 'y' => 0];
+            $imageResolution = ['x' => 72, 'y' => 72];
         }
         $width = $image->getWidth();
         $height = $image->getHeight();
@@ -125,10 +125,14 @@ class ImageInfo
         $imageMeta['orientation'] = $orientation;
         $imageMeta['resolution_x'] = $imageResolution['x'];
         $imageMeta['resolution_y'] = $imageResolution['y'];
-        $imageMeta['exif'] = $exif;
+        $imageMeta['print_width_inches'] = round($width / $imageResolution['x'], 2);
+        $imageMeta['print_height_inches'] = round($height / $imageResolution['y'], 2);
+        $imageMeta['print_width_mm'] = intval($width / $imageResolution['x'] * 25.4);
+        $imageMeta['print_height_mm'] = intval($height / $imageResolution['y'] * 25.4);
         $imageMeta['sha1'] = $imageDataChecksum;
         $imageMeta['colour_space'] = $colourSpace;
         $imageMeta['mime_type'] = $this->mimeDetector->detectMimeTypeFromPath($imageFilePath);
+        $imageMeta['exif'] = $exif;
 
         //cache the meta array
         $this->imageCache[$imagePathChecksum] = $imageMeta;
@@ -199,44 +203,54 @@ class ImageInfo
     }
 
     /**
+     * Return the exif in order of precedence
+     *  - ExifTool by Phil Harvey https://exiftool.org/
+     *  - Native PHP
+     *  - ImageMagick
+     *
      * @param string $path
      * @return bool|array
      */
     public function getExif($path): bool|array
     {
-        if ($this->exifToolPath) {
-            $command = "\"{$this->exifToolPath}\" \"{$path}\"";
+        try {
+            if ($this->exifToolPath) {
+                $command = "\"{$this->exifToolPath}\" \"{$path}\"";
 
-            $output = [];
-            $return_var = '';
-            exec($command, $output, $return_var);
-            if (intval($return_var) !== 0) {
-                return false;
-            }
-
-            $compiled = [];
-            foreach ($output as $property) {
-                $property = explode(':', $property, 2);
-                if (isset($property[0]) && isset($property[1])) {
-                    $key = trim($property[0]);
-                    $key = str_replace([" ", "/", "\\"], "_", $key);
-                    $value = trim($property[1]);
-                    $compiled[$key] = $value;
+                $output = [];
+                $return_var = '';
+                exec($command, $output, $return_var);
+                if (intval($return_var) !== 0) {
+                    return false;
                 }
+
+                $compiled = ['extraction_tool' => 'ExifTool-PH'];
+                foreach ($output as $property) {
+                    $property = explode(':', $property, 2);
+                    if (isset($property[0]) && isset($property[1])) {
+                        $key = trim($property[0]);
+                        $key = str_replace([" ", "/", "\\"], "_", $key);
+                        $value = trim($property[1]);
+                        $compiled[$key] = $value;
+                    }
+                }
+                return $compiled;
             }
-            return $compiled;
+        } catch (Throwable $exception) {
         }
 
         try {
             $exif = exif_read_data($path);
-            return $this->cleanExifData($exif);
+            $exif = $this->cleanExifData($exif);
+            return array_merge(['extraction_tool' => 'php'], $exif);
         } catch (Throwable $exception) {
         }
 
         try {
             $im = new Imagick($path);
             $exif = $im->getImageProperties();
-            return $this->cleanExifData($exif);
+            $exif = $this->cleanExifData($exif);
+            return array_merge(['extraction_tool' => 'ImageMagick'], $exif);
         } catch (Throwable $exception) {
         }
 
