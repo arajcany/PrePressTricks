@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/../../vendor/autoload.php';
+
 use arajcany\PrePressTricks\Utilities\Pages;
 
 $pages = new Pages();
