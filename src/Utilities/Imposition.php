@@ -149,7 +149,7 @@ class Imposition
 
 
     /**
-     * Feed this function with the results of $this->calculateColumnsAndRows() +
+     * Feed this function with the results of $this->calculateColumnsAndRows() + add to the array the following
      * - plex               int     1 or 2 sided.
      * - pp                 int     The number of unique pages in the document.
      * - qty                int     The quantity you would like printed.
@@ -161,15 +161,19 @@ class Imposition
      */
     public function calculateTotalSheets(array $impositionParameters, bool $mergeWithImpositionParameter = true): array
     {
-        $nup = $impositionParameters['columns'] * $impositionParameters['rows'];
-        $plex = $impositionParameters['plex'];
-        $pp = $impositionParameters['pp'];
-        $qty = $impositionParameters['qty'];
-        $mode = $impositionParameters['mode'];
+        $nup = (int)($impositionParameters['columns'] * $impositionParameters['rows']);
+        $plex = (int)$impositionParameters['plex'];
+        $pp = (int)$impositionParameters['pp'];
+        $qty = (int)$impositionParameters['qty'];
+        $mode = strtolower((string)$impositionParameters['mode']);
 
-        if (strtolower($mode) === 'repeated') {
+        if ($nup <= 0 || $plex <= 0) {
+            $sheets = false;
+        } elseif ($mode === 'repeated') {
+            // Each page is run as its own form, repeated on the sheet
             $sheets = ceil($qty / $nup) * ceil($pp / $plex);
-        } elseif (strtolower($mode) === 'sequential') {
+        } elseif ($mode === 'sequential') {
+            // Pages are laid out sequentially across the form
             $sheets = ceil((($pp / $plex) * $qty) / $nup);
         } else {
             $sheets = false;
@@ -198,28 +202,43 @@ class Imposition
         $defaultStockProperties = $this->getDefaultStockProperties();
         $stockProperties = array_merge($defaultStockProperties, $stockProperties);
 
-        // Calculate the total SqM of the product - takes into account plex
+        $plex = (int)$impositionProperties['plex'];
+        if ($plex <= 0) {
+            return [
+                'total_weight_kg' => 0,
+                'width_mm' => $impositionProperties['page_width'],
+                'height_mm' => $impositionProperties['page_height'],
+                'depth_mm' => 0,
+            ];
+        }
+
+        // Area of one finished leaf (one physical sheet in the product), in m²
         $paperArea = ($impositionProperties['page_width'] / 1000) * ($impositionProperties['page_height'] / 1000);
-        $totalPaperArea = (ceil($paperArea * $impositionProperties['pp']) / $impositionProperties['plex']) * $impositionProperties['qty'];
+
+        // Number of leaves (finished sheets) in the product stack
+        $leafCount = ceil($impositionProperties['pp'] / $plex) * $impositionProperties['qty'];
+
+        // Total area of the finished product stack, in m²
+        $totalPaperArea = $leafCount * $paperArea;
 
         // Calculate the depth of the stack
-        $leafCount = ($impositionProperties['pp'] / $impositionProperties['plex']) * $impositionProperties['qty'];
         $leafThicknessMM = $stockProperties['ream_depth_mm'] / $stockProperties['sheets_per_ream'];
+        $depthMM = $leafCount * $leafThicknessMM;
 
-        // Calculate the weight of a SqM of stock
+        // Calculate the weight of a SqM of stock from ream data
         $stockSheetArea = ($stockProperties['width_mm'] / 1000) * ($stockProperties['height_mm'] / 1000);
-        $stockSheetsPerSquareMeter = 1 / $stockSheetArea;
+        $stockSheetsPerSquareMeter = $stockSheetArea > 0 ? 1 / $stockSheetArea : 0;
         $kgPerSheet = $stockProperties['ream_weight_kg'] / $stockProperties['sheets_per_ream'];
         $kgPerSquareMeter = $kgPerSheet * $stockSheetsPerSquareMeter;
 
         // Multiply out to get the weight
-        $totalWeighKg = round(($totalPaperArea * $kgPerSquareMeter), 3);
+        $totalWeightKg = round(($totalPaperArea * $kgPerSquareMeter), 3);
 
         return [
-            'total_weight_kg' => $totalWeighKg,
+            'total_weight_kg' => $totalWeightKg,
             'width_mm' => $impositionProperties['page_width'],
             'height_mm' => $impositionProperties['page_height'],
-            'depth_mm' => $leafCount * $leafThicknessMM,
+            'depth_mm' => $depthMM,
         ];
     }
 
