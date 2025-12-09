@@ -27,9 +27,9 @@ $colsAndRows = $Impo->calculateColumnsAndRows($options);
 
 
 $impositionOptions = [
-    'plex' => 1,
-    'pp' => 64,
-    'qty' => 50,
+    'plex' => 2,
+    'pp' => 8,
+    'qty' => 2,
     'mode' => 'sequential',
 ];
 $impositionOptions = array_merge($colsAndRows, $impositionOptions);

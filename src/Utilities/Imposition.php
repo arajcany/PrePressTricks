@@ -235,10 +235,11 @@ class Imposition
         $totalWeightKg = round(($totalPaperArea * $kgPerSquareMeter), 3);
 
         return [
-            'total_weight_kg' => $totalWeightKg,
             'width_mm' => $impositionProperties['page_width'],
             'height_mm' => $impositionProperties['page_height'],
             'depth_mm' => $depthMM,
+            'total_leaves' => $leafCount,
+            'total_weight_kg' => $totalWeightKg,
         ];
     }
 
