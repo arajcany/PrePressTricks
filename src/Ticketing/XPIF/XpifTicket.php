@@ -84,10 +84,8 @@ class XpifTicket extends XpifBase
         //save string
         if ($saveLocation) {
             $savePath = pathinfo($saveLocation, PATHINFO_DIRNAME);
-            if (is_dir($savePath) . DIRECTORY_SEPARATOR) {
-                if (is_writable($savePath) . DIRECTORY_SEPARATOR) {
-                    file_put_contents($saveLocation, $xmlString);
-                }
+            if (is_dir($savePath) && is_writable($savePath)) {
+                file_put_contents($saveLocation, $xmlString);
             }
         }
 

@@ -116,7 +116,7 @@ class Boxes
             $result = [
                 'scale_width' => $normal['scale_width'],
                 'scale_height' => $normal['scale_height'],
-                'rotate' => true,
+                'rotate' => false,
             ];
         } elseif ($normal['scale_width'] < $rotated['scale_width'] && $normal['scale_height'] < $rotated['scale_height']) {
             $result = [

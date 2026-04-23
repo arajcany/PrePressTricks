@@ -755,7 +755,7 @@ class StringToTicket
             if (isset($matches[0])) {
                 preg_match_all('/\d+/si', $matches[0], $numbers);
 
-                if (isset($numbers[0][1]) && isset($numbers[0][1])) {
+                if (isset($numbers[0][0]) && isset($numbers[0][1])) {
                     return $numbers[0];
                 }
             }

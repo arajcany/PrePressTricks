@@ -67,7 +67,7 @@ class CallasCommands extends BaseCommands
                 }
             }
 
-            if (isset($parts['Serialization']) & isset($parts['Activation'][0])) {
+            if (isset($parts['Serialization']) && isset($parts['Activation'][0])) {
                 if (in_array("Trial", $parts['Serialization'])) {
                     if (strlen($parts['Activation'][0]) > 40) {
                         return true;

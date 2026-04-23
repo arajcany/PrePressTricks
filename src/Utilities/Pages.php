@@ -297,12 +297,12 @@ class Pages
         $numbersForBounds = $numbers;
 
         $lowerBound = preg_replace('/[^0-9\-,.]/', '', $lowerBound);
-        if (empty($lowerBound)) {
+        if ($lowerBound === null || $lowerBound === '') {
             $lowerBound = array_shift($numbersForBounds);
         }
 
         $upperBound = preg_replace('/[^0-9\-,.]/', '', $upperBound);
-        if (empty($upperBound)) {
+        if ($upperBound === null || $upperBound === '') {
             $upperBound = array_pop($numbersForBounds);
         }
 
