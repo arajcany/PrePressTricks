@@ -8,21 +8,21 @@
     "packages": [
         {
             "name": "arajcany/tool-box",
-            "version": "2.4.0",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arajcany/ToolBox.git",
-                "reference": "dace59d8f52fce6414dc4c2bbe2e4c30c967bcc7"
+                "reference": "768bdbd89347d63dca722e8fc8518f56c5e1ece0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arajcany/ToolBox/zipball/dace59d8f52fce6414dc4c2bbe2e4c30c967bcc7",
-                "reference": "dace59d8f52fce6414dc4c2bbe2e4c30c967bcc7",
+                "url": "https://api.github.com/repos/arajcany/ToolBox/zipball/768bdbd89347d63dca722e8fc8518f56c5e1ece0",
+                "reference": "768bdbd89347d63dca722e8fc8518f56c5e1ece0",
                 "shasum": ""
             },
             "require": {
-                "cakephp/i18n": ">=5.0",
-                "cakephp/utility": ">=5.0",
+                "cakephp/i18n": "^5.0",
+                "cakephp/utility": "^5.0",
                 "ext-json": "*",
                 "ext-zip": "*",
                 "league/climate": "^3.8",
@@ -55,22 +55,22 @@
             ],
             "support": {
                 "issues": "https://github.com/arajcany/ToolBox/issues",
-                "source": "https://github.com/arajcany/ToolBox/tree/2.4.0"
+                "source": "https://github.com/arajcany/ToolBox/tree/2.4.2"
             },
-            "time": "2025-06-26T02:32:39+00:00"
+            "time": "2026-04-23T09:39:27+00:00"
         },
         {
             "name": "cakephp/chronos",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/chronos.git",
-                "reference": "e6e777b534244911566face8a5dbdbd7f7bda5a6"
+                "reference": "00c16f165a762226d58f9cf88f43e54e41093f84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/chronos/zipball/e6e777b534244911566face8a5dbdbd7f7bda5a6",
-                "reference": "e6e777b534244911566face8a5dbdbd7f7bda5a6",
+                "url": "https://api.github.com/repos/cakephp/chronos/zipball/00c16f165a762226d58f9cf88f43e54e41093f84",
+                "reference": "00c16f165a762226d58f9cf88f43e54e41093f84",
                 "shasum": ""
             },
             "require": {
@@ -116,24 +116,24 @@
                 "issues": "https://github.com/cakephp/chronos/issues",
                 "source": "https://github.com/cakephp/chronos"
             },
-            "time": "2026-04-10T02:50:39+00:00"
+            "time": "2026-09-06T02:30:12+00:00"
         },
         {
             "name": "cakephp/core",
-            "version": "5.3.4",
+            "version": "5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/core.git",
-                "reference": "eb012517900ed288f580aa3487e9a09f28ea85f9"
+                "reference": "55c9f6ec8a11f6c946cad5bc6e8da18d6d98ae06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/core/zipball/eb012517900ed288f580aa3487e9a09f28ea85f9",
-                "reference": "eb012517900ed288f580aa3487e9a09f28ea85f9",
+                "url": "https://api.github.com/repos/cakephp/core/zipball/55c9f6ec8a11f6c946cad5bc6e8da18d6d98ae06",
+                "reference": "55c9f6ec8a11f6c946cad5bc6e8da18d6d98ae06",
                 "shasum": ""
             },
             "require": {
-                "cakephp/utility": "^5.3.0",
+                "cakephp/utility": "^5.4.0",
                 "league/container": "^5.1",
                 "php": ">=8.2",
                 "psr/container": "^1.1 || ^2.0"
@@ -149,7 +149,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-5.next": "5.4.x-dev"
+                    "dev-5.next": "5.5.x-dev"
                 }
             },
             "autoload": {
@@ -183,25 +183,25 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/core"
             },
-            "time": "2026-03-31T06:25:23+00:00"
+            "time": "2026-08-24T11:32:41+00:00"
         },
         {
             "name": "cakephp/i18n",
-            "version": "5.3.4",
+            "version": "5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/i18n.git",
-                "reference": "78020e2aff0f7dccfd004a84c7f5d748a3e0eabb"
+                "reference": "a3e427d76ff2bd62411528c0e28ba51ba0ffa6ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/i18n/zipball/78020e2aff0f7dccfd004a84c7f5d748a3e0eabb",
-                "reference": "78020e2aff0f7dccfd004a84c7f5d748a3e0eabb",
+                "url": "https://api.github.com/repos/cakephp/i18n/zipball/a3e427d76ff2bd62411528c0e28ba51ba0ffa6ae",
+                "reference": "a3e427d76ff2bd62411528c0e28ba51ba0ffa6ae",
                 "shasum": ""
             },
             "require": {
                 "cakephp/chronos": "^3.3",
-                "cakephp/core": "^5.3.0",
+                "cakephp/core": "^5.4.0",
                 "ext-intl": "*",
                 "php": ">=8.2"
             },
@@ -211,7 +211,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-5.next": "5.4.x-dev"
+                    "dev-5.next": "5.5.x-dev"
                 }
             },
             "autoload": {
@@ -251,24 +251,24 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/i18n"
             },
-            "time": "2026-03-09T09:38:36+00:00"
+            "time": "2026-08-24T11:32:41+00:00"
         },
         {
             "name": "cakephp/utility",
-            "version": "5.3.4",
+            "version": "5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/utility.git",
-                "reference": "4ac9826fe5faa1505ec5aa3c171d6b58b6ab4e99"
+                "reference": "98376e5bbcdd84fdda6d6c4207ef6111fc5aed23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/utility/zipball/4ac9826fe5faa1505ec5aa3c171d6b58b6ab4e99",
-                "reference": "4ac9826fe5faa1505ec5aa3c171d6b58b6ab4e99",
+                "url": "https://api.github.com/repos/cakephp/utility/zipball/98376e5bbcdd84fdda6d6c4207ef6111fc5aed23",
+                "reference": "98376e5bbcdd84fdda6d6c4207ef6111fc5aed23",
                 "shasum": ""
             },
             "require": {
-                "cakephp/core": "^5.3.0",
+                "cakephp/core": "^5.4.0",
                 "php": ">=8.2"
             },
             "suggest": {
@@ -278,7 +278,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-5.next": "5.4.x-dev"
+                    "dev-5.next": "5.5.x-dev"
                 }
             },
             "autoload": {
@@ -315,27 +315,29 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/utility"
             },
-            "time": "2026-03-09T09:38:36+00:00"
+            "time": "2026-08-24T11:32:41+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.9.0",
+            "version": "2.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "7d0ed42f28e42d61352a7a79de682e5e67fec884"
+                "reference": "95e7828100de18b4e269fb1703be530082d5166d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/7d0ed42f28e42d61352a7a79de682e5e67fec884",
-                "reference": "7d0ed42f28e42d61352a7a79de682e5e67fec884",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/95e7828100de18b4e269fb1703be530082d5166d",
+                "reference": "95e7828100de18b4e269fb1703be530082d5166d",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-factory": "^1.0",
                 "psr/http-message": "^1.1 || ^2.0",
-                "ralouphie/getallheaders": "^3.0"
+                "ralouphie/getallheaders": "^3.0",
+                "symfony/deprecation-contracts": "^2.5 || ^3.0",
+                "symfony/polyfill-php80": "^1.25"
             },
             "provide": {
                 "psr/http-factory-implementation": "1.0",
@@ -343,9 +345,9 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "http-interop/http-factory-tests": "0.9.0",
+                "http-interop/http-factory-tests": "1.1.0",
                 "jshttp/mime-db": "1.54.0.1",
-                "phpunit/phpunit": "^8.5.44 || ^9.6.25"
+                "phpunit/phpunit": "^8.5.52 || ^9.6.34"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
@@ -416,7 +418,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.9.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.13.1"
             },
             "funding": [
                 {
@@ -432,7 +434,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-10T16:41:02+00:00"
+            "time": "2026-08-24T09:13:11+00:00"
         },
         {
             "name": "intervention/image",
@@ -520,16 +522,16 @@
         },
         {
             "name": "league/climate",
-            "version": "3.10.1",
+            "version": "3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/climate.git",
-                "reference": "f2d78fbc504740bcd0209e40a4586c886567ddc9"
+                "reference": "653297fb93b4702f3c02ca9dd662f123208f765c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/climate/zipball/f2d78fbc504740bcd0209e40a4586c886567ddc9",
-                "reference": "f2d78fbc504740bcd0209e40a4586c886567ddc9",
+                "url": "https://api.github.com/repos/thephpleague/climate/zipball/653297fb93b4702f3c02ca9dd662f123208f765c",
+                "reference": "653297fb93b4702f3c02ca9dd662f123208f765c",
                 "shasum": ""
             },
             "require": {
@@ -541,7 +543,7 @@
                 "mikey179/vfsstream": "^1.6.12",
                 "mockery/mockery": "^1.6.12",
                 "phpunit/phpunit": "^9.6.21",
-                "squizlabs/php_codesniffer": "^3.10"
+                "squizlabs/php_codesniffer": "^4.0"
             },
             "suggest": {
                 "ext-mbstring": "If ext-mbstring is not available you MUST install symfony/polyfill-mbstring"
@@ -580,9 +582,9 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/climate/issues",
-                "source": "https://github.com/thephpleague/climate/tree/3.10.1"
+                "source": "https://github.com/thephpleague/climate/tree/3.12.0"
             },
-            "time": "2026-03-19T19:32:55+00:00"
+            "time": "2026-08-27T08:24:22+00:00"
         },
         {
             "name": "league/container",
@@ -670,16 +672,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.33.0",
+            "version": "3.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "570b8871e0ce693764434b29154c54b434905350"
+                "reference": "f7fb152932f30072d573510cbd4dd657d6475b25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/570b8871e0ce693764434b29154c54b434905350",
-                "reference": "570b8871e0ce693764434b29154c54b434905350",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f7fb152932f30072d573510cbd4dd657d6475b25",
+                "reference": "f7fb152932f30072d573510cbd4dd657d6475b25",
                 "shasum": ""
             },
             "require": {
@@ -747,22 +749,22 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.33.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.36.0"
             },
-            "time": "2026-03-25T07:59:30+00:00"
+            "time": "2026-09-02T08:00:27+00:00"
         },
         {
             "name": "league/flysystem-local",
-            "version": "3.31.0",
+            "version": "3.35.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-local.git",
-                "reference": "2f669db18a4c20c755c2bb7d3a7b0b2340488079"
+                "reference": "a099b24dce160f3b2239043d13d47c4a1a214ea4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/2f669db18a4c20c755c2bb7d3a7b0b2340488079",
-                "reference": "2f669db18a4c20c755c2bb7d3a7b0b2340488079",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/a099b24dce160f3b2239043d13d47c4a1a214ea4",
+                "reference": "a099b24dce160f3b2239043d13d47c4a1a214ea4",
                 "shasum": ""
             },
             "require": {
@@ -796,22 +798,22 @@
                 "local"
             ],
             "support": {
-                "source": "https://github.com/thephpleague/flysystem-local/tree/3.31.0"
+                "source": "https://github.com/thephpleague/flysystem-local/tree/3.35.3"
             },
-            "time": "2026-01-23T15:30:45+00:00"
+            "time": "2026-08-12T13:29:21+00:00"
         },
         {
             "name": "league/mime-type-detection",
-            "version": "1.16.0",
+            "version": "1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "2d6702ff215bf922936ccc1ad31007edc76451b9"
+                "reference": "f5f47eff7c48ed1003069a2ca67f316fb4021c76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/2d6702ff215bf922936ccc1ad31007edc76451b9",
-                "reference": "2d6702ff215bf922936ccc1ad31007edc76451b9",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/f5f47eff7c48ed1003069a2ca67f316fb4021c76",
+                "reference": "f5f47eff7c48ed1003069a2ca67f316fb4021c76",
                 "shasum": ""
             },
             "require": {
@@ -821,7 +823,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.2",
                 "phpstan/phpstan": "^0.12.68",
-                "phpunit/phpunit": "^8.5.8 || ^9.3 || ^10.0"
+                "phpunit/phpunit": "^8.5.8 || ^9.3 || ^10.0 || ^11.0 || ^12.0"
             },
             "type": "library",
             "autoload": {
@@ -842,7 +844,7 @@
             "description": "Mime-type detection for Flysystem",
             "support": {
                 "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.16.0"
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.17.0"
             },
             "funding": [
                 {
@@ -854,7 +856,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-21T08:32:55+00:00"
+            "time": "2026-07-09T11:49:27+00:00"
         },
         {
             "name": "psr/clock",
@@ -1265,33 +1267,189 @@
             "time": "2020-12-15T21:32:01+00:00"
         },
         {
-            "name": "tecnickcom/tc-lib-barcode",
-            "version": "2.4.34",
+            "name": "symfony/deprecation-contracts",
+            "version": "v3.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tecnickcom/tc-lib-barcode.git",
-                "reference": "4057b35150e383f0425221efaea312e5cb968902"
+                "url": "https://github.com/symfony/deprecation-contracts.git",
+                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-barcode/zipball/4057b35150e383f0425221efaea312e5cb968902",
-                "reference": "4057b35150e383f0425221efaea312e5cb968902",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/f3202fa1b5097b0af062dc978b32ecf63404e31d",
+                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d",
                 "shasum": ""
             },
             "require": {
-                "ext-bcmath": "*",
-                "ext-date": "*",
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
+                "branch-alias": {
+                    "dev-main": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "function.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "A generic function and convention to trigger deprecation notices",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.7.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-06-05T06:23:12+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php80",
+            "version": "v1.37.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php80.git",
+                "reference": "dfb55726c3a76ea3b6459fcfda1ec2d80a682411"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/dfb55726c3a76ea3b6459fcfda1ec2d80a682411",
+                "reference": "dfb55726c3a76ea3b6459fcfda1ec2d80a682411",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ion Bazan",
+                    "email": "ion.bazan@gmail.com"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.37.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-04-10T16:19:22+00:00"
+        },
+        {
+            "name": "tecnickcom/tc-lib-barcode",
+            "version": "2.16.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/tc-lib-barcode.git",
+                "reference": "3dea3241fc99463a63a3d9fd3b694bcc716b4d5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-barcode/zipball/3dea3241fc99463a63a3d9fd3b694bcc716b4d5b",
+                "reference": "3dea3241fc99463a63a3d9fd3b694bcc716b4d5b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
                 "ext-gd": "*",
                 "ext-pcre": "*",
-                "php": ">=8.1",
-                "tecnickcom/tc-lib-color": "^2.3"
+                "php": "^8.2",
+                "tecnickcom/tc-lib-color": "^3.0"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+            },
+            "suggest": {
+                "ext-bcmath": "Speeds up the arbitrary precision arithmetic used by the IMB and PDF417 barcode types (a pure-PHP implementation is used when missing)",
+                "ext-imagick": "Alternative PNG renderer used by getPngData() when the extension is loaded"
             },
             "type": "library",
             "autoload": {
@@ -1310,46 +1468,79 @@
                     "role": "lead"
                 }
             ],
-            "description": "PHP library to generate linear and bidimensional barcodes",
+            "description": "PHP library to generate 73 types of linear, 2D and postal barcodes as SVG, PNG, HTML or GD images",
             "homepage": "https://tcpdf.org",
             "keywords": [
-                "3 of 9",
-                "ANSI MH10.8M-1983",
-                "CBC",
+                "2D Barcode",
+                "AZTEC Rune",
                 "CODABAR",
                 "CODE 11",
-                "CODE 128 A B C",
+                "CODE 128",
+                "CODE 16K",
+                "CODE 32",
                 "CODE 39",
+                "CODE 49",
                 "CODE 93",
+                "DMRE",
+                "Deutsche Post",
                 "EAN 13",
+                "EAN 2",
+                "EAN 5",
                 "EAN 8",
                 "ECC200",
-                "ISO IEC 15438 2006",
+                "GB T 21049",
+                "GS1 DataBar",
+                "GS1-14",
+                "HIBC",
+                "Han Xin Code",
+                "IATA 2 of 5",
+                "ISO IEC 15438",
                 "ISO IEC 16022",
-                "ISO IEC 24778 2008",
+                "ISO IEC 18004",
+                "ISO IEC 20830",
+                "ISO IEC 21471",
+                "ISO IEC 24724",
+                "ISO IEC 24778",
+                "ITF-14",
                 "Intelligent Mail Barcode",
                 "Interleaved 2 of 5",
+                "Japan Post",
                 "KIX",
-                "Klant",
+                "LOGMARS",
+                "Linear barcode",
                 "MSI",
+                "Mailmark",
+                "Matrix 2 of 5",
+                "Micro QR Code",
                 "Onecode",
                 "PHARMACODE",
                 "PHARMACODE TWO-TRACKS",
                 "POSTNET",
+                "PZN",
+                "Plessey",
                 "RMS4CC",
+                "SSCC-18",
                 "Standard 2 of 5",
+                "Telepen",
                 "UPC-A",
                 "UPC-E",
-                "USD-3",
-                "USPS-B-3200",
-                "USS-93",
+                "australia post",
                 "aztec",
                 "barcode",
                 "datamatrix",
+                "gs1",
+                "gs1-128",
+                "identcode",
+                "leitcode",
+                "matrix barcode",
                 "pdf417",
                 "planet",
+                "png",
+                "postal barcode",
                 "qr-code",
                 "royal mail",
+                "stacked barcode",
+                "svg",
                 "tc-lib-barcode",
                 "upc"
             ],
@@ -1359,36 +1550,34 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:15:41+00:00"
+            "time": "2026-09-21T11:52:00+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-color",
-            "version": "2.3.14",
+            "version": "3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-color.git",
-                "reference": "6fbb7daabf4f15b38d264ad9091f0745502459b9"
+                "reference": "8f223ae84d2ea2570f28eae81679075362b7ab1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-color/zipball/6fbb7daabf4f15b38d264ad9091f0745502459b9",
-                "reference": "6fbb7daabf4f15b38d264ad9091f0745502459b9",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-color/zipball/8f223ae84d2ea2570f28eae81679075362b7ab1d",
+                "reference": "8f223ae84d2ea2570f28eae81679075362b7ab1d",
                 "shasum": ""
             },
             "require": {
                 "ext-pcre": "*",
-                "php": ">=8.1"
+                "php": "^8.2"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
             },
             "type": "library",
             "autoload": {
@@ -1410,16 +1599,24 @@
             "description": "PHP library to manipulate various color representations",
             "homepage": "https://tcpdf.org",
             "keywords": [
+                "cielab",
                 "cmyk",
                 "color",
                 "colors",
                 "colour",
                 "colours",
+                "css",
+                "gray",
+                "grayscale",
                 "hsl",
                 "hsla",
                 "javascript",
+                "lab",
+                "pdf",
                 "rgb",
                 "rgba",
+                "separation",
+                "spot",
                 "tc-lib-color",
                 "web"
             ],
@@ -1429,37 +1626,38 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:09:08+00:00"
+            "time": "2026-09-21T11:49:03+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-file",
-            "version": "2.3.7",
+            "version": "3.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-file.git",
-                "reference": "11e089c29a407577fdfc265528bf5582f168ebd6"
+                "reference": "4ad8fcfc75a23f15d21bfdd24a2d363aaf29a935"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-file/zipball/11e089c29a407577fdfc265528bf5582f168ebd6",
-                "reference": "11e089c29a407577fdfc265528bf5582f168ebd6",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-file/zipball/4ad8fcfc75a23f15d21bfdd24a2d363aaf29a935",
+                "reference": "4ad8fcfc75a23f15d21bfdd24a2d363aaf29a935",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-pcre": "*",
-                "php": ">=8.1"
+                "php": "^8.2"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+            },
+            "suggest": {
+                "ext-intl": "Enables Unicode NFC normalization when matching paths against the allowlist"
             },
             "type": "library",
             "autoload": {
@@ -1478,7 +1676,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "PHP library to read byte-level data from files",
+            "description": "PHP library for safe low-level file access: byte-level reads, path allowlisting, file caching and directory lookup",
             "homepage": "https://tcpdf.org",
             "keywords": [
                 "Double",
@@ -1496,47 +1694,58 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:13:10+00:00"
+            "time": "2026-09-21T11:49:16+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-pdf",
-            "version": "8.7.1",
+            "version": "8.76.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-pdf.git",
-                "reference": "3939a311cf596be2817acf49efb093a75b521751"
+                "reference": "2dddf3e4f6038c30776db2a1c5ed8e86d6433452"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf/zipball/3939a311cf596be2817acf49efb093a75b521751",
-                "reference": "3939a311cf596be2817acf49efb093a75b521751",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf/zipball/2dddf3e4f6038c30776db2a1c5ed8e86d6433452",
+                "reference": "2dddf3e4f6038c30776db2a1c5ed8e86d6433452",
                 "shasum": ""
             },
             "require": {
-                "ext-date": "*",
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
                 "ext-pcre": "*",
-                "php": ">=8.1",
-                "tecnickcom/tc-lib-barcode": "^2.4",
-                "tecnickcom/tc-lib-color": "^2.3",
-                "tecnickcom/tc-lib-file": "^2.3",
-                "tecnickcom/tc-lib-pdf-encrypt": "^2.1",
-                "tecnickcom/tc-lib-pdf-font": "^2.6",
-                "tecnickcom/tc-lib-pdf-graph": "^2.4",
-                "tecnickcom/tc-lib-pdf-image": "^2.1",
-                "tecnickcom/tc-lib-pdf-page": "^4.3",
-                "tecnickcom/tc-lib-unicode": "^2.0",
-                "tecnickcom/tc-lib-unicode-data": "^2.0"
+                "ext-xml": "*",
+                "ext-zlib": "*",
+                "php": "^8.2",
+                "tecnickcom/tc-lib-barcode": "^2.16",
+                "tecnickcom/tc-lib-color": "^3.0",
+                "tecnickcom/tc-lib-file": "^3.9",
+                "tecnickcom/tc-lib-pdf-encrypt": "^2.11",
+                "tecnickcom/tc-lib-pdf-font": "^4.4",
+                "tecnickcom/tc-lib-pdf-graph": "^2.18",
+                "tecnickcom/tc-lib-pdf-image": "^3.14",
+                "tecnickcom/tc-lib-pdf-page": "^4.16",
+                "tecnickcom/tc-lib-pdf-parser": "^3.16",
+                "tecnickcom/tc-lib-pdf-sign": "^2.0",
+                "tecnickcom/tc-lib-unicode": "^3.0",
+                "tecnickcom/tc-lib-unicode-data": "^3.0"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+            },
+            "suggest": {
+                "ext-curl": "Required to contact a Timestamp Authority (RFC 3161) when timestamping signatures",
+                "ext-intl": "Enables Unicode NFC normalization of the PDF file name"
             },
             "type": "library",
             "autoload": {
@@ -1570,42 +1779,37 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-21T21:26:04+00:00"
+            "time": "2026-09-21T16:10:29+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-pdf-encrypt",
-            "version": "2.1.41",
+            "version": "2.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-pdf-encrypt.git",
-                "reference": "d538851472decc36ee5e634e85aae281a49f4885"
+                "reference": "c314e5367fe70de7dfe65a28eb797b279cbe9108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-encrypt/zipball/d538851472decc36ee5e634e85aae281a49f4885",
-                "reference": "d538851472decc36ee5e634e85aae281a49f4885",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-encrypt/zipball/c314e5367fe70de7dfe65a28eb797b279cbe9108",
+                "reference": "c314e5367fe70de7dfe65a28eb797b279cbe9108",
                 "shasum": ""
             },
             "require": {
-                "ext-date": "*",
+                "ext-ctype": "*",
                 "ext-hash": "*",
                 "ext-openssl": "*",
                 "ext-pcre": "*",
-                "php": ">=8.1"
+                "php": "^8.2"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
-            },
-            "suggest": {
-                "ext-posix": "*"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
             },
             "type": "library",
             "autoload": {
@@ -1624,7 +1828,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "PHP library to encrypt data for PDF",
+            "description": "PHP library to encrypt and decrypt PDF data",
             "homepage": "https://tcpdf.org",
             "keywords": [
                 "aes",
@@ -1640,41 +1844,110 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:13:26+00:00"
+            "time": "2026-09-21T11:49:31+00:00"
         },
         {
-            "name": "tecnickcom/tc-lib-pdf-font",
-            "version": "2.6.39",
+            "name": "tecnickcom/tc-lib-pdf-filter",
+            "version": "2.11.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tecnickcom/tc-lib-pdf-font.git",
-                "reference": "a57b4b550f85d41a5f4cbc2869c1ec5fe40658aa"
+                "url": "https://github.com/tecnickcom/tc-lib-pdf-filter.git",
+                "reference": "cefbf314e3c2749ede5470a8240535ff82646a06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-font/zipball/a57b4b550f85d41a5f4cbc2869c1ec5fe40658aa",
-                "reference": "a57b4b550f85d41a5f4cbc2869c1ec5fe40658aa",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-filter/zipball/cefbf314e3c2749ede5470a8240535ff82646a06",
+                "reference": "cefbf314e3c2749ede5470a8240535ff82646a06",
                 "shasum": ""
             },
             "require": {
+                "ext-pcre": "*",
+                "ext-zlib": "*",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "carthage-software/mago": "1.49.0",
+                "pdepend/pdepend": "^2.16",
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+            },
+            "suggest": {
+                "ext-imagick": "Required for the JPXDecode (JPEG 2000) and CCITTFaxDecode filters",
+                "jbig2dec": "CLI tool required for the JBIG2Decode filter"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Com\\Tecnick\\Pdf\\Filter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP library to decode PDF compression and encryption filters",
+            "homepage": "https://tcpdf.org",
+            "keywords": [
+                "compression",
+                "encryption",
+                "filter",
+                "pdf",
+                "tc-lib-pdf-filter"
+            ],
+            "support": {
+                "issues": "https://github.com/tecnickcom/tc-lib-pdf-filter/issues",
+                "source": "https://github.com/tecnickcom/tc-lib-pdf-filter"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-09-21T11:49:45+00:00"
+        },
+        {
+            "name": "tecnickcom/tc-lib-pdf-font",
+            "version": "4.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/tc-lib-pdf-font.git",
+                "reference": "658e04565534c0cdd3d8d7ff12f1c6ebeab5f7ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-font/zipball/658e04565534c0cdd3d8d7ff12f1c6ebeab5f7ce",
+                "reference": "658e04565534c0cdd3d8d7ff12f1c6ebeab5f7ce",
+                "shasum": ""
+            },
+            "require": {
+                "ext-hash": "*",
                 "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-zlib": "*",
-                "php": ">=8.1",
-                "tecnickcom/tc-lib-file": "^2.3",
-                "tecnickcom/tc-lib-pdf-encrypt": "^2.1",
-                "tecnickcom/tc-lib-unicode-data": "^2.0"
+                "php": "^8.2",
+                "tecnickcom/tc-lib-file": "^3.9",
+                "tecnickcom/tc-lib-pdf-encrypt": "^2.11",
+                "tecnickcom/tc-lib-unicode-data": "^3.0"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+            },
+            "suggest": {
+                "ext-iconv": "Decodes legacy Macintosh (MacRoman) TrueType name strings",
+                "ext-mbstring": "Decodes UTF-16BE and Windows-1252 TrueType name strings"
             },
             "type": "library",
             "autoload": {
@@ -1693,7 +1966,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "PHP library containing PDF page formats and definitions",
+            "description": "PHP library containing PDF font methods and utilities",
             "homepage": "https://tcpdf.org",
             "keywords": [
                 "PFB",
@@ -1710,38 +1983,36 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:18:14+00:00"
+            "time": "2026-09-21T15:56:42+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-pdf-graph",
-            "version": "2.4.18",
+            "version": "2.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-pdf-graph.git",
-                "reference": "3646f1a9f271da6053db3b1d01f311c8fbb15e2d"
+                "reference": "0674268be53f9d8a77c473f0a717206fd928af0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-graph/zipball/3646f1a9f271da6053db3b1d01f311c8fbb15e2d",
-                "reference": "3646f1a9f271da6053db3b1d01f311c8fbb15e2d",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-graph/zipball/0674268be53f9d8a77c473f0a717206fd928af0b",
+                "reference": "0674268be53f9d8a77c473f0a717206fd928af0b",
                 "shasum": ""
             },
             "require": {
                 "ext-zlib": "*",
-                "php": ">=8.1",
-                "tecnickcom/tc-lib-color": "^2.3",
-                "tecnickcom/tc-lib-pdf-encrypt": "^2.1"
+                "php": "^8.2",
+                "tecnickcom/tc-lib-color": "^3.0",
+                "tecnickcom/tc-lib-pdf-encrypt": "^2.11"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
             },
             "type": "library",
             "autoload": {
@@ -1775,40 +2046,37 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:17:11+00:00"
+            "time": "2026-09-21T11:54:27+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-pdf-image",
-            "version": "2.1.39",
+            "version": "3.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-pdf-image.git",
-                "reference": "5062881d051eb8e708c931b2b6f9b05903281b0d"
+                "reference": "0c07dba58b6f2c6e8653e2e4b678ae2203055611"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-image/zipball/5062881d051eb8e708c931b2b6f9b05903281b0d",
-                "reference": "5062881d051eb8e708c931b2b6f9b05903281b0d",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-image/zipball/0c07dba58b6f2c6e8653e2e4b678ae2203055611",
+                "reference": "0c07dba58b6f2c6e8653e2e4b678ae2203055611",
                 "shasum": ""
             },
             "require": {
                 "ext-gd": "*",
                 "ext-zlib": "*",
-                "php": ">=8.1",
-                "tecnickcom/tc-lib-color": "^2.3",
-                "tecnickcom/tc-lib-file": "^2.3",
-                "tecnickcom/tc-lib-pdf-encrypt": "^2.1"
+                "php": "^8.2",
+                "tecnickcom/tc-lib-file": "^3.9",
+                "tecnickcom/tc-lib-pdf-encrypt": "^2.11"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
             },
             "type": "library",
             "autoload": {
@@ -1843,39 +2111,36 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:17:27+00:00"
+            "time": "2026-09-21T11:54:43+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-pdf-page",
-            "version": "4.3.18",
+            "version": "4.16.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-pdf-page.git",
-                "reference": "5ee92d4c57f5fe118b0911fd38c89e87837f053f"
+                "reference": "54fb640faf82e9829b50175b70520769db97e15b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-page/zipball/5ee92d4c57f5fe118b0911fd38c89e87837f053f",
-                "reference": "5ee92d4c57f5fe118b0911fd38c89e87837f053f",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-page/zipball/54fb640faf82e9829b50175b70520769db97e15b",
+                "reference": "54fb640faf82e9829b50175b70520769db97e15b",
                 "shasum": ""
             },
             "require": {
-                "ext-date": "*",
                 "ext-zlib": "*",
-                "php": ">=8.1",
-                "tecnickcom/tc-lib-color": "^2.3",
-                "tecnickcom/tc-lib-pdf-encrypt": "^2.1"
+                "php": "^8.2",
+                "tecnickcom/tc-lib-color": "^3.0",
+                "tecnickcom/tc-lib-pdf-encrypt": "^2.11"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
             },
             "type": "library",
             "autoload": {
@@ -1908,38 +2173,166 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:16:53+00:00"
+            "time": "2026-09-21T11:54:13+00:00"
         },
         {
-            "name": "tecnickcom/tc-lib-unicode",
-            "version": "2.0.50",
+            "name": "tecnickcom/tc-lib-pdf-parser",
+            "version": "3.16.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tecnickcom/tc-lib-unicode.git",
-                "reference": "c420ca207a78cfeb9b1b87a68f9cbb1b3cc767ec"
+                "url": "https://github.com/tecnickcom/tc-lib-pdf-parser.git",
+                "reference": "4c3596dc3bf2e86e435d4d8f6de782a0755d7b4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-unicode/zipball/c420ca207a78cfeb9b1b87a68f9cbb1b3cc767ec",
-                "reference": "c420ca207a78cfeb9b1b87a68f9cbb1b3cc767ec",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-parser/zipball/4c3596dc3bf2e86e435d4d8f6de782a0755d7b4f",
+                "reference": "4c3596dc3bf2e86e435d4d8f6de782a0755d7b4f",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
                 "ext-pcre": "*",
-                "php": ">=8.1",
-                "tecnickcom/tc-lib-unicode-data": "^2.0"
+                "php": "^8.2",
+                "tecnickcom/tc-lib-pdf-filter": "^2.11"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Com\\Tecnick\\Pdf\\Parser\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP library to parse PDF documents",
+            "homepage": "https://tcpdf.org",
+            "keywords": [
+                "document",
+                "parser",
+                "pdf",
+                "tc-lib-pdf-parser"
+            ],
+            "support": {
+                "issues": "https://github.com/tecnickcom/tc-lib-pdf-parser/issues",
+                "source": "https://github.com/tecnickcom/tc-lib-pdf-parser"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-09-21T11:53:59+00:00"
+        },
+        {
+            "name": "tecnickcom/tc-lib-pdf-sign",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/tc-lib-pdf-sign.git",
+                "reference": "78c8c20aae5a16ccd335e1c8f528f9335bdcc40f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-pdf-sign/zipball/78c8c20aae5a16ccd335e1c8f528f9335bdcc40f",
+                "reference": "78c8c20aae5a16ccd335e1c8f528f9335bdcc40f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "ext-pcre": "*",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "carthage-software/mago": "1.49.0",
+                "pdepend/pdepend": "^2.16",
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Com\\Tecnick\\Pdf\\Sign\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP library to create and embed digital signatures (PKCS#7 / CAdES / PAdES) in PDF documents",
+            "homepage": "https://tcpdf.org",
+            "keywords": [
+                "cades",
+                "digital-signature",
+                "pades",
+                "pdf",
+                "pkcs7",
+                "sign",
+                "signature",
+                "tc-lib-pdf-sign",
+                "timestamp"
+            ],
+            "support": {
+                "issues": "https://github.com/tecnickcom/tc-lib-pdf-sign/issues",
+                "source": "https://github.com/tecnickcom/tc-lib-pdf-sign"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-09-21T11:50:01+00:00"
+        },
+        {
+            "name": "tecnickcom/tc-lib-unicode",
+            "version": "3.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/tc-lib-unicode.git",
+                "reference": "43aadfcc1567e91f0278469c992cb98ebcecb967"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-unicode/zipball/43aadfcc1567e91f0278469c992cb98ebcecb967",
+                "reference": "43aadfcc1567e91f0278469c992cb98ebcecb967",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-mbstring": "*",
+                "ext-pcre": "*",
+                "php": "^8.2",
+                "tecnickcom/tc-lib-unicode-data": "^3.0"
+            },
+            "require-dev": {
+                "carthage-software/mago": "1.49.0",
+                "pdepend/pdepend": "^2.16",
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
             },
             "type": "library",
             "autoload": {
@@ -1958,7 +2351,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "PHP library containing Unicode methods",
+            "description": "PHP library to process UTF-8 and Unicode text",
             "homepage": "https://tcpdf.org",
             "keywords": [
                 "font",
@@ -1973,35 +2366,33 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:16:29+00:00"
+            "time": "2026-09-21T11:53:43+00:00"
         },
         {
             "name": "tecnickcom/tc-lib-unicode-data",
-            "version": "2.0.49",
+            "version": "3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-unicode-data.git",
-                "reference": "77dc342155e78837e140baa7f55aa8e9f9778a31"
+                "reference": "cc0749b9551aed3eb4403828dc1d8a8145949d05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-unicode-data/zipball/77dc342155e78837e140baa7f55aa8e9f9778a31",
-                "reference": "77dc342155e78837e140baa7f55aa8e9f9778a31",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-unicode-data/zipball/cc0749b9551aed3eb4403828dc1d8a8145949d05",
+                "reference": "cc0749b9551aed3eb4403828dc1d8a8145949d05",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1"
+                "php": "^8.2"
             },
             "require-dev": {
+                "carthage-software/mago": "1.49.0",
                 "pdepend/pdepend": "^2.16",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "phpmd/phpmd": "^2.15",
-                "phpunit/phpunit": "^13.1 || ^12.5 || ^11.5 || ^10.5",
-                "squizlabs/php_codesniffer": "^4.0"
+                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
             },
             "type": "library",
             "autoload": {
@@ -2035,30 +2426,30 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
-                    "type": "custom"
+                    "url": "https://github.com/sponsors/tecnickcom",
+                    "type": "github"
                 }
             ],
-            "time": "2026-04-20T07:14:02+00:00"
+            "time": "2026-09-21T11:50:14+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.4",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a"
+                "reference": "8680aa248f8e07bc8fb43f56f0f5fc77a0c96aae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/07d290f0c47959fd5eed98c95ee5602db07e0b6a",
-                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8680aa248f8e07bc8fb43f56f0f5fc77a0c96aae",
+                "reference": "8680aa248f8e07bc8fb43f56f0f5fc77a0c96aae",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^8.0"
             },
             "conflict": {
                 "doctrine/collections": "<1.6.8",
@@ -2093,32 +2484,31 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.4"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.14.0"
             },
             "funding": [
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
-                    "type": "tidelift"
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
                 }
             ],
-            "time": "2025-08-01T08:46:24+00:00"
+            "time": "2026-08-11T10:17:44+00:00"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.7.0",
+            "version": "v5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82"
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dca41cd15c2ac9d055ad70dbfd011130757d1f82",
-                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/9e33da9553fe7786f0962b35f4e4ecf01be89def",
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def",
                 "shasum": ""
             },
             "require": {
-                "ext-ctype": "*",
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "php": ">=7.4"
@@ -2157,9 +2547,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.7.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.9.0"
             },
-            "time": "2025-12-06T11:56:16+00:00"
+            "time": "2026-09-13T18:51:52+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -2281,16 +2671,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "12.5.6",
+            "version": "12.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "876099a072646c7745f673d7aeab5382c4439691"
+                "reference": "186dab580576598076de6818596d12b61801880e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/876099a072646c7745f673d7aeab5382c4439691",
-                "reference": "876099a072646c7745f673d7aeab5382c4439691",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/186dab580576598076de6818596d12b61801880e",
+                "reference": "186dab580576598076de6818596d12b61801880e",
                 "shasum": ""
             },
             "require": {
@@ -2301,13 +2691,13 @@
                 "php": ">=8.3",
                 "phpunit/php-text-template": "^5.0",
                 "sebastian/complexity": "^5.0",
-                "sebastian/environment": "^8.0.3",
-                "sebastian/lines-of-code": "^4.0",
+                "sebastian/environment": "^8.1.2",
+                "sebastian/lines-of-code": "^4.0.1",
                 "sebastian/version": "^6.0",
                 "theseer/tokenizer": "^2.0.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.5.1"
+                "phpunit/phpunit": "^12.5.28"
             },
             "suggest": {
                 "ext-pcov": "PHP extension that provides line coverage",
@@ -2345,7 +2735,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.5.6"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.5.7"
             },
             "funding": [
                 {
@@ -2365,27 +2755,27 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-15T08:23:17+00:00"
+            "time": "2026-06-01T13:24:19+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "6.0.1",
+            "version": "6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "3d1cd096ef6bea4bf2762ba586e35dbd317cbfd5"
+                "reference": "a248d1640ab059b075f53a2ef0f9856e864e06b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/3d1cd096ef6bea4bf2762ba586e35dbd317cbfd5",
-                "reference": "3d1cd096ef6bea4bf2762ba586e35dbd317cbfd5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/a248d1640ab059b075f53a2ef0f9856e864e06b5",
+                "reference": "a248d1640ab059b075f53a2ef0f9856e864e06b5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0"
+                "phpunit/phpunit": "^12.5.33"
             },
             "type": "library",
             "extra": {
@@ -2418,7 +2808,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
                 "security": "https://github.com/sebastianbergmann/php-file-iterator/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/6.0.1"
+                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/6.0.2"
             },
             "funding": [
                 {
@@ -2438,7 +2828,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-02T14:04:18+00:00"
+            "time": "2026-08-25T14:40:53+00:00"
         },
         {
             "name": "phpunit/php-invoker",
@@ -2626,43 +3016,43 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.5.23",
+            "version": "12.5.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c54fcf3d6bcb6e96ac2f7e40097dc37b5f139969"
+                "reference": "345ac22e42cb14cdc7aa8428655d8bb8c82a4aab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c54fcf3d6bcb6e96ac2f7e40097dc37b5f139969",
-                "reference": "c54fcf3d6bcb6e96ac2f7e40097dc37b5f139969",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/345ac22e42cb14cdc7aa8428655d8bb8c82a4aab",
+                "reference": "345ac22e42cb14cdc7aa8428655d8bb8c82a4aab",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
+                "ext-filter": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
-                "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.13.4",
+                "myclabs/deep-copy": "^1.14.0",
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.3",
-                "phpunit/php-code-coverage": "^12.5.6",
-                "phpunit/php-file-iterator": "^6.0.1",
+                "phpunit/php-code-coverage": "^12.5.7",
+                "phpunit/php-file-iterator": "^6.0.2",
                 "phpunit/php-invoker": "^6.0.0",
                 "phpunit/php-text-template": "^5.0.0",
                 "phpunit/php-timer": "^8.0.0",
-                "sebastian/cli-parser": "^4.2.0",
-                "sebastian/comparator": "^7.1.6",
-                "sebastian/diff": "^7.0.0",
-                "sebastian/environment": "^8.1.0",
-                "sebastian/exporter": "^7.0.2",
-                "sebastian/global-state": "^8.0.2",
+                "sebastian/cli-parser": "^4.2.1",
+                "sebastian/comparator": "^7.1.8",
+                "sebastian/diff": "^7.0.1",
+                "sebastian/environment": "^8.1.2",
+                "sebastian/exporter": "^7.0.3",
+                "sebastian/global-state": "^8.0.3",
                 "sebastian/object-enumerator": "^7.0.0",
                 "sebastian/recursion-context": "^7.0.1",
-                "sebastian/type": "^6.0.3",
+                "sebastian/type": "^6.0.4",
                 "sebastian/version": "^6.0.0",
                 "staabm/side-effects-detector": "^1.0.5"
             },
@@ -2704,7 +3094,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.23"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.35"
             },
             "funding": [
                 {
@@ -2712,27 +3102,27 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-04-18T06:12:49+00:00"
+            "time": "2026-09-09T04:48:50+00:00"
         },
         {
             "name": "sebastian/cli-parser",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/cli-parser.git",
-                "reference": "90f41072d220e5c40df6e8635f5dafba2d9d4d04"
+                "reference": "7d05781b13f7dec9043a629a21d086ed74582a15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/90f41072d220e5c40df6e8635f5dafba2d9d4d04",
-                "reference": "90f41072d220e5c40df6e8635f5dafba2d9d4d04",
+                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/7d05781b13f7dec9043a629a21d086ed74582a15",
+                "reference": "7d05781b13f7dec9043a629a21d086ed74582a15",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0"
+                "phpunit/phpunit": "^12.5.25"
             },
             "type": "library",
             "extra": {
@@ -2761,7 +3151,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/cli-parser/issues",
                 "security": "https://github.com/sebastianbergmann/cli-parser/security/policy",
-                "source": "https://github.com/sebastianbergmann/cli-parser/tree/4.2.0"
+                "source": "https://github.com/sebastianbergmann/cli-parser/tree/4.2.1"
             },
             "funding": [
                 {
@@ -2781,20 +3171,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-14T09:36:45+00:00"
+            "time": "2026-05-17T05:29:34+00:00"
         },
         {
             "name": "sebastian/comparator",
-            "version": "7.1.6",
+            "version": "7.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "c769009dee98f494e0edc3fd4f4087501688f11e"
+                "reference": "7c65c1e79836812819705b473a90c12399542485"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/c769009dee98f494e0edc3fd4f4087501688f11e",
-                "reference": "c769009dee98f494e0edc3fd4f4087501688f11e",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/7c65c1e79836812819705b473a90c12399542485",
+                "reference": "7c65c1e79836812819705b473a90c12399542485",
                 "shasum": ""
             },
             "require": {
@@ -2802,10 +3192,10 @@
                 "ext-mbstring": "*",
                 "php": ">=8.3",
                 "sebastian/diff": "^7.0",
-                "sebastian/exporter": "^7.0"
+                "sebastian/exporter": "^7.0.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.2"
+                "phpunit/phpunit": "^12.5.25"
             },
             "suggest": {
                 "ext-bcmath": "For comparing BcMath\\Number objects"
@@ -2853,7 +3243,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
                 "security": "https://github.com/sebastianbergmann/comparator/security/policy",
-                "source": "https://github.com/sebastianbergmann/comparator/tree/7.1.6"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/7.1.8"
             },
             "funding": [
                 {
@@ -2873,7 +3263,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-14T08:23:15+00:00"
+            "time": "2026-05-21T04:45:25+00:00"
         },
         {
             "name": "sebastian/complexity",
@@ -2935,24 +3325,24 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "7.0.0",
+            "version": "7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "7ab1ea946c012266ca32390913653d844ecd085f"
+                "reference": "cd4cabe39f8a4e8ee6818ba99f10a05561ea4ad6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/7ab1ea946c012266ca32390913653d844ecd085f",
-                "reference": "7ab1ea946c012266ca32390913653d844ecd085f",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/cd4cabe39f8a4e8ee6818ba99f10a05561ea4ad6",
+                "reference": "cd4cabe39f8a4e8ee6818ba99f10a05561ea4ad6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0",
-                "symfony/process": "^7.2"
+                "phpunit/phpunit": "^12.5.33",
+                "symfony/process": "^7.4.17"
             },
             "type": "library",
             "extra": {
@@ -2990,35 +3380,47 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/diff/issues",
                 "security": "https://github.com/sebastianbergmann/diff/security/policy",
-                "source": "https://github.com/sebastianbergmann/diff/tree/7.0.0"
+                "source": "https://github.com/sebastianbergmann/diff/tree/7.0.1"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/sebastian/diff",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-02-07T04:55:46+00:00"
+            "time": "2026-08-25T15:35:54+00:00"
         },
         {
             "name": "sebastian/environment",
-            "version": "8.1.0",
+            "version": "8.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "b121608b28a13f721e76ffbbd386d08eff58f3f6"
+                "reference": "9d32c685773823b1983e256ae4ecd48a10d6e439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/b121608b28a13f721e76ffbbd386d08eff58f3f6",
-                "reference": "b121608b28a13f721e76ffbbd386d08eff58f3f6",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/9d32c685773823b1983e256ae4ecd48a10d6e439",
+                "reference": "9d32c685773823b1983e256ae4ecd48a10d6e439",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0"
+                "phpunit/phpunit": "^12.5.26"
             },
             "suggest": {
                 "ext-posix": "*"
@@ -3054,7 +3456,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
                 "security": "https://github.com/sebastianbergmann/environment/security/policy",
-                "source": "https://github.com/sebastianbergmann/environment/tree/8.1.0"
+                "source": "https://github.com/sebastianbergmann/environment/tree/8.1.2"
             },
             "funding": [
                 {
@@ -3074,29 +3476,29 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-15T12:13:01+00:00"
+            "time": "2026-05-25T13:40:20+00:00"
         },
         {
             "name": "sebastian/exporter",
-            "version": "7.0.2",
+            "version": "7.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "016951ae10980765e4e7aee491eb288c64e505b7"
+                "reference": "c5e21b5de653ce0a769fb36f5cdfcb5e7a32cf23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/016951ae10980765e4e7aee491eb288c64e505b7",
-                "reference": "016951ae10980765e4e7aee491eb288c64e505b7",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/c5e21b5de653ce0a769fb36f5cdfcb5e7a32cf23",
+                "reference": "c5e21b5de653ce0a769fb36f5cdfcb5e7a32cf23",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.3",
-                "sebastian/recursion-context": "^7.0"
+                "sebastian/recursion-context": "^7.0.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0"
+                "phpunit/phpunit": "^12.5.25"
             },
             "type": "library",
             "extra": {
@@ -3144,7 +3546,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
                 "security": "https://github.com/sebastianbergmann/exporter/security/policy",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/7.0.2"
+                "source": "https://github.com/sebastianbergmann/exporter/tree/7.0.3"
             },
             "funding": [
                 {
@@ -3164,30 +3566,30 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-24T06:16:11+00:00"
+            "time": "2026-05-20T04:37:17+00:00"
         },
         {
             "name": "sebastian/global-state",
-            "version": "8.0.2",
+            "version": "8.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "ef1377171613d09edd25b7816f05be8313f9115d"
+                "reference": "b164d3274d6537ab462591c5755f76a8f5b1aae9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/ef1377171613d09edd25b7816f05be8313f9115d",
-                "reference": "ef1377171613d09edd25b7816f05be8313f9115d",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/b164d3274d6537ab462591c5755f76a8f5b1aae9",
+                "reference": "b164d3274d6537ab462591c5755f76a8f5b1aae9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3",
                 "sebastian/object-reflector": "^5.0",
-                "sebastian/recursion-context": "^7.0"
+                "sebastian/recursion-context": "^7.0.1"
             },
             "require-dev": {
                 "ext-dom": "*",
-                "phpunit/phpunit": "^12.0"
+                "phpunit/phpunit": "^12.5.28"
             },
             "type": "library",
             "extra": {
@@ -3218,7 +3620,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/global-state/issues",
                 "security": "https://github.com/sebastianbergmann/global-state/security/policy",
-                "source": "https://github.com/sebastianbergmann/global-state/tree/8.0.2"
+                "source": "https://github.com/sebastianbergmann/global-state/tree/8.0.3"
             },
             "funding": [
                 {
@@ -3238,28 +3640,28 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-29T11:29:25+00:00"
+            "time": "2026-06-01T15:10:33+00:00"
         },
         {
             "name": "sebastian/lines-of-code",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/lines-of-code.git",
-                "reference": "97ffee3bcfb5805568d6af7f0f893678fc076d2f"
+                "reference": "d543b8ef219dcd8da262cbb958639a96bedba10e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/97ffee3bcfb5805568d6af7f0f893678fc076d2f",
-                "reference": "97ffee3bcfb5805568d6af7f0f893678fc076d2f",
+                "url": "https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/d543b8ef219dcd8da262cbb958639a96bedba10e",
+                "reference": "d543b8ef219dcd8da262cbb958639a96bedba10e",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "^5.0",
+                "nikic/php-parser": "^5.7.0",
                 "php": ">=8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0"
+                "phpunit/phpunit": "^12.5.25"
             },
             "type": "library",
             "extra": {
@@ -3288,15 +3690,27 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/lines-of-code/issues",
                 "security": "https://github.com/sebastianbergmann/lines-of-code/security/policy",
-                "source": "https://github.com/sebastianbergmann/lines-of-code/tree/4.0.0"
+                "source": "https://github.com/sebastianbergmann/lines-of-code/tree/4.0.1"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/sebastian/lines-of-code",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-02-07T04:57:28+00:00"
+            "time": "2026-05-19T16:22:07+00:00"
         },
         {
             "name": "sebastian/object-enumerator",
@@ -3490,23 +3904,23 @@
         },
         {
             "name": "sebastian/type",
-            "version": "6.0.3",
+            "version": "6.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "e549163b9760b8f71f191651d22acf32d56d6d4d"
+                "reference": "82ff822c2edc46724be9f7411d3163021f602773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/e549163b9760b8f71f191651d22acf32d56d6d4d",
-                "reference": "e549163b9760b8f71f191651d22acf32d56d6d4d",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/82ff822c2edc46724be9f7411d3163021f602773",
+                "reference": "82ff822c2edc46724be9f7411d3163021f602773",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0"
+                "phpunit/phpunit": "^12.5.25"
             },
             "type": "library",
             "extra": {
@@ -3535,7 +3949,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/type/issues",
                 "security": "https://github.com/sebastianbergmann/type/security/policy",
-                "source": "https://github.com/sebastianbergmann/type/tree/6.0.3"
+                "source": "https://github.com/sebastianbergmann/type/tree/6.0.4"
             },
             "funding": [
                 {
@@ -3555,7 +3969,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-09T06:57:12+00:00"
+            "time": "2026-05-20T06:45:45+00:00"
         },
         {
             "name": "sebastian/version",
@@ -3664,84 +4078,17 @@
             "time": "2024-10-20T05:08:20+00:00"
         },
         {
-            "name": "symfony/deprecation-contracts",
-            "version": "v3.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "63afe740e99a13ba87ec199bb07bbdee937a5b62"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/63afe740e99a13ba87ec199bb07bbdee937a5b62",
-                "reference": "63afe740e99a13ba87ec199bb07bbdee937a5b62",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "url": "https://github.com/symfony/contracts",
-                    "name": "symfony/contracts"
-                },
-                "branch-alias": {
-                    "dev-main": "3.6-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "function.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "A generic function and convention to trigger deprecation notices",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-09-25T14:21:43+00:00"
-        },
-        {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.36.0",
+            "version": "v1.38.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "6a21eb99c6973357967f6ce3708cd55a6bec6315"
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6a21eb99c6973357967f6ce3708cd55a6bec6315",
-                "reference": "6a21eb99c6973357967f6ce3708cd55a6bec6315",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
                 "shasum": ""
             },
             "require": {
@@ -3793,7 +4140,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.2"
             },
             "funding": [
                 {
@@ -3813,20 +4160,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-10T17:25:58+00:00"
+            "time": "2026-05-27T06:59:30+00:00"
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v7.4.8",
+            "version": "v7.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "9510c3966f749a1d1ff0059e1eabef6cc621e7fd"
+                "reference": "e088da50b813f32473a76871616cbb8fa54653a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/9510c3966f749a1d1ff0059e1eabef6cc621e7fd",
-                "reference": "9510c3966f749a1d1ff0059e1eabef6cc621e7fd",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e088da50b813f32473a76871616cbb8fa54653a8",
+                "reference": "e088da50b813f32473a76871616cbb8fa54653a8",
                 "shasum": ""
             },
             "require": {
@@ -3842,7 +4189,7 @@
                 "symfony/http-kernel": "^6.4|^7.0|^8.0",
                 "symfony/process": "^6.4|^7.0|^8.0",
                 "symfony/uid": "^6.4|^7.0|^8.0",
-                "twig/twig": "^3.12"
+                "twig/twig": "^3.12|^4.0"
             },
             "bin": [
                 "Resources/bin/var-dump-server"
@@ -3880,7 +4227,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v7.4.8"
+                "source": "https://github.com/symfony/var-dumper/tree/v7.4.18"
             },
             "funding": [
                 {
@@ -3900,7 +4247,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-30T13:44:50+00:00"
+            "time": "2026-08-30T20:10:52+00:00"
         },
         {
             "name": "theseer/tokenizer",

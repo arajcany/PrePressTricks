@@ -26,9 +26,9 @@ class XpifTest extends TestCase
     public $now;
     private $dtdMappingDir;
 
-    public function __construct($name = null)
+    protected function setUp(): void
     {
-        parent::__construct($name);
+        parent::setUp();
 
         $this->now = date("Y-m-d H:i:s");
         $this->tstHomeDir = str_replace(DIRECTORY_SEPARATOR."Ticketing".DIRECTORY_SEPARATOR."XPIF", '', __DIR__) . DIRECTORY_SEPARATOR;
@@ -41,10 +41,8 @@ class XpifTest extends TestCase
     public function testDtd()
     {
         $ffcHome = getenv('FF_CORE_HOME');
-        $this->assertNotEquals(false, $ffcHome);
-
         if (!$ffcHome) {
-            return;
+            $this->markTestSkipped('FF_CORE_HOME environment variable is not set.');
         }
 
         $dtdGlob = $ffcHome . "Platform".DIRECTORY_SEPARATOR."*.dtd";

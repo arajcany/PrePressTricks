@@ -9,6 +9,7 @@ use arajcany\PrePressTricks\Utilities\Pages;
 use Cake\Utility\Hash;
 use Cake\Utility\Xml;
 use Throwable;
+use function Cake\I18n\__;
 
 class CallasCommands extends BaseCommands
 {

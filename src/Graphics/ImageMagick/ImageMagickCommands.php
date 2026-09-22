@@ -10,6 +10,7 @@ use ImagickException;
 use ImagickPixel;
 use Intervention\Image\ImageManager;
 use Throwable;
+use function Cake\I18n\__;
 
 class ImageMagickCommands
 {

@@ -15,9 +15,9 @@ class StringToTicketTest extends TestCase
     public $now;
     public $str2ticket;
 
-    public function __construct($name = null)
+    protected function setUp(): void
     {
-        parent::__construct($name);
+        parent::setUp();
 
         $this->now = date("Y-m-d H:i:s");
         $this->tstHomeDir = __DIR__ . DIRECTORY_SEPARATOR .".." . DIRECTORY_SEPARATOR;

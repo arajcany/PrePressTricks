@@ -11,12 +11,9 @@ class PDFGeometryTest extends TestCase
     public $pdfGeometry;
 
 
-    /**
-     * PDFGeometryTest constructor.
-     */
-    public function __construct($name = null)
+    protected function setUp(): void
     {
-        parent::__construct($name);
+        parent::setUp();
         $this->pdfGeometry = new PDFGeometry();
     }
 

@@ -8,6 +8,7 @@ use arajcany\PrePressTricks\Graphics\Common\BaseCommands;
 use arajcany\PrePressTricks\Utilities\Boxes;
 use arajcany\PrePressTricks\Utilities\Pages;
 use Throwable;
+use function Cake\I18n\__;
 
 class GhostscriptCommands extends BaseCommands
 {

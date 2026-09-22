@@ -19,9 +19,9 @@ class GhostscriptCommandsTest extends TestCase
     public $now;
     private $gsExe;
 
-    public function __construct($name = null)
+    protected function setUp(): void
     {
-        parent::__construct($name);
+        parent::setUp();
 
         $this->now = date("Y-m-d H:i:s");
         $this->tstHomeDir = str_replace(DIRECTORY_SEPARATOR . "Graphics" . DIRECTORY_SEPARATOR . "Ghostscript", '', __DIR__) . DIRECTORY_SEPARATOR;
