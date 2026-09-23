@@ -96,7 +96,7 @@ class Pages
      * @param array $options
      * @return false|array|string
      */
-    public function rangeExpand(array|string $rangeInput = null, array $options = []): false|array|string
+    public function rangeExpand(array|string|null $rangeInput = null, array $options = []): false|array|string
     {
         if ($this->is_blank($rangeInput)) {
             return false;
@@ -174,7 +174,7 @@ class Pages
      * @param array $options
      * @return false|array|string
      */
-    public function rangeCompact(array|string $rangeInput = null, array $options = []): false|array|string
+    public function rangeCompact(array|string|null $rangeInput = null, array $options = []): false|array|string
     {
         if ($this->is_blank($rangeInput)) {
             return false;
