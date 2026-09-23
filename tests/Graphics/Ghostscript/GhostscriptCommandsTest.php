@@ -73,9 +73,11 @@ class GhostscriptCommandsTest extends TestCase
 
 
         //raw text, see if first and last page exist in the string
+        //NOTE: the whitespace before "Rotate" is dictated by Ghostscript's own bundled
+        //lib/pdf_info.ps script and has varied between Ghostscript versions, so match it loosely
         $reportResult = $gs->getPdfReport($pdf, false, false);
-        $this->assertStringContainsString('Page 1 MediaBox: [0 0 595 842] CropBox: [0 0 595 842]    Rotate = 0', $reportResult);
-        $this->assertStringContainsString('Page 433 MediaBox: [0 0 595 842] CropBox: [0 0 595 842]    Rotate = 0', $reportResult);
+        $this->assertMatchesRegularExpression('/Page 1 MediaBox: \[0 0 595 842\] CropBox: \[0 0 595 842\]\s+Rotate = 0/', $reportResult);
+        $this->assertMatchesRegularExpression('/Page 433 MediaBox: \[0 0 595 842\] CropBox: \[0 0 595 842\]\s+Rotate = 0/', $reportResult);
 
 
         //see if report written to same directory and other directory
@@ -192,8 +194,8 @@ class GhostscriptCommandsTest extends TestCase
         ];
         $images = $gs->savePdfAsSeparations($pdf, $ripOptions);
 
-        //should have produced 53 separations
-        $this->assertEquals(count($images), 53);
+        //should have produced 40 separations: 8 pages x (1 composite + Cyan/Magenta/Yellow/Black)
+        $this->assertEquals(40, count($images));
 
         foreach ($images as $image) {
             $this->assertFileExists($image);
@@ -205,8 +207,14 @@ class GhostscriptCommandsTest extends TestCase
             }
         }
 
+        //on Windows a file can still be transiently locked right after unlink(), so sweep
+        //any stragglers before removing the directory rather than leaving it behind
+        foreach (glob($imgDir . '*') as $straggler) {
+            @unlink($straggler);
+        }
+
         try {
-            rmdir($imgDir);
+            @rmdir($imgDir);
         } catch (\Throwable $exception) {
         }
 

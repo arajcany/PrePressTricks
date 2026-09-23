@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7877875caedea0094ceec5af5aeda365",
+    "content-hash": "5f0d237394a86a0d25a565c52e11cec9",
     "packages": [
         {
             "name": "arajcany/tool-box",
-            "version": "2.4.2",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arajcany/ToolBox.git",
-                "reference": "768bdbd89347d63dca722e8fc8518f56c5e1ece0"
+                "reference": "0485c5a6090884321f95a32f9e086d7b33769867"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arajcany/ToolBox/zipball/768bdbd89347d63dca722e8fc8518f56c5e1ece0",
-                "reference": "768bdbd89347d63dca722e8fc8518f56c5e1ece0",
+                "url": "https://api.github.com/repos/arajcany/ToolBox/zipball/0485c5a6090884321f95a32f9e086d7b33769867",
+                "reference": "0485c5a6090884321f95a32f9e086d7b33769867",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,7 @@
                 "ext-zip": "*",
                 "league/climate": "^3.8",
                 "league/flysystem": "^3.0",
-                "php": ">=8.3"
+                "php": ">=8.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "*",
@@ -55,9 +55,9 @@
             ],
             "support": {
                 "issues": "https://github.com/arajcany/ToolBox/issues",
-                "source": "https://github.com/arajcany/ToolBox/tree/2.4.2"
+                "source": "https://github.com/arajcany/ToolBox/tree/2.5.0"
             },
-            "time": "2026-04-23T09:39:27+00:00"
+            "time": "2026-09-23T00:01:49+00:00"
         },
         {
             "name": "cakephp/chronos",
@@ -4531,7 +4531,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.4",
+        "php": ">=8.5",
         "ext-json": "*",
         "ext-dom": "*",
         "ext-soap": "*",
